@@ -25,11 +25,11 @@
           <!-- begin:: Content Head -->
 
           <!-- begin:: Content Head -->
-          <KTSubheader
+          <!-- <KTSubheader
             v-if="subheaderDisplay"
             v-bind:breadcrumbs="breadcrumbs"
             v-bind:title="pageTitle"
-          />
+          /> -->
           <!-- end:: Content Head -->
 
           <!-- begin:: Content Body -->
@@ -61,7 +61,7 @@ import KTHeader from "@/view/layout/header/Header.vue";
 import KTHeaderMobile from "@/view/layout/header/HeaderMobile.vue";
 import KTFooter from "@/view/layout/footer/Footer.vue";
 import HtmlClass from "@/core/services/htmlclass.service";
-import KTSubheader from "@/view/layout/subheader/Subheader.vue";
+// import KTSubheader from "@/view/layout/subheader/Subheader.vue";
 import KTStickyToolbar from "@/view/layout/extras/StickyToolbar.vue";
 import KTScrollTop from "@/view/layout/extras/ScrollTop";
 import Loader from "@/view/content/Loader.vue";
@@ -77,7 +77,7 @@ export default {
     KTHeader,
     KTHeaderMobile,
     KTFooter,
-    KTSubheader,
+    // KTSubheader,
     KTStickyToolbar,
     KTScrollTop,
     Loader

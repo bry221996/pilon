@@ -1,29 +1,6 @@
 <template>
   <!-- begin:: Header Topbar -->
   <div class="topbar">
-    <!--begin: Search -->
-    <b-dropdown
-      size="sm"
-      id="kt_quick_search_toggle"
-      variant="link"
-      toggle-class="topbar-item text-decoration-none"
-      no-caret
-      right
-      no-flip
-    >
-      <template v-slot:button-content>
-        <div class="btn btn-icon btn-clean btn-lg btn-dropdown mr-1">
-          <span class="svg-icon svg-icon-xl svg-icon-primary">
-            <inline-svg src="media/svg/icons/General/Search.svg" />
-          </span>
-        </div>
-      </template>
-      <b-dropdown-text tag="div" class="min-w-md-350px">
-        <KTSearchDefault></KTSearchDefault>
-      </b-dropdown-text>
-    </b-dropdown>
-    <!--end: Search -->
-
     <!--begin: Notifications -->
     <b-dropdown
       size="sm"
@@ -35,10 +12,10 @@
     >
       <template v-slot:button-content>
         <div
-          class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1 pulse pulse-primary"
+          class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1"
         >
           <span class="svg-icon svg-icon-xl svg-icon-primary">
-            <inline-svg src="media/svg/icons/Code/Compiling.svg" />
+            <inline-svg src="media/svg/icons/General/Notification2.svg" />
           </span>
           <span class="pulse-ring"></span>
         </div>
@@ -52,7 +29,7 @@
     <!--end: Notifications -->
 
     <!--begin: Quick Actions -->
-    <b-dropdown
+    <!-- <b-dropdown
       size="sm"
       variant="link"
       toggle-class="topbar-item text-decoration-none"
@@ -70,11 +47,11 @@
       <b-dropdown-text tag="div" class="min-w-md-350px">
         <KTDropdownQuickAction></KTDropdownQuickAction>
       </b-dropdown-text>
-    </b-dropdown>
+    </b-dropdown> -->
     <!--end: Quick Actions -->
 
     <!--begin: My Cart -->
-    <b-dropdown
+    <!-- <b-dropdown
       size="sm"
       variant="link"
       toggle-class="topbar-item text-decoration-none"
@@ -92,15 +69,15 @@
       <b-dropdown-text tag="div" class="min-w-md-350px">
         <KTDropdownMyCart></KTDropdownMyCart>
       </b-dropdown-text>
-    </b-dropdown>
+    </b-dropdown> -->
     <!--end: My Cart -->
 
     <!--begin: Quick panel toggle -->
-    <KTQuickPanel></KTQuickPanel>
+    <!-- <KTQuickPanel></KTQuickPanel> -->
     <!--end: Quick panel toggle -->
 
     <!--begin: Language bar -->
-    <div class="topbar-item">
+    <!-- <div class="topbar-item">
       <b-dropdown
         size="sm"
         variant="link"
@@ -121,12 +98,12 @@
             v-on:language-changed="onLanguageChanged"
           ></KTDropdownLanguage>
         </b-dropdown-text>
-      </b-dropdown>
-    </div>
+      </b-dropdown> -->
+    <!-- </div> -->
     <!--end: Language bar -->
 
     <!--begin: User Bar -->
-    <KTQuickUser></KTQuickUser>
+    <!-- <KTQuickUser></KTQuickUser> -->
     <!--end: User Bar -->
   </div>
   <!-- end:: Header Topbar -->
@@ -159,13 +136,7 @@
 </style>
 
 <script>
-import KTSearchDefault from "@/view/layout/extras/dropdown/SearchDefault.vue";
 import KTDropdownNotification from "@/view/layout/extras/dropdown/DropdownNotification.vue";
-import KTDropdownQuickAction from "@/view/layout/extras/dropdown/DropdownQuickAction.vue";
-import KTDropdownMyCart from "@/view/layout/extras/dropdown/DropdownMyCart.vue";
-import KTDropdownLanguage from "@/view/layout/extras/dropdown/DropdownLanguage.vue";
-import KTQuickUser from "@/view/layout/extras/offcanvas/QuickUser.vue";
-import KTQuickPanel from "@/view/layout/extras/offcanvas/QuickPanel.vue";
 import i18nService from "@/core/services/i18n.service.js";
 
 export default {
@@ -177,13 +148,7 @@ export default {
     };
   },
   components: {
-    KTSearchDefault,
     KTDropdownNotification,
-    KTDropdownQuickAction,
-    KTDropdownMyCart,
-    KTDropdownLanguage,
-    KTQuickUser,
-    KTQuickPanel
   },
   methods: {
     onLanguageChanged() {
