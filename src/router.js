@@ -16,6 +16,27 @@ export default new Router({
           component: () => import("@/view/pages/Dashboard.vue")
         },
         {
+          path: "/investments",
+          component: () => import("@/view/pages/investment/Index.vue"),
+          children: [
+            {
+              path: "user",
+              component: () =>
+                import("@/view/pages/investment/MyInvestments.vue")
+            },
+            {
+              path: "available",
+              component: () =>
+                import("@/view/pages/investment/AvailableInvestments.vue")
+            },
+            {
+              path: "history",
+              component: () =>
+                import("@/view/pages/investment/InvestmentHistory.vue")
+            }
+          ]
+        },
+        {
           path: "/builder",
           name: "builder",
           component: () => import("@/view/pages/Builder.vue")

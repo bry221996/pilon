@@ -3,7 +3,7 @@
   <div
     id="kt_header"
     ref="kt_header"
-    class="header"
+    class="header shadow"
     v-bind:class="headerClasses"
   >
     <div

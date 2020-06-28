@@ -36,7 +36,7 @@
 
 		// Fixed Header & Fixed Subheader Modes
 		.header-fixed.subheader-fixed & {
-			box-shadow: none !important;
+			box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 		}
 	}
 }

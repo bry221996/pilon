@@ -1,0 +1,114 @@
+<template>
+  <KTCard>
+    <template v-slot:body>
+      <div class="row">
+        <div class="col">
+          <h6 class="text-primary">
+            <strong>YOUR OVERALL FUNDS</strong>
+          </h6>
+        </div>
+      </div>
+
+      <!-- start:main-analytics -->
+      <div class="row mt-5">
+        <div
+          class="col-4"
+          v-for="analytics in mainAnalytics"
+          :key="analytics.label"
+        >
+          <b-card
+            :bg-variant="analytics.variant"
+            text-variant="white"
+            class="p-0"
+          >
+            <div style="position: absolute; right: 0.5rem; top: 0.5rem;">
+              <i class="fa fa-question-circle" style="color: white"></i>
+            </div>
+            <b-card-title>USD {{ analytics.value }}</b-card-title>
+            <b-card-text>{{ analytics.label }}</b-card-text>
+          </b-card>
+        </div>
+      </div>
+      <!-- end:main-analytics -->
+
+      <div class="row mt-5 sub-analytics mx-0 py-5">
+        <div
+          class="col-4"
+          v-for="analytics in subAnalytics"
+          :key="analytics.label"
+        >
+          <div :class="analytics.class">
+            <p class="mb-1 text-primary">
+              <strong>{{ analytics.label }}</strong>
+            </p>
+            <p class="mb-0">
+              <strong> {{ analytics.value }}</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </template>
+  </KTCard>
+</template>
+
+<script>
+import KTCard from "@/view/content/Card.vue";
+import { mapState } from "vuex";
+
+export default {
+  name: "FundsSummary",
+  components: {
+    KTCard: KTCard
+  },
+  computed: {
+    ...mapState({
+      funds: state => state.auth.user.fundSummary
+    }),
+    mainAnalytics() {
+      return [
+        {
+          label: "Funds Available",
+          variant: "info",
+          value: this.funds.available
+        },
+        {
+          label: "Funds on Hold",
+          variant: "warning",
+          value: this.funds.on_hold
+        },
+        {
+          label: "Invested Funds",
+          variant: "success",
+          value: this.funds.ongoing_investment_sum
+        }
+      ];
+    },
+    subAnalytics() {
+      return [
+        {
+          label: "TOTAL INTEREST EARNED TILL DATE",
+          class: "pl-6",
+          value: `$ ${this.funds.dividends}`
+        },
+        {
+          label: "AVERAGE % RETURNS",
+          class: "pl-9",
+          value: this.funds.annualized_return
+        },
+        {
+          label: "EXPECTED RETURNS THIS MONTH",
+          class: "pl-12",
+          value: `$ ${this.funds.expected_next_return}`
+        }
+      ];
+    }
+  }
+};
+</script>
+
+<style scoped>
+.sub-analytics {
+  border-radius: 0.42rem;
+  background-color: #e5f6ff;
+}
+</style>

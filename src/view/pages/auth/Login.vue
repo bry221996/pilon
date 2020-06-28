@@ -1,108 +1,71 @@
 <template>
-  <div>
-    <!--begin::Content header-->
-    <div
-      class="position-absolute top-0 right-0 text-right mt-5 mb-15 mb-lg-0 flex-column-auto justify-content-center py-5 px-10"
-    >
-      <span class="font-weight-bold font-size-3 text-dark-60">
-        Don't have an account yet?
-      </span>
-      <router-link
-        class="font-weight-bold font-size-3 ml-2"
-        :to="{ name: 'register' }"
-      >
-        Sign Up!
-      </router-link>
-    </div>
-    <!--end::Content header-->
-
+  <div class="w-100">
     <!--begin::Signin-->
     <div class="login-form login-signin">
-      <div class="text-center mb-10 mb-lg-20">
-        <h3 class="font-size-h1">Sign In</h3>
-        <p class="text-muted font-weight-semi-bold">
-          Enter your username and password
-        </p>
-      </div>
-
       <!--begin::Form-->
-      <b-form class="form" @submit.stop.prevent="onSubmit">
-        <div role="alert" class="alert alert-info">
-          <div class="alert-text">
-            Use account <strong>admin@demo.com</strong> and password
-            <strong>demo</strong> to continue.
-          </div>
-        </div>
-
-        <div
-          role="alert"
-          v-bind:class="{ show: errors.length }"
-          class="alert fade alert-danger"
-        >
-          <div class="alert-text" v-for="(error, i) in errors" :key="i">
-            {{ error }}
-          </div>
-        </div>
-
-        <b-form-group
-          id="example-input-group-1"
-          label=""
-          label-for="example-input-1"
-        >
-          <b-form-input
-            class="form-control form-control-solid h-auto py-5 px-6"
-            id="example-input-1"
-            name="example-input-1"
-            v-model="$v.form.email.$model"
-            :state="validateState('email')"
-            aria-describedby="input-1-live-feedback"
-          ></b-form-input>
-
-          <b-form-invalid-feedback id="input-1-live-feedback">
-            Email is required and a valid email address.
-          </b-form-invalid-feedback>
-        </b-form-group>
-
-        <b-form-group
-          id="example-input-group-2"
-          label=""
-          label-for="example-input-2"
-        >
-          <b-form-input
-            class="form-control form-control-solid h-auto py-5 px-6"
-            type="password"
-            id="example-input-2"
-            name="example-input-2"
-            v-model="$v.form.password.$model"
-            :state="validateState('password')"
-            aria-describedby="input-2-live-feedback"
-          ></b-form-input>
-
-          <b-form-invalid-feedback id="input-2-live-feedback">
-            Password is required.
-          </b-form-invalid-feedback>
-        </b-form-group>
-
-        <!--begin::Action-->
-        <div
-          class="form-group d-flex flex-wrap justify-content-between align-items-center"
-        >
-          <a
-            href="#"
-            class="text-dark-60 text-hover-primary my-3 mr-2"
-            id="kt_login_forgot"
-          >
-            Forgot Password ?
-          </a>
-          <button
-            ref="kt_login_signin_submit"
-            class="btn btn-primary font-weight-bold px-9 py-4 my-3 font-size-3"
-          >
-            Sign In
-          </button>
-        </div>
-        <!--end::Action-->
-      </b-form>
+      <v-form>
+        <v-container>
+          <v-row class="mt-5">
+            <v-text-field
+              placeholder="example@email.com"
+              class="pt-0"
+              color="#707070"
+              v-model="$v.form.username.$model"
+            >
+              <template slot="label">
+                <strong>Login ID</strong>
+              </template>
+            </v-text-field>
+          </v-row>
+          <v-row class="mt-5">
+            <v-text-field
+              type="password"
+              placeholder="**********"
+              class="pt-0"
+              color="#707070"
+              v-model="$v.form.password.$model"
+            >
+              <template slot="label">
+                <strong>Password</strong>
+              </template>
+            </v-text-field>
+          </v-row>
+          <v-row>
+            <div
+              role="alert"
+              v-if="'password' in errors"
+              class="alert alert-danger w-100"
+            >
+              <div
+                class="alert-text"
+                v-for="(error, i) in errors.password"
+                :key="i"
+              >
+                {{ error }}
+              </div>
+            </div>
+          </v-row>
+          <v-row class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <v-checkbox></v-checkbox>
+              <span class="text-primary"> Remember me.</span>
+            </div>
+            <span class="text-primary">Forgot Password</span>
+          </v-row>
+          <v-row>
+            <v-btn
+              :loading="isSubmitting"
+              rounded
+              color="primary"
+              dark
+              block
+              large
+              @click="onSubmit"
+              >SIGN IN</v-btn
+            >
+          </v-row>
+        </v-container>
+      </v-form>
       <!--end::Form-->
     </div>
     <!--end::Signin-->
@@ -120,25 +83,25 @@ import { mapState } from "vuex";
 import { LOGIN, LOGOUT } from "@/core/services/store/auth.module";
 
 import { validationMixin } from "vuelidate";
-import { email, minLength, required } from "vuelidate/lib/validators";
+import { minLength, required } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
   name: "login",
   data() {
     return {
-      // Remove this dummy login info
       form: {
-        email: "admin@demo.com",
-        password: "demo"
-      }
+        username: "ryan+981784@limestone.network",
+        password: "aA123456!"
+      },
+      items: ["Investor"],
+      isSubmitting: false
     };
   },
   validations: {
     form: {
-      email: {
-        required,
-        email
+      username: {
+        required
       },
       password: {
         required,
@@ -153,7 +116,7 @@ export default {
     },
     resetForm() {
       this.form = {
-        email: null,
+        username: null,
         password: null
       };
 
@@ -161,36 +124,29 @@ export default {
         this.$v.$reset();
       });
     },
-    onSubmit() {
+    async onSubmit() {
       this.$v.form.$touch();
-      if (this.$v.form.$anyError) {
-        return;
-      }
+      if (this.$v.form.$anyError) return;
 
-      const email = this.$v.form.email.$model;
+      this.isSubmitting = true;
+
+      const username = this.$v.form.username.$model;
       const password = this.$v.form.password.$model;
 
-      // clear existing errors
+      // // clear existing errors
       this.$store.dispatch(LOGOUT);
 
-      // set spinner to submit button
-      const submitButton = this.$refs["kt_login_signin_submit"];
-      submitButton.classList.add("spinner", "spinner-light", "spinner-right");
-
-      // dummy delay
-      setTimeout(() => {
-        // send login request
-        this.$store
-          .dispatch(LOGIN, { email, password })
-          // go to which page after successfully login
-          .then(() => this.$router.push({ name: "dashboard" }));
-
-        submitButton.classList.remove(
-          "spinner",
-          "spinner-light",
-          "spinner-right"
-        );
-      }, 2000);
+      await this.$store
+        .dispatch(LOGIN, { username, password })
+        .then(() => {
+          this.$router.push({ name: "dashboard" });
+        })
+        .catch(() => {
+          console.log("err");
+        })
+        .finally(() => {
+          this.isSubmitting = false;
+        });
     }
   },
   computed: {

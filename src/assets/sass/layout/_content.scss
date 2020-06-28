@@ -5,8 +5,6 @@
 // Desktop Mode
 @include media-breakpoint-up(lg) {
 	.content {
-		padding: get($page-padding, desktop) 0;
-
 		// Fixed Footer Mode
 		.footer-fixed & {
 			padding-bottom: get($footer-config, fixed, height);

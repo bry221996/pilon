@@ -11,9 +11,7 @@
       no-flip
     >
       <template v-slot:button-content>
-        <div
-          class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1"
-        >
+        <div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
           <span class="svg-icon svg-icon-xl svg-icon-primary">
             <inline-svg src="media/svg/icons/General/Notification2.svg" />
           </span>
@@ -148,7 +146,7 @@ export default {
     };
   },
   components: {
-    KTDropdownNotification,
+    KTDropdownNotification
   },
   methods: {
     onLanguageChanged() {
