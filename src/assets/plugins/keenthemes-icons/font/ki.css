@@ -18,6 +18,18 @@
     font-size: 1rem;
 }
 
+.ki-bold-font {
+  font-weight: 700 !important;
+}
+
+.ki-bold-900 {
+  font-weight: 900 !important;
+}
+
+.ls-2 {
+  letter-spacing: 0.125rem;
+}
+
 .ki:before {
     font-family: "Ki";
     font-style: normal;

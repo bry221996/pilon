@@ -1,18 +1,22 @@
 <template>
-  <KTCard>
+  <KTCard class="shadow">
     <template v-slot:body>
       <div class="row">
         <div class="col">
-          <h6 class="text-primary">
-            <strong>YOUR OVERALL FUNDS</strong>
-          </h6>
+          <p class="text-primary mb-0 font-weight-boldest ls-2">
+            <inline-svg
+              class="mr-2"
+              src="media/pilons/pilon_funds-blue.svg"
+            ></inline-svg>
+            YOUR OVERALL FUNDS
+          </p>
         </div>
       </div>
 
       <!-- start:main-analytics -->
       <div class="row mt-5">
         <div
-          class="col-4"
+          class="col-12 col-lg-4 mb-2 mb-sm-0"
           v-for="analytics in mainAnalytics"
           :key="analytics.label"
         >
@@ -24,7 +28,9 @@
             <div style="position: absolute; right: 0.5rem; top: 0.5rem;">
               <i class="fa fa-question-circle" style="color: white"></i>
             </div>
-            <b-card-title>USD {{ analytics.value }}</b-card-title>
+            <b-card-title class="mb-4">
+              <strong>USD {{ analytics.value }}</strong>
+            </b-card-title>
             <b-card-text>{{ analytics.label }}</b-card-text>
           </b-card>
         </div>
@@ -33,7 +39,7 @@
 
       <div class="row mt-5 sub-analytics mx-0 py-5">
         <div
-          class="col-4"
+          class="col-12 col-lg-4 mb-2 mb-sm-0"
           v-for="analytics in subAnalytics"
           :key="analytics.label"
         >
@@ -42,7 +48,7 @@
               <strong>{{ analytics.label }}</strong>
             </p>
             <p class="mb-0">
-              <strong> {{ analytics.value }}</strong>
+              <strong>{{ analytics.value }}</strong>
             </p>
           </div>
         </div>

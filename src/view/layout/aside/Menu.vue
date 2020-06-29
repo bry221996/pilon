@@ -15,7 +15,7 @@
       >
         <a :href="href" class="menu-link" @click="navigate">
           <i class="menu-icon flaticon2-architecture-and-city"></i>
-          <span class="menu-text">Dashboard</span>
+          <span class="menu-text ki-bold-font">Dashboard</span>
         </a>
       </li>
     </router-link>
@@ -35,7 +35,7 @@
       >
         <a :href="href" class="menu-link" @click="navigate">
           <i class="menu-icon flaticon-profile-1"></i>
-          <span class="menu-text">Profile</span>
+          <span class="menu-text ki-bold-font">Profile</span>
         </a>
       </li>
     </router-link>
@@ -48,7 +48,7 @@
     >
       <a href="#" class="menu-link menu-toggle">
         <i class="menu-icon flaticon-file-2"></i>
-        <span class="menu-text">Investments</span>
+        <span class="menu-text ki-bold-font">Investments</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="menu-submenu">
@@ -137,7 +137,7 @@
     >
       <a href="#" class="menu-link menu-toggle">
         <i class="menu-icon flaticon-notepad"></i>
-        <span class="menu-text">Funds</span>
+        <span class="menu-text ki-bold-font">Funds</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="menu-submenu">
@@ -150,7 +150,7 @@
           </li>
 
           <router-link
-            to="/vue-bootstrap/form-group"
+            to="/funds/overview"
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
             <li
@@ -166,13 +166,13 @@
                 <i class="menu-bullet menu-bullet-line">
                   <span></span>
                 </i>
-                <span class="menu-text">Funds on Hold</span>
+                <span class="menu-text">Funds Overview</span>
               </a>
             </li>
           </router-link>
 
           <router-link
-            to="/vue-bootstrap/form-input"
+            to="/funds/topup"
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
             <li
@@ -194,7 +194,7 @@
           </router-link>
 
           <router-link
-            to="/vue-bootstrap/form-radio"
+            to="/funds/withdraw"
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
             <li
@@ -216,7 +216,7 @@
           </router-link>
 
           <router-link
-            to="/vue-bootstrap/form-file"
+            to="/funds/history"
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
             <li
@@ -254,7 +254,7 @@
       >
         <a :href="href" class="menu-link" @click="navigate">
           <i class="menu-icon flaticon-interface-7"></i>
-          <span class="menu-text">Settings</span>
+          <span class="menu-text ki-bold-font">Settings</span>
         </a>
       </li>
     </router-link>
@@ -262,7 +262,7 @@
     <li aria-haspopup="true" class="menu-item">
       <a class="menu-link" @click.prevent="onLogout">
         <i class="menu-icon flaticon-logout"></i>
-        <span class="menu-text">Logout</span>
+        <span class="menu-text ki-bold-font">Logout</span>
       </a>
     </li>
   </ul>

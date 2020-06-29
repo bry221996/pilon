@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="314" height="182" viewBox="0 0 314 182">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" y1="0.5" x2="0" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1d31c6"/>
+      <stop offset="1" stop-color="#4f84f0"/>
+    </linearGradient>
+    <filter id="Rectangle_1077" x="0" y="0" width="314" height="182" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#bcccef"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_3133" data-name="Group 3133" transform="translate(-30 -87)">
+    <g transform="matrix(1, 0, 0, 1, 30, 87)" filter="url(#Rectangle_1077)">
+      <rect id="Rectangle_1077-2" data-name="Rectangle 1077" width="296" height="164" rx="14" transform="translate(6 6)" fill="url(#linear-gradient)"/>
+    </g>
+    <text id="_0000" data-name="**** **** **** 0000" transform="translate(68 206)" fill="#fff" font-size="10" font-family="HelveticaNeue-Bold, Helvetica Neue" font-weight="700" letter-spacing="0.125em"><tspan x="0" y="0">**** **** **** 0000</tspan></text>
+    <text id="MM_YY" data-name="MM/YY" transform="translate(245 207)" fill="#fff" font-size="11" font-family="HelveticaNeue-Bold, Helvetica Neue" font-weight="700" letter-spacing="0.125em"><tspan x="0" y="0">MM/YY</tspan></text>
+    <text id="NAME" transform="translate(68 231)" fill="#fff" font-size="10" font-family="HelveticaNeue-Bold, Helvetica Neue" font-weight="700" letter-spacing="0.125em"><tspan x="0" y="0">NAME</tspan></text>
+  </g>
+</svg>

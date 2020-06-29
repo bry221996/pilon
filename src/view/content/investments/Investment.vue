@@ -4,56 +4,42 @@
       <div class="pb-2" style="border-bottom: 1px solid #dee2e6">
         <table class="table">
           <tr class="pb-3">
-            <td style="border-top: none" width="15.5%">
-              <b-img
-                src="/media/project-logos/1.png"
-                fluid
-                alt="Fluid image"
-              ></b-img>
+            <td class="p-0" style="border-top: none" width="15%">
+              <b-img :src="imageUrl" fluid alt="Fluid image"></b-img>
             </td>
             <td style="border-top: none" width="20%">
               <div class="d-flex flex-column">
-                <p class="mb-2">
-                  <strong>COMPANY</strong>
-                </p>
-                <p>Awfully Chocolate</p>
+                <p class="mb-2 font-weight-boldest">COMPANY</p>
+                <p>{{ investment.company }}</p>
               </div>
               <div class="d-flex flex-column">
-                <p class="mb-2">
-                  <strong>EARLY REPAYMENT DUE</strong>
-                </p>
-                <p>15 June 2020</p>
+                <p class="mb-2 font-weight-boldest">EARLY REPAYMENT DUE</p>
+                <p>{{ investment.repayment_due }}</p>
               </div>
             </td>
             <td style="border-top: none" width="26%">
               <div class="d-flex flex-column">
-                <p class="mb-2">
-                  <strong>INVOICES AVAILABLE FOR FUNDING</strong>
+                <p class="mb-2 font-weight-boldest">
+                  INVOICES AVAILABLE FOR FUNDING
                 </p>
-                <p>1</p>
+                <p>{{ investment.invoice_available_for_funding }}</p>
               </div>
               <div class="d-flex flex-column">
-                <p class="mb-2">
-                  <strong>RETURNS</strong>
-                </p>
-                <p>1.5%</p>
+                <p class="mb-2 font-weight-boldest">RETURNS</p>
+                <p>{{ investment.returns }}</p>
               </div>
             </td>
             <td style="border-top: none" width="23%">
               <div class="d-flex flex-column">
-                <p class="mb-2">
-                  <strong>TOTAL INVOICE AMOUNT</strong>
-                </p>
-                <p>$35,000.00</p>
+                <p class="mb-2 font-weight-boldest">TOTAL INVOICE AMOUNT</p>
+                <p>{{ investment.total_invoce_amount }}</p>
               </div>
               <div class="d-flex flex-column">
-                <p class="mb-2">
-                  <strong>TENURE</strong>
-                </p>
-                <p>45 Days</p>
+                <p class="mb-2 font-weight-boldest">TENURE</p>
+                <p>{{ investment.tenure }}</p>
               </div>
             </td>
-            <td style="border-top: none" width="15.5%" class="align-middle">
+            <td style="border-top: none" width="16%" class="align-middle">
               <b-button size="sm" squared variant="success"
                 >FUND THIS INVOICE</b-button
               >
@@ -64,3 +50,21 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: "Investment",
+  props: {
+    investment: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    imageUrl() {
+      const key = this.$vnode.key + 1;
+      return `/media/project-logos/${key}.png`;
+    }
+  }
+};
+</script>

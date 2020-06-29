@@ -13,7 +13,10 @@
       <template v-slot:button-content>
         <div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
           <span class="svg-icon svg-icon-xl svg-icon-primary">
-            <inline-svg src="media/svg/icons/General/Notification2.svg" />
+            <inline-svg
+              class="mr-2"
+              src="media/pilons/pilon_notification.svg"
+            ></inline-svg>
           </span>
           <span class="pulse-ring"></span>
         </div>
@@ -45,7 +48,7 @@
       <b-dropdown-text tag="div" class="min-w-md-350px">
         <KTDropdownQuickAction></KTDropdownQuickAction>
       </b-dropdown-text>
-    </b-dropdown> -->
+		</b-dropdown>-->
     <!--end: Quick Actions -->
 
     <!--begin: My Cart -->
@@ -67,7 +70,7 @@
       <b-dropdown-text tag="div" class="min-w-md-350px">
         <KTDropdownMyCart></KTDropdownMyCart>
       </b-dropdown-text>
-    </b-dropdown> -->
+		</b-dropdown>-->
     <!--end: My Cart -->
 
     <!--begin: Quick panel toggle -->
@@ -96,7 +99,7 @@
             v-on:language-changed="onLanguageChanged"
           ></KTDropdownLanguage>
         </b-dropdown-text>
-      </b-dropdown> -->
+		</b-dropdown>-->
     <!-- </div> -->
     <!--end: Language bar -->
 
