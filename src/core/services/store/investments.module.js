@@ -5,7 +5,7 @@ export const GET_INVESTMENTS = "getInvestments";
 export const SET_INVESTMENTS = "setInvestments";
 
 const state = {
-  investmentsList: []
+  list: []
 };
 
 const actions = {
@@ -25,7 +25,7 @@ const actions = {
 
 const mutations = {
   [SET_INVESTMENTS](state, investments) {
-    state.investments = investments;
+    state.list = investments;
   }
 };
 

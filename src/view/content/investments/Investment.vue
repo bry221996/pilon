@@ -4,13 +4,13 @@
       <div class="pb-2" style="border-bottom: 1px solid #dee2e6">
         <table class="table">
           <tr class="pb-3">
-            <td class="p-0" style="border-top: none" width="15%">
-              <b-img :src="imageUrl" fluid alt="Fluid image"></b-img>
+            <td class="pl-0" style="border-top: none" width="15%">
+              <b-img :src="investment.companyInfo.photo" fluid alt="Fluid image"></b-img>
             </td>
             <td style="border-top: none" width="20%">
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">COMPANY</p>
-                <p>{{ investment.company }}</p>
+                <p>{{ investment.companyInfo.company_name }}</p>
               </div>
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">EARLY REPAYMENT DUE</p>
@@ -22,7 +22,7 @@
                 <p class="mb-2 font-weight-boldest">
                   INVOICES AVAILABLE FOR FUNDING
                 </p>
-                <p>{{ investment.invoice_available_for_funding }}</p>
+                <p>{{ investment.available_funding_left }}</p>
               </div>
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">RETURNS</p>
