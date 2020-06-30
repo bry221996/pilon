@@ -21,7 +21,7 @@
     </router-link>
 
     <router-link
-      to="/builder"
+      to="/profile"
       v-slot="{ href, navigate, isActive, isExactActive }"
     >
       <li
