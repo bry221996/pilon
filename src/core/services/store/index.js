@@ -6,6 +6,7 @@ import htmlClass from "./htmlclass.module";
 import config from "./config.module";
 import breadcrumbs from "./breadcrumbs.module";
 import investments from "./investments.module";
+import projects from "./projects.module";
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     htmlClass,
     config,
     breadcrumbs,
-    investments
+    investments,
+    projects
   }
 });

@@ -5,20 +5,22 @@ import JwtService from "@/core/services/jwt.service";
 export const VERIFY_AUTH = "verifyAuth";
 export const LOGIN = "login";
 export const LOGOUT = "logout";
-export const REGISTER = "register";
-export const UPDATE_USER = "updateUser";
 export const GET_AUTH_USER = "getAuthUser";
+export const GET_AUTH_CREDIT_CARDS = "getAuthUserCreditCards";
+export const UPDATE_PROFILE = "updateProfile";
 
 // mutation types
 export const PURGE_AUTH = "logOut";
 export const SET_JWT = "setJwt";
 export const SET_AUTH = "setUser";
 export const SET_ERROR = "setError";
+export const SET_CREDIT_CARDS = "setAuthUserCreditCards";
 
 const state = {
   errors: {},
   user: JwtService.getUser(),
-  isAuthenticated: !!JwtService.getToken()
+  isAuthenticated: !!JwtService.getToken(),
+  creditCards: []
 };
 
 const getters = {
@@ -49,7 +51,9 @@ const actions = {
   },
   [GET_AUTH_USER](context) {
     return new Promise((resolve, reject) => {
-      ApiService.get("user/me?expand=fundSummary")
+      ApiService.get(
+        "user/me?expand=fundSummary,personalInfo,residentialAddress"
+      )
         .then(({ data }) => {
           context.commit(SET_AUTH, data.data);
           resolve(data);
@@ -59,29 +63,31 @@ const actions = {
         });
     });
   },
-  [REGISTER](context, credentials) {
+  [GET_AUTH_CREDIT_CARDS](context) {
     return new Promise((resolve, reject) => {
-      ApiService.post("users", { user: credentials })
+      ApiService.get("/kyc/credit-card")
         .then(({ data }) => {
-          context.commit(SET_AUTH, data);
+          context.commit(SET_CREDIT_CARDS, data.data.rows);
           resolve(data);
         })
         .catch(({ response }) => {
-          context.commit(SET_ERROR, response.data.errors);
           reject(response);
         });
     });
   },
-  [UPDATE_USER](context, payload) {
-    const { email, username, password, image, bio } = payload;
-    const user = { email, username, bio, image };
-    if (password) {
-      user.password = password;
-    }
-
-    return ApiService.put("user", user).then(({ data }) => {
-      context.commit(SET_AUTH, data);
-      return data;
+  [UPDATE_PROFILE](context, params) {
+    return new Promise((resolve, reject) => {
+      ApiService.post(
+        "user/me/kyc?expand=fundSummary,personalInfo,residentialAddress",
+        params
+      )
+        .then(({ data }) => {
+          context.commit(SET_AUTH, data.data);
+          resolve(data);
+        })
+        .catch(({ response }) => {
+          reject(response);
+        });
     });
   }
 };
@@ -105,6 +111,9 @@ const mutations = {
     state.user = {};
     state.errors = {};
     JwtService.destroyToken();
+  },
+  [SET_CREDIT_CARDS](state, creditCards) {
+    state.creditCards = creditCards;
   }
 };
 
