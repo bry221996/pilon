@@ -40,27 +40,28 @@ export default new Router({
           path: "/profile",
           name: "profile",
           component: () => import("@/view/pages/profile/Index.vue"),
-          redirect: '/profile/personal-details',
+          redirect: "/profile/personal-details",
           children: [
             {
-              path: 'personal-details',
-              name: 'personal-details',
-              component: () => import("@/view/pages/profile/PersonalDetails.vue"),
+              path: "personal-details",
+              name: "personal-details",
+              component: () =>
+                import("@/view/pages/profile/PersonalDetails.vue")
             },
             {
-              path: 'company-details',
-              name: 'company-details',
-              component: () => import("@/view/pages/profile/CompanyDetails.vue"),
+              path: "company-details",
+              name: "company-details",
+              component: () => import("@/view/pages/profile/CompanyDetails.vue")
             },
             {
-              path: 'bank-account',
-              name: 'bank-account',
-              component: () => import("@/view/pages/profile/BankAccount.vue"),
+              path: "bank-account",
+              name: "bank-account",
+              component: () => import("@/view/pages/profile/BankAccount.vue")
             },
             {
-              path: 'credit-card',
-              name: 'credit-card',
-              component: () => import("@/view/pages/profile/CreditCard.vue"),
+              path: "credit-card",
+              name: "credit-card",
+              component: () => import("@/view/pages/profile/CreditCard.vue")
             }
           ]
         },

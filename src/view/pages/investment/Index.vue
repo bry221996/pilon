@@ -13,7 +13,6 @@
             <strong>{{ link.display }}</strong>
           </router-link>
         </div>
-        ss
       </div>
 
       <div class="col-4">
