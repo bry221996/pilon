@@ -34,7 +34,7 @@
 <script>
 import FundsSummary from "@/view/content/dashboard/FundsSummary.vue";
 import Project from "@/view/content/projects/Project.vue";
-// import { GET_AUTH_USER } from "@/core/services/store/auth.module";
+import { GET_AUTH_USER } from "@/core/services/store/auth.module";
 import { GET_AVAILABLE_PROJECTS } from "@/core/services/store/projects.module";
 import { mapState } from "vuex";
 
@@ -54,6 +54,7 @@ export default {
     })
   },
   async mounted() {
+    await this.$store.dispatch(GET_AUTH_USER);
      await this.$store.dispatch(GET_AVAILABLE_PROJECTS);
      this.isLoaded = true;
   }
