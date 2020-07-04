@@ -209,7 +209,7 @@
                     <v-btn
                       rounded
                       :loading="isSubmitting"
-					  :disabled="$v.form.$anyError"
+                      :disabled="$v.form.$anyError"
                       color="primary"
                       block
                       large

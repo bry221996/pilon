@@ -26,8 +26,8 @@ export default {
   name: "AvailableInvestments",
   data() {
     return {
-      isLoaded: false,
-    }
+      isLoaded: false
+    };
   },
   components: {
     Project

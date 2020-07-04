@@ -102,20 +102,7 @@
 </template>
 
 <script>
-import { GET_AUTH_CREDIT_CARDS } from "@/core/services/store/auth.module";
-import store from "@/core/services/store";
-import { mapState } from "vuex";
-
 export default {
-  name: "CreditCard",
-  async beforeRouteEnter(to, from, next) {
-    await store.dispatch(GET_AUTH_CREDIT_CARDS);
-    next();
-  },
-  computed: {
-    ...mapState({
-      creditCards: state => state.auth.creditCards
-    })
-  }
+  name: "CreditCard"
 };
 </script>

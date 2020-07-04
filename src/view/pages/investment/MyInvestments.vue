@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       isLoaded: false
-    }
+    };
   },
   components: {
     Investment

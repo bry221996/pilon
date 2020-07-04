@@ -1,53 +1,56 @@
 <template>
-	<div class="d-flex flex-column flex-root">
-		<!-- begin:: Header Mobile -->
-		<KTHeaderMobile></KTHeaderMobile>
-		<!-- end:: Header Mobile -->
+  <div class="d-flex flex-column flex-root">
+    <!-- begin:: Header Mobile -->
+    <KTHeaderMobile></KTHeaderMobile>
+    <!-- end:: Header Mobile -->
 
-		<Loader v-if="loaderEnabled" v-bind:logo="loaderLogo"></Loader>
+    <Loader v-if="loaderEnabled" v-bind:logo="loaderLogo"></Loader>
 
-		<!-- begin::Body -->
-		<div class="d-flex flex-row flex-column-fluid page">
-			<!-- begin:: Aside Left -->
-			<KTAside v-if="asideEnabled"></KTAside>
-			<!-- end:: Aside Left -->
+    <!-- begin::Body -->
+    <div class="d-flex flex-row flex-column-fluid page">
+      <!-- begin:: Aside Left -->
+      <KTAside v-if="asideEnabled"></KTAside>
+      <!-- end:: Aside Left -->
 
-			<div id="kt_wrapper" class="d-flex flex-column flex-row-fluid wrapper">
-				<!-- begin:: Header -->
-				<KTHeader></KTHeader>
-				<!-- end:: Header -->
+      <div id="kt_wrapper" class="d-flex flex-column flex-row-fluid wrapper">
+        <!-- begin:: Header -->
+        <KTHeader></KTHeader>
+        <!-- end:: Header -->
 
-				<!-- begin:: Content -->
-				<div id="kt_content" class="content d-flex flex-column flex-column-fluid">
-					<!-- begin:: Content Head -->
+        <!-- begin:: Content -->
+        <div
+          id="kt_content"
+          class="content d-flex flex-column flex-column-fluid"
+        >
+          <!-- begin:: Content Head -->
 
-					<!-- begin:: Content Head -->
-					<!-- <KTSubheader
+          <!-- begin:: Content Head -->
+          <!-- <KTSubheader
             v-if="subheaderDisplay"
             v-bind:breadcrumbs="breadcrumbs"
             v-bind:title="pageTitle"
 					/>-->
-					<!-- end:: Content Head -->
+          <!-- end:: Content Head -->
 
-					<!-- begin:: Content Body -->
-					<div class="d-flex flex-column-fluid">
-						<div
-							:class="{
+          <!-- begin:: Content Body -->
+          <div class="d-flex flex-column-fluid">
+            <div
+              :class="{
                 'container-fluid': contentFluid,
                 container: !contentFluid
               }"
-						>
-							<transition name="fade-in-up">
-								<router-view />
-							</transition>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- <KTStickyToolbar v-if="toolbarDisplay"></KTStickyToolbar> -->
-		<KTScrollTop></KTScrollTop>
-	</div>
+            >
+              <transition name="fade-in-up">
+                <router-view />
+              </transition>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <KTStickyToolbar v-if="toolbarDisplay"></KTStickyToolbar> -->
+    <KTScrollTop></KTScrollTop>
+  </div>
 </template>
 
 <script>
@@ -61,101 +64,101 @@ import Loader from "@/view/content/Loader.vue";
 import { GET_AUTH_USER, LOGOUT } from "@/core/services/store/auth.module";
 // import { LOGOUT } from "@/core/services/store/auth.module";
 import {
-	ADD_BODY_CLASSNAME,
-	REMOVE_BODY_CLASSNAME
+  ADD_BODY_CLASSNAME,
+  REMOVE_BODY_CLASSNAME
 } from "@/core/services/store/htmlclass.module.js";
 
 export default {
-	name: "Layout",
-	components: {
-		KTAside,
-		KTHeader,
-		KTHeaderMobile,
-		KTScrollTop,
-		Loader
-	},
-	beforeMount() {
-		// show page loading
-		this.$store.dispatch(ADD_BODY_CLASSNAME, "page-loading");
+  name: "Layout",
+  components: {
+    KTAside,
+    KTHeader,
+    KTHeaderMobile,
+    KTScrollTop,
+    Loader
+  },
+  beforeMount() {
+    // show page loading
+    this.$store.dispatch(ADD_BODY_CLASSNAME, "page-loading");
 
-		// initialize html element classes
-		HtmlClass.init(this.layoutConfig());
-	},
-	mounted() {
-		// check if current user is authenticated
-		if (!this.isAuthenticated) {
-			this.$router.push({ name: "login" });
-		}
+    // initialize html element classes
+    HtmlClass.init(this.layoutConfig());
+  },
+  mounted() {
+    // check if current user is authenticated
+    if (!this.isAuthenticated) {
+      this.$router.push({ name: "login" });
+    }
 
-		this.$store
-			.dispatch(GET_AUTH_USER)
-			.then(() => {
-				setTimeout(() => {
-					this.$store.dispatch(REMOVE_BODY_CLASSNAME, "page-loading");
-				}, 2000);
-			})
-			.catch(() => {
+    this.$store
+      .dispatch(GET_AUTH_USER)
+      .then(() => {
+        setTimeout(() => {
+          this.$store.dispatch(REMOVE_BODY_CLASSNAME, "page-loading");
+        }, 2000);
+      })
+      .catch(() => {
         this.$store.dispatch(LOGOUT);
         this.$router.push({ name: "login" });
-			});
-	},
-	methods: {},
-	computed: {
-		...mapGetters([
-			"isAuthenticated",
-			"breadcrumbs",
-			"pageTitle",
-			"layoutConfig"
-		]),
+      });
+  },
+  methods: {},
+  computed: {
+    ...mapGetters([
+      "isAuthenticated",
+      "breadcrumbs",
+      "pageTitle",
+      "layoutConfig"
+    ]),
 
-		/**
-		 * Check if the page loader is enabled
-		 * @returns {boolean}
-		 */
-		loaderEnabled() {
-			return !/false/.test(this.layoutConfig("loader.type"));
-		},
+    /**
+     * Check if the page loader is enabled
+     * @returns {boolean}
+     */
+    loaderEnabled() {
+      return !/false/.test(this.layoutConfig("loader.type"));
+    },
 
-		/**
-		 * Check if container width is fluid
-		 * @returns {boolean}
-		 */
-		contentFluid() {
-			return this.layoutConfig("content.width") === "fluid";
-		},
+    /**
+     * Check if container width is fluid
+     * @returns {boolean}
+     */
+    contentFluid() {
+      return this.layoutConfig("content.width") === "fluid";
+    },
 
-		/**
-		 * Page loader logo image using require() function
-		 * @returns {string}
-		 */
-		loaderLogo() {
-			return process.env.BASE_URL + this.layoutConfig("loader.logo");
-		},
+    /**
+     * Page loader logo image using require() function
+     * @returns {string}
+     */
+    loaderLogo() {
+      return process.env.BASE_URL + this.layoutConfig("loader.logo");
+    },
 
-		/**
-		 * Check if the left aside menu is enabled
-		 * @returns {boolean}
-		 */
-		asideEnabled() {
-			return !!this.layoutConfig("aside.self.display");
-		},
+    /**
+     * Check if the left aside menu is enabled
+     * @returns {boolean}
+     */
+    asideEnabled() {
+      return !!this.layoutConfig("aside.self.display");
+    },
 
-		/**
-		 * Set the right toolbar display
-		 * @returns {boolean}
-		 */
-		toolbarDisplay() {
-			// return !!this.layoutConfig("toolbar.display");
-			return true;
-		},
+    /**
+     * Set the right toolbar display
+     * @returns {boolean}
+     */
+    toolbarDisplay() {
+      // return !!this.layoutConfig("toolbar.display");
+      return true;
+    },
 
-		/**
-		 * Set the subheader display
-		 * @returns {boolean}
-		 */
-		subheaderDisplay() {
-			return !!this.layoutConfig("subheader.display");
-		}
-	}
+    /**
+     * Set the subheader display
+     * @returns {boolean}
+     */
+    subheaderDisplay() {
+      return !!this.layoutConfig("subheader.display");
+    }
+  }
 };
 </script>

@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       isLoaded: false
-    }
+    };
   },
   computed: {
     ...mapState({
@@ -55,8 +55,8 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch(GET_AUTH_USER);
-     await this.$store.dispatch(GET_AVAILABLE_PROJECTS);
-     this.isLoaded = true;
+    await this.$store.dispatch(GET_AVAILABLE_PROJECTS);
+    this.isLoaded = true;
   }
 };
 </script>
