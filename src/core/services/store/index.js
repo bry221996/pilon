@@ -7,6 +7,7 @@ import config from "./config.module";
 import breadcrumbs from "./breadcrumbs.module";
 import investments from "./investments.module";
 import projects from "./projects.module";
+import funds from "./funds.module";
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     config,
     breadcrumbs,
     investments,
-    projects
+    projects,
+    funds
   }
 });

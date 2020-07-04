@@ -13,6 +13,10 @@ export const destroyToken = () => {
   window.localStorage.removeItem(ID_TOKEN_KEY);
 };
 
+export const destroyUser = () => {
+  window.localStorage.removeItem(ID_USER_KEY);
+};
+
 export const saveUser = user => {
   window.localStorage.setItem(ID_USER_KEY, JSON.stringify(user));
 };
@@ -21,4 +25,11 @@ export const getUser = () => {
   return JSON.parse(window.localStorage.getItem(ID_USER_KEY)) || {};
 };
 
-export default { getToken, saveToken, destroyToken, saveUser, getUser };
+export default {
+  getToken,
+  saveToken,
+  destroyToken,
+  saveUser,
+  getUser,
+  destroyUser
+};

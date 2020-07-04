@@ -11,7 +11,9 @@ const state = {
 const actions = {
   [GET_CURRENT_INVESTMENTS](context) {
     return new Promise((resolve, reject) => {
-      ApiService.get("/crowd-funding/investment?expand=loan,project,user")
+      ApiService.get(
+        "/crowd-funding/investment?expand=loan,project,companyInfo"
+      )
         .then(({ data }) => {
           context.commit(SET_CURRENT_INVESTMENTS, data.data.rows);
           resolve(data);
