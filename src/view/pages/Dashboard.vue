@@ -1,5 +1,5 @@
 <template>
-  <div class="my-10 container-fluid">
+  <div class="my-10 container-fluid" v-if="isLoaded">
     <div class="row">
       <div class="col-12">
         <funds-summary />
@@ -34,26 +34,28 @@
 <script>
 import FundsSummary from "@/view/content/dashboard/FundsSummary.vue";
 import Project from "@/view/content/projects/Project.vue";
-import store from "@/core/services/store";
-import { GET_AUTH_USER } from "@/core/services/store/auth.module";
+// import { GET_AUTH_USER } from "@/core/services/store/auth.module";
 import { GET_AVAILABLE_PROJECTS } from "@/core/services/store/projects.module";
 import { mapState } from "vuex";
 
 export default {
-  name: "Dashboard",
-  async beforeRouteEnter(to, from, next) {
-    await store.dispatch(GET_AUTH_USER);
-    await store.dispatch(GET_AVAILABLE_PROJECTS);
-    next();
-  },
   components: {
     FundsSummary,
     Project
+  },
+  data() {
+    return {
+      isLoaded: false
+    }
   },
   computed: {
     ...mapState({
       projects: state => state.projects.available
     })
+  },
+  async mounted() {
+     await this.$store.dispatch(GET_AVAILABLE_PROJECTS);
+     this.isLoaded = true;
   }
 };
 </script>
