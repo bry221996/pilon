@@ -94,6 +94,7 @@ const actions = {
 
 const mutations = {
   [SET_JWT](state, token) {
+    state.isAuthenticated = true;
     JwtService.saveToken(token);
     ApiService.setHeader();
   },
@@ -111,6 +112,7 @@ const mutations = {
     state.user = {};
     state.errors = {};
     JwtService.destroyToken();
+    JwtService.destroyUser();
   },
   [SET_CREDIT_CARDS](state, creditCards) {
     state.creditCards = creditCards;
