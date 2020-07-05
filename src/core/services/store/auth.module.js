@@ -52,7 +52,7 @@ const actions = {
   [GET_AUTH_USER](context) {
     return new Promise((resolve, reject) => {
       ApiService.get(
-        "user/me?expand=fundSummary,personalInfo,residentialAddress"
+        "user/me?expand=fundSummary,personalInfo,residentialAddress,businessInfo,financialInfo"
       )
         .then(({ data }) => {
           context.commit(SET_AUTH, data.data);
