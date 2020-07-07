@@ -142,68 +142,6 @@
                     </v-select>
                   </v-col>
                 </v-row>
-                <v-row>
-                  <v-col cols="12" class="py-0">
-                    <v-radio-group v-model="changePassword">
-                      <v-radio value="radio-1">
-                        <template slot="label" class="mb-0">
-                          <p
-                            class="font-weight-boldest text-dark mb-0 pt-1"
-                            style="font-size: 1rem"
-                          >
-                            CHANGE PASSWORD
-                          </p>
-                        </template>
-                      </v-radio>
-                    </v-radio-group>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col cols="12">
-                    <v-text-field
-                      placeholder=" "
-                      class="pt-0"
-                      color="#707070"
-                      v-model="currentPassword"
-                    >
-                      <template slot="label">
-                        <p class="font-weight-boldest text-dark">
-                          CURRENT PASSWORD
-                        </p>
-                      </template>
-                    </v-text-field>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col cols="6">
-                    <v-text-field
-                      placeholder=" "
-                      class="pt-0"
-                      color="#707070"
-                      v-model="newPassword"
-                    >
-                      <template slot="label" class="ss">
-                        <p class="font-weight-boldest text-dark">
-                          NEW PASSWORD
-                        </p>
-                      </template>
-                    </v-text-field>
-                  </v-col>
-                  <v-col cols="6">
-                    <v-text-field
-                      placeholder=" "
-                      class="pt-0"
-                      color="#707070"
-                      v-model="confirmPassword"
-                    >
-                      <template slot="label">
-                        <p class="font-weight-boldest text-dark">
-                          CONFIRM PASSWORD
-                        </p>
-                      </template>
-                    </v-text-field>
-                  </v-col>
-                </v-row>
                 <v-row class="d-flex justify-content-end">
                   <v-col cols="6">
                     <v-btn
