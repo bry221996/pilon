@@ -18,7 +18,7 @@
               </div>
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">EARLY REPAYMENT DUE</p>
-                <p>{{ project.loan.maturity_date }}</p>
+                <p>{{ project.invoice.early_payment_date }}</p>
               </div>
             </td>
             <td style="border-top: none" width="26%">
@@ -30,7 +30,7 @@
               </div>
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">RETURNS</p>
-                <p>{{ project.returns }}</p>
+                <p>{{ project.returns }} % </p>
               </div>
             </td>
             <td style="border-top: none" width="23%">
