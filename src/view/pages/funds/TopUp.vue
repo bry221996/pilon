@@ -38,7 +38,7 @@
                   <p class="text-muted">PAYMENT METHOD</p>
                   <v-btn
                     large
-                    :color="form.type == paymentType.value ? 'success' : ''"
+                    :color="form.payment_type == paymentType.value ? 'success' : ''"
                     v-for="(paymentType, index) in paymentTypes"
                     :key="index"
                     class="my-1"
@@ -46,7 +46,7 @@
                     >{{ paymentType.display }}</v-btn
                   >
                 </div>
-                <template v-if="form.type == 6">
+                <template v-if="form.payment_type == 6">
                   <div class="col-4 px-5">
                     <p class="text-muted">SELECT CARD</p>
                     <inline-svg
@@ -147,7 +147,7 @@
                         color="#707070"
                         v-model="form.date_transferred"
                         :label="
-                          form.type == 2 ? 'Cheque Issue Date' : 'Transfer Date'
+                          form.payment_type == 2 ? 'Cheque Issue Date' : 'Transfer Date'
                         "
                         readonly
                         v-bind="attrs"
@@ -167,7 +167,7 @@
                         class="pt-0"
                         placeholder
                         :label="
-                          form.type == 2 ? 'Cheque Number' : 'Transfer No'
+                          form.payment_type == 2 ? 'Cheque Number' : 'Transfer No'
                         "
                         v-model="form.transfer_no"
                       ></v-text-field>
@@ -178,7 +178,7 @@
                       <v-file-input
                         v-model="form.attachment"
                         :label="
-                          form.type == 2
+                          form.payment_type == 2
                             ? 'Screenshots of Cheque'
                             : 'Screenshots of Bank Transfer'
                         "
@@ -275,7 +275,8 @@ export default {
       modal: false,
       menu2: false,
       form: {
-        type: 6,
+        type: 1,
+        payment_type: 6,
         date_transferred: null,
         amount: null,
         fee: 0,
@@ -289,7 +290,7 @@ export default {
       funds: state => state.auth.user.fundSummary
     }),
     formIsValid() {
-      if (parseInt(this.form.type) < 6) {
+      if (parseInt(this.form.payment_type) < 6) {
         return (
           !!this.form.amount &&
           !!this.form.date_transferred &&
@@ -327,7 +328,7 @@ export default {
       this.isSubmitting = true;
       let params = Object.assign({}, this.form);
 
-      if (this.form.type < 6) {
+      if (this.form.payment_type < 6) {
         delete params.attachment;
         var fileFormData = new FormData();
         fileFormData.append("file", this.form.attachment);
@@ -361,7 +362,7 @@ export default {
       }
     },
     changePaymentType(type) {
-      this.form.type = type;
+      this.form.payment_type = type;
     }
   }
 };
