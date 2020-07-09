@@ -42,7 +42,7 @@ export default {
     return {
       links: [
         { display: "PERSONAL DETAILS", to: "/profile/personal-details" },
-        { display: "COMANPY DETAILS", to: "/profile/company-details" },
+        { display: "COMPANY DETAILS", to: "/profile/company-details" },
         { display: "CREDIT CARD", to: "/profile/credit-card" },
         { display: "BANK ACCOUNT", to: "/profile/bank-account" }
       ]
