@@ -38,7 +38,9 @@
                   <p class="text-muted">PAYMENT METHOD</p>
                   <v-btn
                     large
-                    :color="form.payment_type == paymentType.value ? 'success' : ''"
+                    :color="
+                      form.payment_type == paymentType.value ? 'success' : ''
+                    "
                     v-for="(paymentType, index) in paymentTypes"
                     :key="index"
                     class="my-1"
@@ -147,7 +149,9 @@
                         color="#707070"
                         v-model="form.date_transferred"
                         :label="
-                          form.payment_type == 2 ? 'Cheque Issue Date' : 'Transfer Date'
+                          form.payment_type == 2
+                            ? 'Cheque Issue Date'
+                            : 'Transfer Date'
                         "
                         readonly
                         v-bind="attrs"
@@ -167,7 +171,9 @@
                         class="pt-0"
                         placeholder
                         :label="
-                          form.payment_type == 2 ? 'Cheque Number' : 'Transfer No'
+                          form.payment_type == 2
+                            ? 'Cheque Number'
+                            : 'Transfer No'
                         "
                         v-model="form.transfer_no"
                       ></v-text-field>

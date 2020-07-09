@@ -42,6 +42,20 @@ export default new Router({
             import("@/view/pages/investment/InvestmentDetails.vue")
         },
         {
+          path: "auto-invest",
+          component: () => import("@/view/pages/auto-invest/Index.vue"),
+          children: [
+            {
+              path: "/",
+              component: () => import("@/view/pages/auto-invest/List.vue")
+            },
+            {
+              path: "create",
+              component: () => import("@/view/pages/auto-invest/Create.vue")
+            }
+          ]
+        },
+        {
           path: "/profile",
           name: "profile",
           component: () => import("@/view/pages/profile/Index.vue"),
