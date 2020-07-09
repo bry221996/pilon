@@ -239,6 +239,27 @@
         </ul>
       </div>
     </li>
+
+    <router-link
+      to="/auto-invest"
+      v-slot="{ href, navigate, isActive, isExactActive }"
+    >
+      <li
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        class="menu-item"
+        :class="[
+          isActive && 'menu-item-active',
+          isExactActive && 'menu-item-active'
+        ]"
+      >
+        <a :href="href" class="menu-link" @click="navigate">
+          <i class="menu-icon flaticon-graph"></i>
+          <span class="menu-text ki-bold-font">Auto Invest</span>
+        </a>
+      </li>
+    </router-link>
+
     <router-link
       to="/vue-bootstrap/media"
       v-slot="{ href, navigate, isActive, isExactActive }"

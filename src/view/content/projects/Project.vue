@@ -30,7 +30,7 @@
               </div>
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">RETURNS</p>
-                <p>{{ project.returns }} % </p>
+                <p>{{ project.returns }} %</p>
               </div>
             </td>
             <td style="border-top: none" width="23%">
