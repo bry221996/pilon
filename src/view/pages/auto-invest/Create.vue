@@ -35,13 +35,13 @@
               <v-subheader>Interest Range (0%-20%)</v-subheader>
 
               <v-card-text class="px-0">
-                <v-slider
+                <v-range-slider
                   v-model="form.interest_range"
                   thumb-label
                   min="1"
                   max="20"
                   ticks
-                ></v-slider>
+                ></v-range-slider>
               </v-card-text>
             </v-card>
           </v-col>
@@ -50,13 +50,13 @@
               <v-subheader>Interest Tenure (1-12 months)</v-subheader>
 
               <v-card-text class="px-0">
-                <v-slider
+                <v-range-slider
                   v-model="form.tenure"
                   thumb-label
                   min="1"
                   max="12"
                   ticks
-                ></v-slider>
+                ></v-range-slider>
               </v-card-text>
             </v-card>
           </v-col>
@@ -101,8 +101,8 @@ export default {
       isSubmitting: false,
       form: {
         name: "",
-        interest_range: 0,
-        tenure: 0,
+        interest_range: [1, 20],
+        tenure: [1, 12],
         allocation_limit: null,
         industries: [],
         status: true
@@ -114,7 +114,7 @@ export default {
       industries: state => state.rules.industries
     }),
     formIsValid() {
-      return !! this.form.name && !!this.form.allocation_limit && !!this.form.industries.length && this.form.interest_range && this.form.tenure;
+      return !! this.form.name && !!this.form.allocation_limit && !!this.form.industries.length;
     }
   },
   methods: {

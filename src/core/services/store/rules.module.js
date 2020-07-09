@@ -22,16 +22,16 @@ const state = {
   list: [
     {
       name: "Sample auto invest",
-      interest_range: 5,
-      tenure: 3,
+      interest_range: [4, 10],
+      tenure: [8, 12],
       allocation_limit: 100000,
       industries: [0, 1, 4, 6, 7],
       status: true
     },
     {
       name: "Sample auto invest 2",
-      interest_range: 10,
-      tenure: 6,
+      interest_range: [1, 6],
+      tenure: [1, 3],
       allocation_limit: 250000,
       industries: [0, 1, 4, 6, 7],
       status: false
