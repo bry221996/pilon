@@ -6,6 +6,7 @@
         variant="primary"
         class="mr-4 ml-4"
         style="padding-left: 50px; padding-right: 50px"
+        @click.prevent="$router.push('/funds/topup')"
         >TOP UP FUNDS</b-button
       >
     </li>
