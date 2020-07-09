@@ -187,7 +187,7 @@ export default {
 	mixins: [validationMixin],
 	data() {
 		return {
-			dismissCountDown: 5,
+			dismissCountDown: 0,
 			isSubmitting: false,
 			countries: [],
 			form: {
