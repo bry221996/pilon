@@ -55,7 +55,7 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch(GET_AUTH_USER);
-    await this.$store.dispatch(GET_AVAILABLE_PROJECTS);
+    await this.$store.dispatch(GET_AVAILABLE_PROJECTS, 3);
     this.isLoaded = true;
   }
 };
