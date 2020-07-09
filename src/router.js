@@ -37,6 +37,11 @@ export default new Router({
           ]
         },
         {
+          path: "investment/:id",
+          component: () =>
+            import("@/view/pages/investment/InvestmentDetails.vue")
+        },
+        {
           path: "/profile",
           name: "profile",
           component: () => import("@/view/pages/profile/Index.vue"),

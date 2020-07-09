@@ -44,7 +44,11 @@
               </div>
             </td>
             <td style="border-top: none" width="16%" class="align-middle">
-              <b-button size="sm" squared variant="success"
+              <b-button
+                size="sm"
+                squared
+                variant="success"
+                @click="redirectToDetails"
                 >FUND THIS INVOICE</b-button
               >
             </td>
@@ -62,6 +66,11 @@ export default {
     project: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    redirectToDetails() {
+      this.$router.push(`/investment/${this.project.id}`);
     }
   }
 };

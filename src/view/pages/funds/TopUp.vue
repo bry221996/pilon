@@ -206,7 +206,7 @@
         </div>
       </div>
     </v-form>
-    
+
     <v-dialog v-model="showSuccessDialog" persistent max-width="500">
       <v-card class="py-5">
         <div
@@ -246,7 +246,7 @@ export default {
   name: "FundsTopUp",
   data() {
     return {
-            showSuccessDialog: false,
+      showSuccessDialog: false,
       months: [
         { value: 1, text: "January" },
         { value: 2, text: "February" },
