@@ -177,7 +177,7 @@
                   <div class="flex-grow-1">
                     <div class="mb-10">
                       <p class="font-weight-boldest">AMOUNT</p>
-                      <p>{{ project.invoice.total_amount }}</p>
+                      <p>{{ project.goal_amount }}</p>
                     </div>
                     <div>
                       <p

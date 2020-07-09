@@ -36,7 +36,7 @@
             <td style="border-top: none" width="23%">
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">TOTAL INVOICE AMOUNT</p>
-                <p>{{ project.total_funded }}</p>
+                <p>{{ project.goal_amount }}</p>
               </div>
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">TENURE</p>
