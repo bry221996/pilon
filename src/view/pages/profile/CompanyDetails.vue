@@ -15,7 +15,7 @@
                 <v-row>
                   <v-col cols="12">
                     <v-text-field
-                      placeholder="example@email.com"
+                      placeholder=" "
                       class="pt-0"
                       color="#707070"
                     >
@@ -30,7 +30,7 @@
                 <v-row>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder="example@email.com"
+                      placeholder=" "
                       class="pt-0"
                       color="#707070"
                     >
@@ -41,7 +41,7 @@
                   </v-col>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder="example@email.com"
+                      placeholder=" "
                       class="pt-0"
                       color="#707070"
                     >
@@ -54,7 +54,7 @@
                 <v-row>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder="example@email.com"
+                      placeholder=" "
                       class="pt-0"
                       color="#707070"
                     >
@@ -65,7 +65,7 @@
                   </v-col>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder="example@email.com"
+                      placeholder=" "
                       class="pt-0"
                       color="#707070"
                     >
@@ -78,7 +78,7 @@
                 <v-row>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder="example@email.com"
+                      placeholder=" "
                       class="pt-0"
                       color="#707070"
                     >
@@ -89,7 +89,7 @@
                   </v-col>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder="example@email.com"
+                      placeholder=" "
                       class="pt-0"
                       color="#707070"
                     >

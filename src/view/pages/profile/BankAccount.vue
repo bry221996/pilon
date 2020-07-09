@@ -35,7 +35,7 @@
                 <v-row>
                   <v-col cols="12" class="py-0">
                     <v-radio-group :column="false">
-                      <v-radio value="radio-1" class="mr-5">
+                      <v-radio value="savings" class="mr-5">
                         <template slot="label" class="mb-0">
                           <p
                             class="font-weight-boldest text-dark mb-0 pt-1"
@@ -45,7 +45,7 @@
                           </p>
                         </template>
                       </v-radio>
-                      <v-radio value="radio-1">
+                      <v-radio value="current">
                         <template slot="label" class="mb-0">
                           <p
                             class="font-weight-boldest text-dark mb-0 pt-1"
