@@ -65,7 +65,7 @@
           </div>
           <div class="flex-grow-1 py-6 px-6">
             <h4 class="card-title mb-4">
-              <strong>USD {{ project.invoice.total_amount | money_format }}</strong>
+              <strong>USD {{ project.goal_amount | money_format }}</strong>
             </h4>
             <p class="card-text">Funding Amount</p>
           </div>
