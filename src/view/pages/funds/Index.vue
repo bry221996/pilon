@@ -7,7 +7,12 @@
 </template>
 
 <script>
+import { GET_AUTH_USER } from "@/core/services/store/auth.module";
+
 export default {
-  name: "FundsIndex"
+  name: "FundsIndex",
+  mounted() {
+    this.$store.dispatch(GET_AUTH_USER)
+  }
 };
 </script>
