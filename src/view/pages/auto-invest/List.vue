@@ -29,7 +29,7 @@
       <div class="col-4">{{ rule.name }}</div>
       <div class="col-2">{{ rule.interest_range[0] }}% - {{ rule.interest_range[1] }}%</div>
       <div class="col-2">{{ rule.tenure[0] }} - {{ rule.tenure[1] }} months</div>
-      <div class="col-2">$ {{ rule.allocation_limit }}</div>
+      <div class="col-2">$ {{ rule.allocation_limit | money_format }}</div>
       <div class="col-2" v-html="getStatusDisplay(rule.status)"></div>
     </div>
   </div>

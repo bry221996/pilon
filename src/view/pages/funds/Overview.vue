@@ -50,7 +50,7 @@
                     <td width="14%">{{ fund.reference_no }}</td>
                     <td width="14%">{{ fund.created_at }}</td>
                     <td width="30%">{{ fund.description }}</td>
-                    <td width="14%">{{ fund.amount }}</td>
+                    <td width="14%">${{ fund.amount | money_format }}</td>
                     <td width="14%">
                       <inline-svg
                         style="width: 2rem"

@@ -21,7 +21,7 @@
             <i class="fa fa-question-circle" style="color: white"></i>
           </div>
           <b-card-title class="mb-4">
-            <strong>USD {{ funds.available }}</strong>
+            <strong>USD {{ funds.available | money_format }}</strong>
           </b-card-title>
           <b-card-text>FUNDS AVAILABLE</b-card-text>
         </b-card>

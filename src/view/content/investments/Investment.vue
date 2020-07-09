@@ -30,13 +30,13 @@
               </div>
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">RETURNS</p>
-                <p>{{ investment.project.returns }}</p>
+                <p>{{ investment.project.returns }}%</p>
               </div>
             </td>
             <td style="border-top: none" width="23%">
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">TOTAL INVOICE AMOUNT</p>
-                <p>{{ investment.total_amount }}</p>
+                <p>$ {{ investment.total_amount | money_format}}</p>
               </div>
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">TENURE</p>

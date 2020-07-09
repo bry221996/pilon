@@ -50,6 +50,13 @@ router.beforeEach((to, from, next) => {
   }, 100);
 });
 
+
+Vue.filter('money_format', function (value) {
+  if (!value) return '';
+  value = parseFloat(value);
+  return Number((value).toFixed(1)).toLocaleString()
+})
+
 new Vue({
   router,
   store,

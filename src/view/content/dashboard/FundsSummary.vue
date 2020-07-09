@@ -29,7 +29,7 @@
               <i class="fa fa-question-circle" style="color: white"></i>
             </div>
             <b-card-title class="mb-4">
-              <strong>USD {{ analytics.value }}</strong>
+              <strong>USD {{ analytics.value | money_format }}</strong>
             </b-card-title>
             <b-card-text>{{ analytics.label }}</b-card-text>
           </b-card>
@@ -104,7 +104,7 @@ export default {
         {
           label: "EXPECTED RETURNS THIS MONTH",
           class: "pl-12",
-          value: `$ ${this.funds.expected_next_return}`
+          value: `$ ${Number((this.funds.expected_next_return).toFixed(1)).toLocaleString()}`
         }
       ];
     }

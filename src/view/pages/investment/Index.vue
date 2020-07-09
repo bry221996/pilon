@@ -20,7 +20,7 @@
           <div style="position: absolute; right: 0.5rem; top: 0.5rem;">
             <i class="fa fa-question-circle" style="color: white"></i>
           </div>
-          <b-card-title>USD {{ funds.available }}</b-card-title>
+          <b-card-title>USD {{ funds.available | money_format }}</b-card-title>
           <b-card-text>Funds Available</b-card-text>
         </b-card>
       </div>
