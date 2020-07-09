@@ -35,7 +35,7 @@
               <td style="border-top: none" width="23%">
                 <div class="d-flex flex-column">
                   <p class="mb-2 font-weight-boldest">TOTAL INVOICE AMOUNT</p>
-                  <p>{{ project.invoice.total_amount }}</p>
+                  <p>${{ project.invoice.total_amount | money_format}}</p>
                 </div>
                 <div class="d-flex flex-column">
                   <p class="mb-2 font-weight-boldest">TENURE</p>
@@ -59,19 +59,19 @@
             style="background-color: #1D31C6; color: white"
           >
             <h4 class="card-title mb-4">
-              <strong>USD {{ funds.available }}</strong>
+              <strong>USD {{ funds.available | money_format }}</strong>
             </h4>
             <p class="card-text">Funds Available</p>
           </div>
           <div class="flex-grow-1 py-6 px-6">
             <h4 class="card-title mb-4">
-              <strong>USD {{ project.invoice.total_amount }}</strong>
+              <strong>USD {{ project.invoice.total_amount | money_format }}</strong>
             </h4>
             <p class="card-text">Funding Amount</p>
           </div>
           <div class="flex-grow-1 py-6 px-6">
             <h4 class="card-title mb-4">
-              <strong>USD {{ project.loan.interest }}</strong>
+              <strong>USD {{ project.loan.interest | money_format }}</strong>
             </h4>
             <p class="card-text">Expected Returns</p>
           </div>
@@ -94,8 +94,8 @@
       </div>
 
       <div class="row mt-5">
-        <v-expansion-panels>
-          <v-expansion-panel>
+        <v-expansion-panels v-model="suplierDetailsPanel">
+          <v-expansion-panel key="0">
             <v-expansion-panel-header color="#F2F3FF">
               <p class="text-primary mb-0 font-weight-boldest ls-2 text-left">
                 SUPPLIER DETAILS
@@ -131,7 +131,7 @@
                     <div class="flex-grow-1">
                       <div>
                         <p class="font-weight-boldest">COMPANY ADDRESS</p>
-                        <p>{{ project.companyInfo.address || "N/A" }}</p>
+                        <p>{{ address }}</p>
                       </div>
                       <div>
                         <p class="font-weight-boldest">COMPANY WEBSITE</p>
@@ -155,7 +155,7 @@
       </div>
 
       <div class="row mt-5">
-        <v-expansion-panels>
+        <v-expansion-panels v-model="projectDetailsPanel">
           <v-expansion-panel>
             <v-expansion-panel-header color="#F2F3FF">
               <p class="text-primary mb-0 font-weight-boldest ls-2 text-left">
@@ -177,7 +177,7 @@
                   <div class="flex-grow-1">
                     <div class="mb-10">
                       <p class="font-weight-boldest">AMOUNT</p>
-                      <p>{{ project.goal_amount }}</p>
+                      <p>${{ project.goal_amount | money_format }}</p>
                     </div>
                     <div>
                       <p
@@ -225,7 +225,7 @@
                       >
                         INVOICE AMOUNT
                       </p>
-                      <p>{{ project.invoice.total_amount }}</p>
+                      <p>$ {{ project.invoice.total_amount | money_format }}</p>
                     </div>
                   </div>
                   <div class="flex-grow-1">
@@ -298,9 +298,9 @@
                     </div>
                     <div>
                       <p>{{ activity.created_at }}</p>
-                      <p>{{ "activity.companyInfo.name" }}</p>
-                      <p>{{ "activity.companyInfo.personnel" }}</p>
-                      <p>{{ "activity.companyInfo.position" }}</p>
+                      <p>{{ activity.companyInfo.name }}</p>
+                      <p>{{ activity.companyInfo.personnel }}</p>
+                      <p>{{ activity.companyInfo.position }}</p>
                     </div>
                   </div>
                 </div>
@@ -423,6 +423,8 @@ export default {
   name: "InvestmentDetails",
   data() {
     return {
+      suplierDetailsPanel: 0,
+      projectDetailsPanel: 0,
       showConfirmationDialog: false,
       showSuccessfulDialog: false,
       isLoaded: false,
@@ -433,7 +435,11 @@ export default {
   computed: {
     ...mapState({
       funds: state => state.auth.user.fundSummary
-    })
+    }),
+    address() {
+      const { unit_no, line1, line2, country_name, postal } = this.project.companyInfo.address;
+      return unit_no +' '+ line1  +' '+ line2  + ' ' + country_name +' '+ postal;
+    }
   },
   async mounted() {
     const PROJECT_DETAILS_RESPONSE = await ApiService.get(
