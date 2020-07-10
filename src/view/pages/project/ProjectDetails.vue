@@ -5,44 +5,45 @@
         <div class="col-12">
           <table class="table">
             <tr class="pb-3">
-              <td class="pl-0" style="border-top: none" width="16%">
+              <td class="pl-0" style="border-top: none" width="15%">
                 <b-img
-                  :src="investment.companyInfo.photo"
+                  :src="project.companyInfo.photo"
                   fluid
                   alt="Fluid image"
                 ></b-img>
               </td>
-              <td style="border-top: none" width="28%">
+              <td style="border-top: none" width="20%">
                 <div class="d-flex flex-column">
                   <p class="mb-2 font-weight-boldest">COMPANY</p>
-                  <p>{{ investment.companyInfo.company_name || "N/A" }}</p>
+                  <p>{{ project.companyInfo.company_name || "N/A" }}</p>
                 </div>
                 <div class="d-flex flex-column">
                   <p class="mb-2 font-weight-boldest">INVOICE DUE</p>
-                  <p>{{ investment.invoice.due_date }}</p>
+                  <p>{{ project.invoice.due_date }}</p>
                 </div>
               </td>
-              <td style="border-top: none" width="28%">
+              <td style="border-top: none" width="26%">
                 <div class="d-flex flex-column">
                   <p class="mb-2 font-weight-boldest">BUYER</p>
-                  <p>
-                    {{ investment.invoice.buyer.companyInfo.name || "N/A" }}
-                  </p>
+                  <p>{{ project.invoice.buyer.companyInfo.name || "N/A" }}</p>
                 </div>
                 <div class="d-flex flex-column">
                   <p class="mb-2 font-weight-boldest">RETURNS</p>
-                  <p>{{ investment.project.returns }} % P.A.</p>
+                  <p>{{ project.returns }} % P.A.</p>
                 </div>
               </td>
-              <td style="border-top: none" width="28%">
+              <td style="border-top: none" width="23%">
                 <div class="d-flex flex-column">
                   <p class="mb-2 font-weight-boldest">TOTAL INVOICE AMOUNT</p>
-                  <p>${{ investment.invoice.total_amount | money_format }}</p>
+                  <p>${{ project.invoice.total_amount | money_format }}</p>
                 </div>
                 <div class="d-flex flex-column">
                   <p class="mb-2 font-weight-boldest">TENURE</p>
-                  <p>{{ investment.loan.tenure_label }}</p>
+                  <p>{{ project.loan.tenure_label }}</p>
                 </div>
+              </td>
+              <td style="border-top: none" width="16%">
+                <p>Purchaser Profile</p>
               </td>
             </tr>
           </table>
@@ -64,21 +65,30 @@
           </div>
           <div class="flex-grow-1 py-6 px-6">
             <h4 class="card-title mb-4">
-              <strong>USD {{ investment.principal | money_format }}</strong>
+              <strong>USD {{ project.goal_amount | money_format }}</strong>
             </h4>
-            <p class="card-text">Investment Amount</p>
+            <p class="card-text">Funding Amount</p>
           </div>
           <div class="flex-grow-1 py-6 px-6">
             <h4 class="card-title mb-4">
-              <strong>USD {{ investment.interest | money_format }}</strong>
+              <strong>USD {{ project.loan.interest | money_format }}</strong>
             </h4>
             <p class="card-text">Expected Returns</p>
           </div>
           <div class="flex-grow-1 py-6 px-6">
             <h4 class="card-title mb-4">
-              <strong>{{ investment.invoice.due_date }}</strong>
+              <strong>{{ project.invoice.due_date }}</strong>
             </h4>
             <p class="card-text">Estimated Payment Date</p>
+          </div>
+          <div class="px-10 d-flex align-items-center justify-content-center">
+            <b-button
+              size="large"
+              squared
+              variant="success"
+              @click="showConfirmationDialog = true"
+              >FUND THIS INVOICE</b-button
+            >
           </div>
         </div>
       </div>
@@ -98,7 +108,7 @@
                     <b-img
                       height="100%"
                       width="80%"
-                      :src="investment.companyInfo.photo"
+                      :src="project.companyInfo.photo"
                       fluid
                       alt="Fluid image"
                     ></b-img>
@@ -109,14 +119,12 @@
                     <div class="flex-grow-1">
                       <div>
                         <p class="font-weight-boldest">COMPANY NAME</p>
-                        <p>
-                          {{ investment.companyInfo.company_name || "N/A" }}
-                        </p>
+                        <p>{{ project.companyInfo.company_name || "N/A" }}</p>
                       </div>
                       <div class>
                         <p class="font-weight-boldest">REGISTRATION NUMBER</p>
                         <p>
-                          {{ investment.companyInfo.registration_no || "N/A" }}
+                          {{ project.companyInfo.registration_no || "N/A" }}
                         </p>
                       </div>
                     </div>
@@ -127,19 +135,17 @@
                       </div>
                       <div>
                         <p class="font-weight-boldest">COMPANY WEBSITE</p>
-                        <p>{{ investment.companyInfo.website || "N/A" }}</p>
+                        <p>{{ project.companyInfo.website || "N/A" }}</p>
                       </div>
                     </div>
                   </div>
                   <div class>
                     <p class="font-weight-boldest">ABOUT COMPANY</p>
-                    <p>
-                      {{ investment.companyInfo.director.full_name || "N/A" }}
-                    </p>
+                    <p>{{ project.companyInfo.director.full_name || "N/A" }}</p>
                   </div>
                   <div class>
                     <p class="font-weight-boldest">COMPANY DIRECTOR</p>
-                    <p>{{ investment.companyInfo.about_us || "N/A" }}</p>
+                    <p>{{ project.companyInfo.about_us || "N/A" }}</p>
                   </div>
                 </div>
               </div>
@@ -160,7 +166,7 @@
               <div class="row my-5">
                 <div class="col-12">
                   <p class="text-primary font-weight-boldest">
-                    {{ investment.companyInfo.company_name || "N/A" }}
+                    {{ project.companyInfo.company_name || "N/A" }}
                   </p>
                 </div>
               </div>
@@ -170,8 +176,8 @@
                 >
                   <div class="flex-grow-1">
                     <div class="mb-10">
-                      <p class="font-weight-boldest">INVESTMENT AMOUNT</p>
-                      <p>${{ investment.principal | money_format }}</p>
+                      <p class="font-weight-boldest">AMOUNT</p>
+                      <p>${{ project.goal_amount | money_format }}</p>
                     </div>
                     <div>
                       <p
@@ -180,13 +186,13 @@
                       >
                         DESCRIPTION
                       </p>
-                      <p>{{ investment.description || "N/A" }}</p>
+                      <p>{{ project.description || "N/A" }}</p>
                     </div>
                   </div>
                   <div class="flex-grow-1">
                     <div class="mb-10">
                       <p class="font-weight-boldest">SUBMISSION DATE</p>
-                      <p>{{ investment.invoice.submission_date }}</p>
+                      <p>{{ project.invoice.submission_date }}</p>
                       <p></p>
                     </div>
                     <div>
@@ -196,7 +202,7 @@
                       >
                         INVOICE NO.
                       </p>
-                      <p>{{ investment.invoice.invoice_no }}</p>
+                      <p>{{ project.invoice.invoice_no }}</p>
                     </div>
                   </div>
                   <div class="flex-grow-1">
@@ -207,7 +213,7 @@
                       >
                         INVOICE DATE
                       </p>
-                      <p>{{ investment.invoice.due_date }}</p>
+                      <p>{{ project.invoice.due_date }}</p>
                       <p></p>
                     </div>
                   </div>
@@ -219,9 +225,7 @@
                       >
                         INVOICE AMOUNT
                       </p>
-                      <p>
-                        $ {{ investment.invoice.total_amount | money_format }}
-                      </p>
+                      <p>$ {{ project.invoice.total_amount | money_format }}</p>
                     </div>
                   </div>
                   <div class="flex-grow-1">
@@ -232,9 +236,24 @@
                       >
                         EARLY REPAYMENT
                       </p>
-                      <p>
-                        {{ investment.invoice.early_payment_date || "N/A" }}
+                      <p>{{ project.invoice.early_payment_date || "N/A" }}</p>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <div>
+                      <p
+                        class="font-weight-boldest pb-5"
+                        style="border-bottom: 1px solid #F2F3FF; margin-bottom: 8px"
+                      >
+                        ACTIONS
                       </p>
+                      <b-button
+                        size="large"
+                        squared
+                        variant="success"
+                        @click="showConfirmationDialog = true"
+                        >FUND THIS INVOICE</b-button
+                      >
                     </div>
                   </div>
                 </div>
@@ -251,17 +270,17 @@
                   <a
                     class="shadow p-4 rounded"
                     :href="
-                      investment.invoice.blockchain_verification.etherscan_url
+                      project.invoice.blockchain_verification.etherscan_url
                     "
                     target="_blank"
-                    >{{ investment.invoice.blockchain_verification.label }}</a
+                    >{{ project.invoice.blockchain_verification.label }}</a
                   >
                 </div>
                 <p class="text-muted">
                   This invoice is certified. For proof of authenticity,
                   <a
                     :href="
-                      investment.invoice.blockchain_verification.etherscan_url
+                      project.invoice.blockchain_verification.etherscan_url
                     "
                     target="_blank"
                     >view this transaction here.</a
@@ -278,7 +297,7 @@
               <div class="activities d-flex justify-content-between flex-row">
                 <div
                   class="flex-grow-1"
-                  v-for="(activity, index) in investment.invoice.activities"
+                  v-for="(activity, index) in project.invoice.activities"
                   :key="index"
                 >
                   <p class="text-primary font-weight-boldest">
@@ -304,6 +323,109 @@
           </v-expansion-panel>
         </v-expansion-panels>
       </div>
+      <v-dialog v-model="showConfirmationDialog" persistent max-width="500">
+        <v-card class="py-1">
+          <i
+            class="flaticon2-cross"
+            style="position: absolute; right: 1rem; top: 1rem;"
+            @click="showConfirmationDialog = false"
+          ></i>
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <div class="col-10">
+                <p
+                  style="font-size: 1.25rem; color: #1D8CC6"
+                  class="mt-5 modal-text font-weight-boldest text-primary text-center"
+                >
+                  Confirmation
+                </p>
+                <p class="modal-text text-center text-primary">
+                  You are about to fund this invoice. Funding amount will be
+                  deducted from your available balance.
+                </p>
+
+                <hr />
+
+                <div class="d-flex justify-content-between">
+                  <p>Funding Amount</p>
+                  <p>$ {{ project.invoice.total_amount | money_format }}</p>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                  <p>At rate %</p>
+                  <p>{{ project.returns }} % P.A.</p>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                  <p>Repayment Date</p>
+                  <p>{{ project.loan.repayment_start_date }}</p>
+                </div>
+
+                <div class="mb-10 d-flex justify-content-between">
+                  <p>Tenure</p>
+                  <p>{{ project.loan.tenure_label }}</p>
+                </div>
+
+                <div
+                  class="d-flex justify-content-between"
+                  style="border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(0, 0, 0, 0.1); "
+                >
+                  <p
+                    class="py-3 my-0 flex-grow-1 font-weight-boldest text-primary"
+                    style="border-right: 1px solid rgba(0, 0, 0, 0.1)"
+                  >
+                    Expected Returns
+                  </p>
+                  <p class="ml-4 py-3 my-0 font-weight-boldest text-primary">
+                    USD {{ project.loan.interest | money_format }}
+                  </p>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <v-btn
+                    class="mt-5"
+                    style="text-transform: none"
+                    color="primary"
+                    :loading="isSubmitting"
+                    squared
+                    @click="fundInvoice"
+                    >Proceed</v-btn
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </v-card>
+      </v-dialog>
+
+      <v-dialog v-model="showSuccessfulDialog" persistent max-width="500">
+        <v-card class="py-5">
+          <div
+            class="d-flex justify-content-center flex-column align-items-center"
+          >
+            <p
+              style="font-size: 1.25rem; color: #1D8CC6"
+              class="mt-5 modal-text font-weight-boldest"
+            >
+              Funding Successful
+            </p>
+            <p class="modal-text" style="color: #1D8CC6">
+              You have successfully funded the invoice.
+            </p>
+            <inline-svg
+              width="40%"
+              src="media/pilons/pilon_funding_successful.svg"
+            ></inline-svg>
+            <v-btn
+              style="text-transform: none"
+              color="primary"
+              squared
+              @click="$router.push('/investments/user')"
+              >View My Investments</v-btn
+            >
+          </div>
+        </v-card>
+      </v-dialog>
     </div>
   </v-app>
 </template>
@@ -312,7 +434,7 @@
 import ApiService from "@/core/services/api.service";
 import { mapState } from "vuex";
 export default {
-  name: "InvestmentDetails",
+  name: "ProjectDetails",
   data() {
     return {
       suplierDetailsPanel: 0,
@@ -321,7 +443,7 @@ export default {
       showSuccessfulDialog: false,
       isLoaded: false,
       isSubmitting: false,
-      investment: {}
+      project: {}
     };
   },
   computed: {
@@ -335,7 +457,7 @@ export default {
         line2,
         country_name,
         postal
-      } = this.investment.companyInfo.address;
+      } = this.project.companyInfo.address;
       return (
         unit_no + " " + line1 + " " + line2 + " " + country_name + " " + postal
       );
@@ -343,17 +465,17 @@ export default {
   },
   async mounted() {
     const PROJECT_DETAILS_RESPONSE = await ApiService.get(
-      `/crowd-funding/investment/${this.$route.params.id}?expand=loan,invoice,companyInfo,project`
+      `/crowd-funding/project/${this.$route.params.id}?expand=loan,invoice,companyInfo`
     );
-    this.investment = PROJECT_DETAILS_RESPONSE.data.data;
+    this.project = PROJECT_DETAILS_RESPONSE.data.data;
     this.isLoaded = true;
   },
   methods: {
     async fundInvoice() {
       this.isSubmitting = true;
       await ApiService.post("/crowd-funding/investment", {
-        project_id: this.investment.id,
-        amount: this.investment.invoice.total_amount
+        project_id: this.project.id,
+        amount: this.project.invoice.total_amount
       });
       this.showConfirmationDialog = false;
       this.showSuccessfulDialog = true;

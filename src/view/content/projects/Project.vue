@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     redirectToDetails() {
-      this.$router.push(`/investment/${this.project.id}`);
+      this.$router.push(`/projects/${this.project.id}`);
     }
   }
 };

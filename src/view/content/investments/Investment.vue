@@ -44,7 +44,11 @@
               </div>
             </td>
             <td style="border-top: none" width="16%" class="align-middle">
-              <b-button size="sm" squared variant="success"
+              <b-button
+                size="sm"
+                squared
+                variant="success"
+                @click="$router.push(`/investment/${investment.id}`)"
                 >VIEW INVESTMENT</b-button
               >
             </td>
