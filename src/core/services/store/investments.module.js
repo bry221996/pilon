@@ -6,7 +6,6 @@ export const GET_INVESTMENTS_HISTORY = "getInvestmentsHistory";
 export const SET_CURRENT_INVESTMENTS = "setCurrentInvestments";
 export const SET_INVESTMENTS_HISTORY = "setInvestmentsHistory";
 
-
 const state = {
   current: [],
   history: []

@@ -263,21 +263,21 @@
                 class="row px-5 py-8 mb-5 d-flex flex-column"
                 style="background-color: #FAFAFA"
               >
-                <div class="d-flex align-items-center">
-                  <p class="text-primary font-weight-boldest ls-2">
+                <div class="d-flex align-items-center mb-5">
+                  <p class="text-primary font-weight-boldest ls-2 mb-0 mr-5">
                     VERIFIED ON BLOCKCHAIN
                   </p>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field
-                      dense
-                      rounded
-                      :value="project.invoice.blockchain_verification.label"
-                    ></v-text-field>
-                  </v-col>
+                  <a class="shadow p-4 rounded"  :href="project.invoice.blockchain_verification.etherscan_url" target="_blank">{{ project.invoice.blockchain_verification.label }}</a>
                 </div>
                 <p class="text-muted">
-                  This invoice is certified. For proof of authenticity, view
-                  this transaction here.
+                  This invoice is certified. For proof of authenticity,
+                  <a
+                    :href="
+                      project.invoice.blockchain_verification.etherscan_url
+                    "
+                    target="_blank"
+                    >view this transaction here.</a
+                  >
                 </p>
               </div>
 
@@ -341,7 +341,7 @@
 
                 <div class="d-flex justify-content-between">
                   <p>Funding Amount</p>
-                  <p>$ {{ project.invoice.total_amount  | money_format }}</p>
+                  <p>$ {{ project.invoice.total_amount | money_format }}</p>
                 </div>
 
                 <div class="d-flex justify-content-between">
