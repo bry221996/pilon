@@ -14,11 +14,7 @@
               <v-container>
                 <v-row>
                   <v-col cols="12">
-                    <v-text-field
-                      placeholder=" "
-                      class="pt-0"
-                      color="#707070"
-                    >
+                    <v-text-field placeholder=" " class="pt-0" color="#707070">
                       <template slot="label" class="ss">
                         <p class="font-weight-boldest text-dark">
                           COMPANY NAME
@@ -29,22 +25,14 @@
                 </v-row>
                 <v-row>
                   <v-col cols="6">
-                    <v-text-field
-                      placeholder=" "
-                      class="pt-0"
-                      color="#707070"
-                    >
+                    <v-text-field placeholder=" " class="pt-0" color="#707070">
                       <template slot="label" class="ss">
                         <p class="font-weight-boldest text-dark">EMAIL</p>
                       </template>
                     </v-text-field>
                   </v-col>
                   <v-col cols="6">
-                    <v-text-field
-                      placeholder=" "
-                      class="pt-0"
-                      color="#707070"
-                    >
+                    <v-text-field placeholder=" " class="pt-0" color="#707070">
                       <template slot="label">
                         <p class="font-weight-boldest text-dark">CONTACT</p>
                       </template>
@@ -53,22 +41,14 @@
                 </v-row>
                 <v-row>
                   <v-col cols="6">
-                    <v-text-field
-                      placeholder=" "
-                      class="pt-0"
-                      color="#707070"
-                    >
+                    <v-text-field placeholder=" " class="pt-0" color="#707070">
                       <template slot="label" class="ss">
                         <p class="font-weight-boldest text-dark">ADDRESS</p>
                       </template>
                     </v-text-field>
                   </v-col>
                   <v-col cols="6">
-                    <v-text-field
-                      placeholder=" "
-                      class="pt-0"
-                      color="#707070"
-                    >
+                    <v-text-field placeholder=" " class="pt-0" color="#707070">
                       <template slot="label">
                         <p class="font-weight-boldest text-dark">POSTCODE</p>
                       </template>
@@ -77,22 +57,14 @@
                 </v-row>
                 <v-row>
                   <v-col cols="6">
-                    <v-text-field
-                      placeholder=" "
-                      class="pt-0"
-                      color="#707070"
-                    >
+                    <v-text-field placeholder=" " class="pt-0" color="#707070">
                       <template slot="label" class="ss">
                         <p class="font-weight-boldest text-dark">COUNTRY</p>
                       </template>
                     </v-text-field>
                   </v-col>
                   <v-col cols="6">
-                    <v-text-field
-                      placeholder=" "
-                      class="pt-0"
-                      color="#707070"
-                    >
+                    <v-text-field placeholder=" " class="pt-0" color="#707070">
                       <template slot="label">
                         <p class="font-weight-boldest text-dark">LAST NAME</p>
                       </template>

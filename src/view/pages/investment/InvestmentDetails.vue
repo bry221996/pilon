@@ -35,7 +35,7 @@
               <td style="border-top: none" width="23%">
                 <div class="d-flex flex-column">
                   <p class="mb-2 font-weight-boldest">TOTAL INVOICE AMOUNT</p>
-                  <p>${{ project.invoice.total_amount | money_format}}</p>
+                  <p>${{ project.invoice.total_amount | money_format }}</p>
                 </div>
                 <div class="d-flex flex-column">
                   <p class="mb-2 font-weight-boldest">TENURE</p>
@@ -263,10 +263,17 @@
                 class="row px-5 py-8 mb-5 d-flex flex-column"
                 style="background-color: #FAFAFA"
               >
-                <div class="d-flex">
+                <div class="d-flex align-items-center">
                   <p class="text-primary font-weight-boldest ls-2">
                     VERIFIED ON BLOCKCHAIN
                   </p>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field
+                      dense
+                      rounded
+                      :value="project.invoice.blockchain_verification.label"
+                    ></v-text-field>
+                  </v-col>
                 </div>
                 <p class="text-muted">
                   This invoice is certified. For proof of authenticity, view
@@ -437,8 +444,16 @@ export default {
       funds: state => state.auth.user.fundSummary
     }),
     address() {
-      const { unit_no, line1, line2, country_name, postal } = this.project.companyInfo.address;
-      return unit_no +' '+ line1  +' '+ line2  + ' ' + country_name +' '+ postal;
+      const {
+        unit_no,
+        line1,
+        line2,
+        country_name,
+        postal
+      } = this.project.companyInfo.address;
+      return (
+        unit_no + " " + line1 + " " + line2 + " " + country_name + " " + postal
+      );
     }
   },
   async mounted() {

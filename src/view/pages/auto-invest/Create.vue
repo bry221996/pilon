@@ -83,7 +83,16 @@
         </v-row>
         <v-row class="d-flex justify-content-end">
           <v-col cols="4">
-            <v-btn :disabled="!formIsValid" :loading="isSubmitting" rounded color="primary" block large @click="addRule">SAVE</v-btn>
+            <v-btn
+              :disabled="!formIsValid"
+              :loading="isSubmitting"
+              rounded
+              color="primary"
+              block
+              large
+              @click="addRule"
+              >SAVE</v-btn
+            >
           </v-col>
         </v-row>
       </v-container>
@@ -114,7 +123,11 @@ export default {
       industries: state => state.rules.industries
     }),
     formIsValid() {
-      return !! this.form.name && !!this.form.allocation_limit && !!this.form.industries.length;
+      return (
+        !!this.form.name &&
+        !!this.form.allocation_limit &&
+        !!this.form.industries.length
+      );
     }
   },
   methods: {
@@ -122,7 +135,7 @@ export default {
       this.isSubmitting = true;
       this.$store.commit(ADD_RULE, this.form);
       this.isSubmitting = false;
-      this.$router.push('/auto-invest');
+      this.$router.push("/auto-invest");
     }
   }
 };

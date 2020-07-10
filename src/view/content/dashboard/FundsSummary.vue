@@ -104,7 +104,9 @@ export default {
         {
           label: "EXPECTED RETURNS THIS MONTH",
           class: "pl-12",
-          value: `$ ${Number((this.funds.expected_next_return).toFixed(1)).toLocaleString()}`
+          value: `$ ${Number(
+            this.funds.expected_next_return.toFixed(1)
+          ).toLocaleString()}`
         }
       ];
     }

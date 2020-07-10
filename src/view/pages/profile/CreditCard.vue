@@ -30,11 +30,7 @@
                 </v-row>
                 <v-row>
                   <v-col cols="6">
-                    <v-text-field
-                      placeholder=" "
-                      class="pt-0"
-                      color="#707070"
-                    >
+                    <v-text-field placeholder=" " class="pt-0" color="#707070">
                       <template slot="label" class="ss">
                         <p class="font-weight-boldest text-dark">
                           NAME ON CARD
@@ -43,11 +39,7 @@
                     </v-text-field>
                   </v-col>
                   <v-col cols="6">
-                    <v-text-field
-                      placeholder=" "
-                      class="pt-0"
-                      color="#707070"
-                    >
+                    <v-text-field placeholder=" " class="pt-0" color="#707070">
                       <template slot="label">
                         <p class="font-weight-boldest text-dark">CARD NUMBER</p>
                       </template>
@@ -56,11 +48,7 @@
                 </v-row>
                 <v-row>
                   <v-col cols="6">
-                    <v-text-field
-                      placeholder=" "
-                      class="pt-0"
-                      color="#707070"
-                    >
+                    <v-text-field placeholder=" " class="pt-0" color="#707070">
                       <template slot="label" class="ss">
                         <p class="font-weight-boldest text-dark">CCV</p>
                       </template>
@@ -69,7 +57,7 @@
                   <v-col cols="3">
                     <v-select
                       class="my-0 py-1"
-                      :items="['S', 'January']"
+                      :items="months"
                       placeholder="MM"
                     >
                       <template slot="label" class="ss">
@@ -80,7 +68,7 @@
                   <v-col cols="3">
                     <v-select
                       class="my-0 py-1"
-                      :items="['S', 'January']"
+                      :items="years"
                       placeholder="YYYY"
                     >
                       <template slot="label" class="ss">
@@ -103,6 +91,29 @@
 
 <script>
 export default {
-  name: "CreditCard"
+  name: "CreditCard",
+  data() {
+    return {
+      months: [
+        { value: 1, text: "January" },
+        { value: 2, text: "February" },
+        { value: 3, text: "March" },
+        { value: 4, text: "April" },
+        { value: 5, text: "May" },
+        { value: 6, text: "June" },
+        { value: 7, text: "July" },
+        { value: 8, text: "August" },
+        { value: 9, text: "September" },
+        { value: 10, text: "October" },
+        { value: 11, text: "November" },
+        { value: 12, text: "December" }
+      ]
+    };
+  },
+  computed: {
+    years() {
+      return Array.from(new Array(20), (x, i) => i + 2020);
+    }
+  }
 };
 </script>

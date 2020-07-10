@@ -43,7 +43,7 @@ const mutations = {
   [ADD_RULE](state, rule) {
     state.list.push(rule);
   }
-}
+};
 
 export default {
   state,
