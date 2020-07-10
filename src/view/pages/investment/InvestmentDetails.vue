@@ -341,7 +341,7 @@
 
                 <div class="d-flex justify-content-between">
                   <p>Funding Amount</p>
-                  <p>{{ project.invoice.total_amount }}</p>
+                  <p>$ {{ project.invoice.total_amount  | money_format }}</p>
                 </div>
 
                 <div class="d-flex justify-content-between">
@@ -370,7 +370,7 @@
                     Expected Returns
                   </p>
                   <p class="ml-4 py-3 my-0 font-weight-boldest text-primary">
-                    USD {{ project.loan.interest }}
+                    USD {{ project.loan.interest | money_format }}
                   </p>
                 </div>
 

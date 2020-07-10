@@ -10,7 +10,7 @@
             AUTO INVEST RULES
           </p>
           <i
-            class="flaticon-add-circular-button"
+            class="flaticon-add-circular-button text-primary"
             @click="$router.push('/auto-invest/create')"
           ></i>
         </div>
