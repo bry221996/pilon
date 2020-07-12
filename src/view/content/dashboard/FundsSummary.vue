@@ -24,6 +24,7 @@
             :bg-variant="analytics.variant"
             text-variant="white"
             class="p-0"
+            @click="redirect(analytics.label)"
           >
             <div style="position: absolute; right: 0.5rem; top: 0.5rem;">
               <i class="fa fa-question-circle" style="color: white"></i>
@@ -109,6 +110,13 @@ export default {
           ).toLocaleString()}`
         }
       ];
+    }
+  },
+  methods: {
+    redirect(label) {
+      if (label === "Invested Funds") {
+        this.$router.push("/investments/user");
+      }
     }
   }
 };
