@@ -420,8 +420,8 @@
               style="text-transform: none"
               color="primary"
               squared
-              @click="$router.push('/investments/user')"
-              >View My Investments</v-btn
+              @click="showSuccessfulDialog = false"
+              >Continue Browsing</v-btn
             >
           </div>
         </v-card>

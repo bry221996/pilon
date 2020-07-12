@@ -100,8 +100,8 @@
               color="primary"
               block
               large
-              @click="addRule"
-              >SAVE</v-btn
+              @click="updateRule"
+              >UPDATE</v-btn
             >
           </v-col>
         </v-row>
@@ -112,9 +112,9 @@
 
 <script>
 import { mapState } from "vuex";
-import { ADD_RULE } from "@/core/services/store/rules.module";
+import { UPDATE_RULE } from "@/core/services/store/rules.module";
 export default {
-  name: "AutoInvestCreate",
+  name: "AutoInvestEdit",
   data() {
     return {
       isSubmitting: false,
@@ -130,7 +130,8 @@ export default {
   },
   computed: {
     ...mapState({
-      industries: state => state.rules.industries
+      industries: state => state.rules.industries,
+      list: state => state.rules.list
     }),
     formIsValid() {
       return (
@@ -140,10 +141,16 @@ export default {
       );
     }
   },
+  mounted() {
+    const seletectRule = this.list.find(
+      rule => rule.id == this.$route.params.id
+    );
+    this.form = seletectRule;
+  },
   methods: {
-    addRule() {
+    updateRule() {
       this.isSubmitting = true;
-      this.$store.commit(ADD_RULE, this.form);
+      this.$store.commit(UPDATE_RULE, this.form);
       this.isSubmitting = false;
       this.$router.push("/auto-invest");
     }

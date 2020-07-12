@@ -48,7 +48,7 @@
                       </div>
                     </td>
                     <td width="14%">{{ fund.reference_no }}</td>
-                    <td width="14%">{{ fund.created_at }}</td>
+                    <td width="14%">{{ formatDate(fund.created_at) }}</td>
                     <td width="30%">{{ fund.description }}</td>
                     <td width="14%">${{ fund.amount | money_format }}</td>
                     <td width="14%">
@@ -72,6 +72,7 @@
 import FundsSummary from "@/view/content/dashboard/FundsSummary.vue";
 import { GET_FUND_REQUESTS } from "@/core/services/store/funds.module";
 import { mapState } from "vuex";
+import moment from "moment";
 
 export default {
   name: "FundsOverview",
@@ -94,6 +95,11 @@ export default {
   async mounted() {
     await this.$store.dispatch(GET_FUND_REQUESTS);
     this.isLoaded = true;
+  },
+  methods: {
+    formatDate(date) {
+      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    }
   }
 };
 </script>

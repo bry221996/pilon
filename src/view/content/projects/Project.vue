@@ -18,7 +18,7 @@
               </div>
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">EARLY REPAYMENT DUE</p>
-                <p>{{ project.invoice.early_payment_date }}</p>
+                <p>{{ repaymentDate }}</p>
               </div>
             </td>
             <td style="border-top: none" width="26%">
@@ -60,12 +60,22 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   name: "Projects",
   props: {
     project: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    repaymentDate() {
+      return moment(
+        this.project.invoice.early_payment_date,
+        "YYYY/MM/DD"
+      ).format("DD/MM/YYYY");
     }
   },
   methods: {

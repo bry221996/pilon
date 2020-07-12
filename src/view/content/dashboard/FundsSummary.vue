@@ -94,7 +94,7 @@ export default {
         {
           label: "TOTAL INTEREST EARNED TILL DATE",
           class: "pl-6",
-          value: `$ ${this.funds.dividends}`
+          value: `$ ${Number(this.funds.dividends.toFixed(1)).toLocaleString()}`
         },
         {
           label: "AVERAGE % RETURNS",

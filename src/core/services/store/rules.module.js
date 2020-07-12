@@ -1,4 +1,5 @@
 export const ADD_RULE = "addRule";
+export const UPDATE_RULE = "updateRule";
 
 const state = {
   industries: [
@@ -21,6 +22,7 @@ const state = {
   ],
   list: [
     {
+      id: 1,
       name: "Sample auto invest",
       interest_range: [4, 10],
       tenure: [8, 12],
@@ -29,6 +31,7 @@ const state = {
       status: true
     },
     {
+      id: 2,
       name: "Sample auto invest 2",
       interest_range: [1, 6],
       tenure: [1, 3],
@@ -41,7 +44,12 @@ const state = {
 
 const mutations = {
   [ADD_RULE](state, rule) {
+    rule.id = state.list.length + 1;
     state.list.push(rule);
+  },
+  [UPDATE_RULE](state, rule) {
+    const index = state.list.findIndex(r => r.id == rule.id);
+    state.list[index] = rule;
   }
 };
 

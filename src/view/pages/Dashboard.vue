@@ -24,7 +24,9 @@
     <div class="row">
       <div class="col-12">
         <div class="p-5 text-center" style="background-color: #E2F5FE">
-          <p class="text-info mb-0 font-weight-boldest">VIEW ALL</p>
+          <router-link class="font-weight-boldest" to="/investments/available"
+            >VIEW ALL</router-link
+          >
         </div>
       </div>
     </div>

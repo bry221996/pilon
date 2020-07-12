@@ -26,7 +26,11 @@
     <hr />
 
     <div class="row my-3" v-for="(rule, index) in rules" :key="index">
-      <div class="col-4">{{ rule.name }}</div>
+      <div class="col-4">
+        <router-link :to="`/auto-invest/${rule.id}`">{{
+          rule.name
+        }}</router-link>
+      </div>
       <div class="col-2">
         {{ rule.interest_range[0] }}% - {{ rule.interest_range[1] }}%
       </div>

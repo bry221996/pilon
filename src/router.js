@@ -42,6 +42,14 @@ export default new Router({
             import("@/view/pages/investment/InvestmentDetails.vue")
         },
         {
+          path: "statements",
+          component: () => import("@/view/pages/MonthlyStatement.vue")
+        },
+        {
+          path: "projects/:id",
+          component: () => import("@/view/pages/project/ProjectDetails.vue")
+        },
+        {
           path: "auto-invest",
           component: () => import("@/view/pages/auto-invest/Index.vue"),
           children: [
@@ -52,6 +60,10 @@ export default new Router({
             {
               path: "create",
               component: () => import("@/view/pages/auto-invest/Create.vue")
+            },
+            {
+              path: ":id",
+              component: () => import("@/view/pages/auto-invest/Edit.vue")
             }
           ]
         },
@@ -110,154 +122,12 @@ export default new Router({
               component: () => import("@/view/pages/funds/History.vue")
             }
           ]
-        },
-        {
-          path: "/vuetify",
-          name: "vuetify",
-          component: () => import("@/view/pages/vuetify/Vuetify.vue"),
-          children: [
-            {
-              path: "alerts",
-              name: "vuetify-alerts",
-              component: () => import("@/view/pages/vuetify/Alerts.vue")
-            },
-            {
-              path: "avatars",
-              name: "vuetify-avatars",
-              component: () => import("@/view/pages/vuetify/Avatars.vue")
-            },
-            {
-              path: "badges",
-              name: "vuetify-badges",
-              component: () => import("@/view/pages/vuetify/Badges.vue")
-            },
-            {
-              path: "buttons",
-              name: "vuetify-buttons",
-              component: () => import("@/view/pages/vuetify/Buttons.vue")
-            },
-            {
-              path: "calendars",
-              name: "vuetify-calendars",
-              component: () => import("@/view/pages/vuetify/Calendars.vue")
-            },
-            {
-              path: "cards",
-              name: "vuetify-cards",
-              component: () => import("@/view/pages/vuetify/Cards.vue")
-            },
-            {
-              path: "chips",
-              name: "vuetify-chips",
-              component: () => import("@/view/pages/vuetify/Chips.vue")
-            },
-            {
-              path: "dialog",
-              name: "vuetify-dialog",
-              component: () => import("@/view/pages/vuetify/Dialog.vue")
-            },
-            {
-              path: "autocompletes",
-              name: "vuetify-autocompletes",
-              component: () =>
-                import("@/view/pages/vuetify/forms/Autocompletes.vue")
-            },
-            {
-              path: "file-inputs",
-              name: "vuetify-file-inputs",
-              component: () =>
-                import("@/view/pages/vuetify/forms/FileInputs.vue")
-            },
-            {
-              path: "forms",
-              name: "vuetify-forms",
-              component: () => import("@/view/pages/vuetify/forms/Forms.vue")
-            },
-            {
-              path: "selection-controls",
-              name: "vuetify-selection-controls",
-              component: () =>
-                import("@/view/pages/vuetify/forms/SelectionControls.vue")
-            },
-            {
-              path: "selects",
-              name: "vuetify-selects",
-              component: () => import("@/view/pages/vuetify/forms/Selects.vue")
-            },
-            {
-              path: "textareas",
-              name: "vuetify-textareas",
-              component: () =>
-                import("@/view/pages/vuetify/forms/Textareas.vue")
-            },
-            {
-              path: "text-fields",
-              name: "vuetify-text-fields",
-              component: () =>
-                import("@/view/pages/vuetify/forms/TextFields.vue")
-            },
-            {
-              path: "simple-tables",
-              name: "vuetify-simple-tables",
-              component: () =>
-                import("@/view/pages/vuetify/tables/SimpleTables.vue")
-            },
-            {
-              path: "data-tables",
-              name: "vuetify-data-tables",
-              component: () =>
-                import("@/view/pages/vuetify/tables/DataTables.vue")
-            },
-            {
-              path: "tabs",
-              name: "vuetify-tabs",
-              component: () => import("@/view/pages/vuetify/Tabs.vue")
-            },
-            {
-              path: "timelines",
-              name: "vuetify-timelines",
-              component: () => import("@/view/pages/vuetify/Timelines.vue")
-            },
-            {
-              path: "tooltips",
-              name: "vuetify-tooltips",
-              component: () => import("@/view/pages/vuetify/Tooltips.vue")
-            },
-            {
-              path: "treeview",
-              name: "vuetify-treeview",
-              component: () => import("@/view/pages/vuetify/Treeview.vue")
-            }
-          ]
-        },
-        {
-          path: "/wizard",
-          name: "wizard",
-          component: () => import("@/view/pages/wizard/Wizard.vue"),
-          children: [
-            {
-              path: "wizard-1",
-              name: "wizard-1",
-              component: () => import("@/view/pages/wizard/Wizard-1.vue")
-            },
-            {
-              path: "wizard-2",
-              name: "wizard-2",
-              component: () => import("@/view/pages/wizard/Wizard-2.vue")
-            },
-            {
-              path: "wizard-3",
-              name: "wizard-3",
-              component: () => import("@/view/pages/wizard/Wizard-3.vue")
-            },
-            {
-              path: "wizard-4",
-              name: "wizard-4",
-              component: () => import("@/view/pages/wizard/Wizard-4.vue")
-            }
-          ]
         }
       ]
+    },
+    {
+      path: "/statements/:id",
+      component: () => import("@/view/pages/Statement.vue")
     },
     {
       path: "/error",

@@ -87,7 +87,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
-  name: "CompanyDetails"
+  name: "CompanyDetails",
+  computed: {
+    ...mapState({
+      business: state => state.auth.user.businessInfo
+    })
+  }
 };
 </script>

@@ -11,6 +11,10 @@
               class="pt-0"
               color="#707070"
               v-model="$v.form.username.$model"
+              :error="$v.form.username.$error"
+              :messages="
+                $v.form.username.$error ? 'This field is required' : ''
+              "
             >
               <template slot="label">
                 <strong>Login ID</strong>
@@ -24,6 +28,10 @@
               class="pt-0"
               color="#707070"
               v-model="$v.form.password.$model"
+              :error="$v.form.password.$error"
+              :messages="
+                $v.form.password.$error ? 'This field is required' : ''
+              "
             >
               <template slot="label">
                 <strong>Password</strong>
@@ -83,7 +91,7 @@ import { mapState } from "vuex";
 import { LOGIN, LOGOUT } from "@/core/services/store/auth.module";
 
 import { validationMixin } from "vuelidate";
-import { minLength, required } from "vuelidate/lib/validators";
+import { required } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
@@ -104,8 +112,7 @@ export default {
         required
       },
       password: {
-        required,
-        minLength: minLength(3)
+        required
       }
     }
   },
