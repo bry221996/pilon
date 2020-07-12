@@ -14,7 +14,12 @@
               <v-container>
                 <v-row>
                   <v-col cols="6">
-                    <v-text-field placeholder=" " class="pt-0" color="#707070">
+                    <v-text-field
+                      placeholder=" "
+                      class="pt-0"
+                      color="#707070"
+                      :value="bank.account_name"
+                    >
                       <template slot="label" class="ss">
                         <p class="font-weight-boldest text-dark">
                           BANK ACCOUNT HOLDER NAME
@@ -23,7 +28,12 @@
                     </v-text-field>
                   </v-col>
                   <v-col cols="6">
-                    <v-text-field placeholder=" " class="pt-0" color="#707070">
+                    <v-text-field
+                      placeholder=" "
+                      class="pt-0"
+                      color="#707070"
+                      :value="bank.account_number"
+                    >
                       <template slot="label">
                         <p class="font-weight-boldest text-dark">
                           BANK ACCOUNT NUMBER
@@ -60,7 +70,12 @@
                 </v-row>
                 <v-row>
                   <v-col cols="6">
-                    <v-text-field placeholder=" " class="pt-0" color="#707070">
+                    <v-text-field
+                      placeholder=" "
+                      class="pt-0"
+                      color="#707070"
+                      :value="bank.bank_name"
+                    >
                       <template slot="label" class="ss">
                         <p class="font-weight-boldest text-dark">BANK NAME</p>
                       </template>
@@ -76,7 +91,12 @@
                 </v-row>
                 <v-row>
                   <v-col cols="6">
-                    <v-text-field placeholder=" " class="pt-0" color="#707070">
+                    <v-text-field
+                      placeholder=" "
+                      class="pt-0"
+                      color="#707070"
+                      :value="bank.branch_code"
+                    >
                       <template slot="label" class="ss">
                         <p class="font-weight-boldest text-dark">BRANCH CODE</p>
                       </template>
@@ -99,7 +119,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
-  name: "BankAccount"
+  name: "BankAccount",
+  computed: {
+    ...mapState({
+      bank: state => state.auth.user.businessInfo.bank
+    })
+  }
 };
 </script>
