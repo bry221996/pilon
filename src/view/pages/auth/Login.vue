@@ -1,5 +1,8 @@
 <template>
   <div class="w-100">
+    <div class="d-flex justify-content-center mb-5">
+      <img src="/media/pilons/pilon_logo.svg" />
+    </div>
     <!--begin::Signin-->
     <div class="login-form login-signin">
       <!--begin::Form-->

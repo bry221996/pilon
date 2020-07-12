@@ -29,7 +29,7 @@
         </div>
         <div class="d-flex align-items-center pl-3">
           <i class="mr-2 text-primary flaticon2-download-2"></i>
-          <router-link :to="getUrl(month)">HTML</router-link>
+          <a :href="getUrl(month)" target="_blank">HTML</a>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@ export default {
   methods: {
     getUrl(name) {
       const url = name.replace(" ", "-");
-      return `/statements/${url}`;
+      return `/#/statements/${url}`;
     }
   }
 };
