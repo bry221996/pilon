@@ -7,7 +7,7 @@
           style="background-color: #F2F3FF"
         >
           <p class="text-primary mb-0 font-weight-boldest ls-2">
-            CREATE AUTO INVEST RULE
+            EDIT AUTO INVEST RULE
           </p>
         </div>
       </div>
