@@ -40,9 +40,9 @@ export default {
   data() {
     return {
       links: [
-        { display: "AVAILABLE INVESTMENTS", to: "/investments/available" },
-        { display: "MY INVESTMENTS", to: "/investments/user" },
-        { display: "INVESTMENTS HISTORY", to: "/investments/history" }
+        { display: "AVAILABLE FUNDINGS", to: "/investments/available" },
+        { display: "PORTFOLIO", to: "/investments/user" },
+        { display: "FUNDING HISTORY", to: "/investments/history" }
       ]
     };
   },

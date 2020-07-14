@@ -48,7 +48,7 @@
     >
       <a href="#" class="menu-link menu-toggle">
         <i class="menu-icon flaticon-file-2"></i>
-        <span class="menu-text ki-bold-font">Investments</span>
+        <span class="menu-text ki-bold-font">Portfolios</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="menu-submenu">
@@ -56,7 +56,7 @@
         <ul class="menu-subnav">
           <li aria-haspopup="true" class="menu-item menu-item-parent">
             <span class="menu-link">
-              <span class="menu-text">Investments</span>
+              <span class="menu-text">Portfolios</span>
             </span>
           </li>
 
@@ -77,7 +77,7 @@
                 <i class="menu-bullet menu-bullet-line">
                   <span></span>
                 </i>
-                <span class="menu-text">Available Investments</span>
+                <span class="menu-text">Available Funding</span>
               </a>
             </li>
           </router-link>
@@ -99,7 +99,7 @@
                 <i class="menu-bullet menu-bullet-line">
                   <span></span>
                 </i>
-                <span class="menu-text">My Investments</span>
+                <span class="menu-text">Portfolio</span>
               </a>
             </li>
           </router-link>
@@ -121,7 +121,7 @@
                 <i class="menu-bullet menu-bullet-line">
                   <span></span>
                 </i>
-                <span class="menu-text">Investment History</span>
+                <span class="menu-text">Funding History</span>
               </a>
             </li>
           </router-link>
