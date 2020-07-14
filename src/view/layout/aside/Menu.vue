@@ -293,7 +293,7 @@
           isExactActive && 'menu-item-active'
         ]"
       >
-        <a :href="href" class="menu-link" @click="navigate">
+        <a :href="href" class="menu-link" @click.prevent="redirectTo">
           <i class="menu-icon flaticon-interface-7"></i>
           <span class="menu-text ki-bold-font">Settings</span>
         </a>
@@ -322,6 +322,9 @@ export default {
       this.$store
         .dispatch(LOGOUT)
         .then(() => this.$router.push({ name: "login" }));
+    },
+    redirectTo() {
+      console.log('Redirecting to Settings Page');
     }
   }
 };

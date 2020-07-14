@@ -12,7 +12,7 @@ const state = {
     "Science and Techno;ogy",
     "Whalesale and Retail Trade",
     "Transport, Storage, and logistic",
-    "Tuorism",
+    "Tourism",
     "Manufacturing and Engineering",
     "Food and Beverage",
     "Information and Technology",
