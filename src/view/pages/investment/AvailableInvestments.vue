@@ -29,6 +29,10 @@
         :project="project"
       />
     </div>
+
+    <div class="col-12 mt-3 text-center">
+      <p>* * * No available fundings * * *</p>
+    </div>
   </div>
 </template>
 
