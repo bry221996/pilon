@@ -251,7 +251,7 @@
                   <a
                     class="shadow p-4 rounded"
                     :href="
-                      investment.invoice.blockchain_verification.verify_url
+                      investment.invoice.blockchain_verification.etherscan_url
                     "
                     target="_blank"
                     >{{ investment.invoice.blockchain_verification.label }}</a
@@ -261,7 +261,7 @@
                   This invoice is certified. For proof of authenticity,
                   <a
                     :href="
-                      investment.invoice.blockchain_verification.etherscan_url
+                      investment.invoice.blockchain_verification.verify_url
                     "
                     target="_blank"
                     >view this transaction here.</a
