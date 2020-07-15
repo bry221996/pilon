@@ -23,10 +23,8 @@
             </td>
             <td style="border-top: none" width="26%">
               <div class="d-flex flex-column">
-                <p class="mb-2 font-weight-boldest">
-                  INVOICES AVAILABLE FOR FUNDING
-                </p>
-                <p>{{ project.companyInfo.total_available_invoices }}</p>
+                <p class="mb-2 font-weight-boldest">TOTAL INVOICE AMOUNT</p>
+                <p>$ {{ project.goal_amount | money_format }}</p>
               </div>
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">RETURNS</p>
@@ -34,10 +32,6 @@
               </div>
             </td>
             <td style="border-top: none" width="23%">
-              <div class="d-flex flex-column">
-                <p class="mb-2 font-weight-boldest">TOTAL INVOICE AMOUNT</p>
-                <p>$ {{ project.goal_amount | money_format }}</p>
-              </div>
               <div class="d-flex flex-column">
                 <p class="mb-2 font-weight-boldest">TENURE</p>
                 <p>{{ project.loan.tenure_label }}</p>

@@ -269,9 +269,7 @@
                   </p>
                   <a
                     class="shadow p-4 rounded"
-                    :href="
-                      project.invoice.blockchain_verification.etherscan_url
-                    "
+                    :href="project.invoice.blockchain_verification.verify_url"
                     target="_blank"
                     >{{ project.invoice.blockchain_verification.label }}</a
                   >

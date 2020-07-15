@@ -228,7 +228,7 @@
                 isExactActive && 'menu-item-active'
               ]"
             >
-              <a :href="href" class="menu-link" @click="navigate">
+              <a :href="href" class="menu-link" @click.prevent="redirectTo">
                 <i class="menu-bullet menu-bullet-line">
                   <span></span>
                 </i>
@@ -324,7 +324,7 @@ export default {
         .then(() => this.$router.push({ name: "login" }));
     },
     redirectTo() {
-      console.log('Redirecting to Settings Page');
+      console.log("Redirecting to Settings Page");
     }
   }
 };
