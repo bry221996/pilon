@@ -30,7 +30,7 @@
       />
     </div>
 
-    <div class="col-12 mt-3 text-center">
+    <div class="col-12 mt-3 text-center" v-if="!projects.length">
       <p>* * * No available fundings * * *</p>
     </div>
   </div>
