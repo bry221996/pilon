@@ -43,7 +43,7 @@
                 squared
                 variant="success"
                 @click="$router.push(`/investment/${investment.id}`)"
-                >VIEW INVESTMENT</b-button
+                >VIEW INVOICE</b-button
               >
             </td>
           </tr>
