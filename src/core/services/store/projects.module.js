@@ -9,10 +9,10 @@ const state = {
 };
 
 const actions = {
-  [GET_AVAILABLE_PROJECTS](context, limit = 10) {
+  [GET_AVAILABLE_PROJECTS](context, query = "") {
     return new Promise((resolve, reject) => {
       ApiService.get(
-        `crowd-funding/project?expand=loan,companyInfo,invoice&per_page=${limit}&filter=available`
+        `crowd-funding/project?expand=loan,companyInfo,invoice&filter=available&${query}`
       )
         .then(({ data }) => {
           context.commit(SET_AVAILABLE_PROJECTS, data.data.rows);
