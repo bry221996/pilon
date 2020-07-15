@@ -77,12 +77,8 @@ export default {
   },
   methods: {
     async updateQuery() {
-      if (this.tenureRange) {
-        await this.$store.dispatch(
-          GET_AVAILABLE_PROJECTS,
-          `tenure_range=${this.tenureRange}`
-        );
-      }
+      const query = this.tenureRange ? `tenure_range=${this.tenureRange}` : "";
+      await this.$store.dispatch(GET_AVAILABLE_PROJECTS, query);
     }
   }
 };

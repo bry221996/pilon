@@ -269,7 +269,9 @@
                   </p>
                   <a
                     class="shadow p-4 rounded"
-                    :href="project.invoice.blockchain_verification.etherscan_url"
+                    :href="
+                      project.invoice.blockchain_verification.etherscan_url
+                    "
                     target="_blank"
                     >{{ project.invoice.blockchain_verification.label }}</a
                   >
@@ -277,9 +279,7 @@
                 <p class="text-muted">
                   This invoice is certified. For proof of authenticity,
                   <a
-                    :href="
-                      project.invoice.blockchain_verification.verify_url
-                    "
+                    :href="project.invoice.blockchain_verification.verify_url"
                     target="_blank"
                     >view this transaction here.</a
                   >
