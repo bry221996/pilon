@@ -6,11 +6,6 @@
     >
       <h4 class="d-flex flex-center rounded-top">
         <span class="text-white">User Notifications</span>
-        <span
-          class="btn btn-text btn-success btn-sm font-weight-bold btn-font-md ml-2"
-        >
-          23 new
-        </span>
       </h4>
 
       <ul
@@ -26,7 +21,7 @@
             href="#"
             role="tab"
           >
-            Alerts
+            Recent Activities
           </a>
         </li>
         <li class="nav-item">
@@ -38,97 +33,68 @@
             href="#"
             role="tab"
           >
-            Events
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            v-on:click="setActiveTab"
-            data-tab="2"
-            class="nav-link"
-            data-toggle="tab"
-            href="#"
-            role="tab"
-          >
-            Logs
+            Notifications
           </a>
         </li>
       </ul>
     </div>
 
     <b-tabs class="hide-tabs" v-model="tabIndex">
-      <b-tab active class="p-8">
-        <perfect-scrollbar
-          class="scroll pr-7 mr-n7"
-          style="max-height: 40vh; position: relative;"
-        >
-          <template v-for="(item, i) in list1">
-            <!--begin::Item-->
-            <div class="d-flex align-items-center mb-6" v-bind:key="i">
-              <!--begin::Symbol-->
-              <div
-                class="symbol symbol-40 mr-5"
-                v-bind:class="`symbol-light-${item.color}`"
-              >
-                <span class="symbol-label">
-                  <span
-                    class="svg-icon svg-icon-lg"
-                    v-bind:class="`svg-icon-${item.color}`"
-                  >
-                    <!--begin::Svg Icon-->
-                    <inline-svg :src="item.svg" />
-                    <!--end::Svg Icon-->
-                  </span>
-                </span>
-              </div>
-              <!--end::Symbol-->
-              <!--begin::Text-->
-              <div class="d-flex flex-column font-weight-bold">
-                <a
-                  href="#"
-                  class="text-dark text-hover-primary mb-1 font-size-lg"
-                >
-                  {{ item.title }}
-                </a>
-                <span class="text-muted">
-                  {{ item.desc }}
-                </span>
-              </div>
-              <!--end::Text-->
-            </div>
-            <!--end::Item-->
-          </template>
-        </perfect-scrollbar>
-      </b-tab>
-
-      <b-tab>
+      <b-tab active>
         <perfect-scrollbar
           class="navi navi-hover scroll my-4"
           style="max-height: 40vh; position: relative;"
+          v-if="activities.length"
         >
-          <template v-for="(item, i) in list2">
+          <template v-for="(item, i) in activities">
             <a href="#" class="navi-item" v-bind:key="i">
               <div class="navi-link">
-                <div class="navi-icon mr-2">
-                  <i v-bind:class="item.icon"></i>
-                </div>
                 <div class="navi-text">
                   <div class="font-weight-bold">
                     {{ item.title }}
                   </div>
                   <div class="text-muted">
-                    {{ item.desc }}
+                    {{ fromNow(item.created_at) }}
                   </div>
                 </div>
               </div>
             </a>
           </template>
         </perfect-scrollbar>
+        <div
+          class="d-flex flex-center text-center font-weight-bold min-h-100px"
+          v-else
+        >
+          No new notifications.
+        </div>
       </b-tab>
 
       <b-tab>
-        <div class="d-flex flex-center text-center text-muted min-h-200px">
-          All caught up!<br />No new notifications.
+        <perfect-scrollbar
+          class="navi navi-hover scroll my-4"
+          style="max-height: 40vh; position: relative;"
+          v-if="notifications.length"
+        >
+          <template v-for="(item, i) in notifications">
+            <a href="#" class="navi-item" v-bind:key="i">
+              <div class="navi-link">
+                <div class="navi-text">
+                  <div class="font-weight-bold">
+                    {{ item.title }}
+                  </div>
+                  <div class="text-muted">
+                    {{ fromNow(item.created_at) }}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </template>
+        </perfect-scrollbar>
+        <div
+          class="d-flex flex-center text-center font-weight-bold min-h-100px"
+          v-else
+        >
+          No new notifications.
         </div>
       </b-tab>
     </b-tabs>
@@ -143,6 +109,8 @@
 </style>
 
 <script>
+import moment from "moment";
+import { mapState } from "vuex";
 export default {
   name: "KTDropdownNotification",
   data() {
@@ -263,6 +231,9 @@ export default {
     };
   },
   methods: {
+    fromNow(date) {
+      return moment(date).fromNow();
+    },
     setActiveTab(event) {
       const tab = event.target.closest('[role="tablist"]');
       const links = tab.querySelectorAll(".nav-link");
@@ -276,12 +247,19 @@ export default {
 
       // set current active tab
       event.target.classList.add("active");
+    },
+    fetch() {
+      console.log(this.tabIndex);
     }
   },
   computed: {
     backgroundImage() {
       return process.env.BASE_URL + "media/misc/bg-1.jpg";
-    }
+    },
+    ...mapState({
+      activities: state => state.notifications.activities,
+      notifications: state => state.notifications.notifications
+    })
   }
 };
 </script>

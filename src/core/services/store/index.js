@@ -9,6 +9,7 @@ import investments from "./investments.module";
 import projects from "./projects.module";
 import funds from "./funds.module";
 import rules from "./rules.module";
+import notifications from "./notifications.module";
 
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     investments,
     projects,
     funds,
-    rules
+    rules,
+    notifications
   }
 });

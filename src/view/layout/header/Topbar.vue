@@ -9,6 +9,7 @@
       no-caret
       right
       no-flip
+      @show="onShow"
     >
       <template v-slot:button-content>
         <div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
@@ -23,7 +24,7 @@
       </template>
       <b-dropdown-text tag="div" class="min-w-md-350px">
         <form>
-          <KTDropdownNotification></KTDropdownNotification>
+          <KTDropdownNotification ref="notifications"></KTDropdownNotification>
         </form>
       </b-dropdown-text>
     </b-dropdown>
@@ -139,6 +140,10 @@
 <script>
 import KTDropdownNotification from "@/view/layout/extras/dropdown/DropdownNotification.vue";
 import i18nService from "@/core/services/i18n.service.js";
+import {
+  GET_NOTIFICATIONS,
+  GET_ACTIVITIES
+} from "@/core/services/store/notifications.module";
 
 export default {
   name: "KTTopbar",
@@ -156,6 +161,10 @@ export default {
       this.languageFlag = this.languages.find(val => {
         return val.lang === i18nService.getActiveLanguage();
       }).flag;
+    },
+    onShow() {
+      this.$store.dispatch(GET_NOTIFICATIONS);
+      this.$store.dispatch(GET_ACTIVITIES);
     }
   },
   computed: {

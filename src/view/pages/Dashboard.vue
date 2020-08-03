@@ -88,9 +88,13 @@ export default {
     })
   },
   async mounted() {
-    await this.$store.dispatch(GET_AUTH_USER);
-    await this.$store.dispatch(GET_AVAILABLE_PROJECTS, "per_page=3");
-    this.isLoaded = true;
+    try {
+      await this.$store.dispatch(GET_AUTH_USER);
+      await this.$store.dispatch(GET_AVAILABLE_PROJECTS, "per_page=3");
+      this.isLoaded = true;
+    } catch (error) {
+      console.log(error);
+    }
   },
   methods: {
     async updateQuery() {
