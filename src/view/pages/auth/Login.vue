@@ -61,7 +61,7 @@
               <v-checkbox></v-checkbox>
               <span class="text-primary"> Remember me.</span>
             </div>
-            <span class="text-primary">Forgot Password</span>
+            <router-link to="/forgot-password">Forgot Password</router-link>
           </v-row>
           <v-row>
             <v-btn
