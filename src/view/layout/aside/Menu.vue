@@ -323,9 +323,7 @@ export default {
         .dispatch(LOGOUT)
         .then(() => this.$router.push({ name: "login" }));
     },
-    redirectTo() {
-      console.log("Redirecting to Settings Page");
-    }
+    redirectTo() {}
   }
 };
 </script>
