@@ -281,7 +281,7 @@
     </router-link>
 
     <router-link
-      to="/vue-bootstrap/media"
+      to="/settings"
       v-slot="{ href, navigate, isActive, isExactActive }"
     >
       <li
@@ -293,7 +293,7 @@
           isExactActive && 'menu-item-active'
         ]"
       >
-        <a :href="href" class="menu-link" @click.prevent="redirectTo">
+        <a :href="href" class="menu-link">
           <i class="menu-icon flaticon-interface-7"></i>
           <span class="menu-text ki-bold-font">Settings</span>
         </a>
