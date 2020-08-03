@@ -40,8 +40,7 @@ const actions = {
 
 const mutations = {
   [SET_NOTIFICATIONS](state, notifications) {
-    console.log(notifications);
-    state.notifications = [];
+    state.notifications = notifications;
   },
   [SET_ACTIVITIES](state, activities) {
     state.activities = activities;
