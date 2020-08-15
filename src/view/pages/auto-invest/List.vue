@@ -20,25 +20,25 @@
       <div class="col-4">Rule Name</div>
       <div class="col-2">Interest Range</div>
       <div class="col-2">Tenure Months</div>
-      <div class="col-2">Allocation</div>
+      <div class="col-2">Maximum Allocation</div>
       <div class="col-2">Status</div>
     </div>
     <hr />
 
     <div class="row my-3" v-for="(rule, index) in rules" :key="index">
       <div class="col-4">
-        <router-link :to="`/auto-invest/${rule.id}`">{{
-          rule.name
-        }}</router-link>
+        <router-link :to="`/auto-invest/${rule.id}`">
+          {{  rule.name || 'N/A' }}
+        </router-link>
       </div>
       <div class="col-2">
-        {{ rule.interest_range[0] }}% - {{ rule.interest_range[1] }}%
+        {{ rule.min_interest }}% - {{ rule.max_interest }}%
       </div>
       <div class="col-2">
-        {{ rule.tenure[0] }} - {{ rule.tenure[1] }} months
+        {{ rule.min_tenure }} - {{ rule.max_tenure }} months
       </div>
-      <div class="col-2">$ {{ rule.allocation_limit | money_format }}</div>
-      <div class="col-2" v-html="getStatusDisplay(rule.status)"></div>
+      <div class="col-2">$ {{ rule.max_allocation }}</div>
+      <div class="col-2" v-html="getStatusDisplay(rule.is_enabled)"></div>
     </div>
   </div>
 </template>

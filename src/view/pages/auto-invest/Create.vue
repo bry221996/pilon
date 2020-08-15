@@ -32,7 +32,7 @@
         <v-row>
           <v-col cols="6">
             <v-card class="px-0 mx-0" flat color="transparent">
-              <v-subheader>Interest Range (0%-20%)</v-subheader>
+              <v-subheader>Interest Range (1%-20%)</v-subheader>
 
               <v-card-text class="px-0">
                 <v-range-slider
@@ -68,7 +68,7 @@
         </v-row>
         <v-row>
           <v-col cols="12" class="pt-0">
-            <v-switch class="pt-0 mt-0" v-model="form.status"></v-switch>
+            <v-switch class="pt-0 mt-0" :true-value="1" :false-value="0" v-model.number="form.is_enabled"></v-switch>
           </v-col>
         </v-row>
         <v-row>
@@ -79,13 +79,13 @@
         <v-row v-for="row in 4" :key="row">
           <v-col class="py-0" v-for="col in 4" :key="col" cols="3">
             <v-checkbox
-              v-model="form.industries"
+              v-model="form.industries_ids"
               class="mt-0"
-              :value="(row - 1) * 4 + (col - 1)"
+              :value="industries[(row - 1) * 4 + (col - 1)]['key']"
             >
               <template slot="label" class="ss">
                 <p style="font-size: 1rem" class="mb-0">
-                  {{ industries[(row - 1) * 4 + (col - 1)] }}
+                  {{ industries[(row - 1) * 4 + (col - 1)]['display'] }}
                 </p>
               </template>
             </v-checkbox>
@@ -123,8 +123,8 @@ export default {
         interest_range: [1, 20],
         tenure: [1, 12],
         allocation_limit: null,
-        industries: [],
-        status: true
+        industries_ids: [],
+        is_enabled: 1
       }
     };
   },
@@ -136,14 +136,26 @@ export default {
       return (
         !!this.form.name &&
         !!this.form.allocation_limit &&
-        !!this.form.industries.length
+        !!this.form.industries_ids.length
       );
-    }
+    },
+    formParams() {
+      let params = {};
+      params.name = this.form.name;
+      params.min_allocation = 1;
+      params.max_allocation = this.form.allocation_limit;
+      params.min_interest = this.form.interest_range[0];
+      params.max_interest = this.form.interest_range[1];
+      params.min_tenure = this.form.tenure[0];
+      params.max_tenure = this.form.tenure[1];
+      params.industries = this.form.industries_ids;
+      return params;
+    },
   },
   methods: {
-    addRule() {
+    async addRule() {
       this.isSubmitting = true;
-      this.$store.commit(ADD_RULE, this.form);
+      await this.$store.dispatch(ADD_RULE, this.formParams);
       this.isSubmitting = false;
       this.$router.push("/auto-invest");
     }
