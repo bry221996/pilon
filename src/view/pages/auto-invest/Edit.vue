@@ -68,7 +68,12 @@
         </v-row>
         <v-row>
           <v-col cols="12" class="pt-0">
-            <v-switch class="pt-0 mt-0" v-model="form.status"></v-switch>
+            <v-switch
+              class="pt-0 mt-0"
+              :true-value="1"
+              :false-value="0"
+              v-model.number="form.is_enabled"
+            ></v-switch>
           </v-col>
         </v-row>
         <v-row>
@@ -79,13 +84,13 @@
         <v-row v-for="row in 4" :key="row">
           <v-col class="py-0" v-for="col in 4" :key="col" cols="3">
             <v-checkbox
-              v-model="form.industries"
+              v-model="form.industries_ids"
               class="mt-0"
-              :value="(row - 1) * 4 + (col - 1)"
+              :value="industries[(row - 1) * 4 + (col - 1)]['key']"
             >
               <template slot="label" class="ss">
                 <p style="font-size: 1rem" class="mb-0">
-                  {{ industries[(row - 1) * 4 + (col - 1)] }}
+                  {{ industries[(row - 1) * 4 + (col - 1)]["display"] }}
                 </p>
               </template>
             </v-checkbox>
@@ -123,8 +128,8 @@ export default {
         interest_range: [1, 20],
         tenure: [1, 12],
         allocation_limit: null,
-        industries: [],
-        status: true
+        industries_ids: [],
+        is_enabled: 1
       }
     };
   },
@@ -137,20 +142,44 @@ export default {
       return (
         !!this.form.name &&
         !!this.form.allocation_limit &&
-        !!this.form.industries.length
+        !!this.form.industries_ids.length
       );
+    },
+    formParams() {
+      let params = {};
+      params.name = this.form.name;
+      params.min_allocation = 1;
+      params.max_allocation = this.form.allocation_limit;
+      params.min_interest = this.form.interest_range[0];
+      params.max_interest = this.form.interest_range[1];
+      params.min_tenure = this.form.tenure[0];
+      params.max_tenure = this.form.tenure[1];
+      params.industries = this.form.industries_ids;
+      params.is_enabled = this.form.is_enabled;
+      return params;
     }
   },
   mounted() {
     const seletectRule = this.list.find(
       rule => rule.id == this.$route.params.id
     );
-    this.form = seletectRule;
+    this.form.name = seletectRule.name;
+    this.form.interest_range = [
+      seletectRule.min_interest,
+      seletectRule.max_interes
+    ];
+    this.form.tenure = [seletectRule.min_tenure, seletectRule.max_tenure];
+    this.form.allocation_limit = seletectRule.max_allocation;
+    this.form.is_enabled = seletectRule.is_enabled;
+    this.form.industries_ids = JSON.parse(seletectRule.industries);
   },
   methods: {
-    updateRule() {
+    async updateRule() {
       this.isSubmitting = true;
-      this.$store.commit(UPDATE_RULE, this.form);
+      await this.$store.dispatch(UPDATE_RULE, {
+        id: this.$route.params.id,
+        params: this.formParams
+      });
       this.isSubmitting = false;
       this.$router.push("/auto-invest");
     }

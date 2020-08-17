@@ -28,7 +28,7 @@
     <div class="row my-3" v-for="(rule, index) in rules" :key="index">
       <div class="col-4">
         <router-link :to="`/auto-invest/${rule.id}`">
-          {{  rule.name || 'N/A' }}
+          {{ rule.name || "N/A" }}
         </router-link>
       </div>
       <div class="col-2">

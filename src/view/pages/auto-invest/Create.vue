@@ -68,7 +68,12 @@
         </v-row>
         <v-row>
           <v-col cols="12" class="pt-0">
-            <v-switch class="pt-0 mt-0" :true-value="1" :false-value="0" v-model.number="form.is_enabled"></v-switch>
+            <v-switch
+              class="pt-0 mt-0"
+              :true-value="1"
+              :false-value="0"
+              v-model.number="form.is_enabled"
+            ></v-switch>
           </v-col>
         </v-row>
         <v-row>
@@ -85,7 +90,7 @@
             >
               <template slot="label" class="ss">
                 <p style="font-size: 1rem" class="mb-0">
-                  {{ industries[(row - 1) * 4 + (col - 1)]['display'] }}
+                  {{ industries[(row - 1) * 4 + (col - 1)]["display"] }}
                 </p>
               </template>
             </v-checkbox>
@@ -149,8 +154,9 @@ export default {
       params.min_tenure = this.form.tenure[0];
       params.max_tenure = this.form.tenure[1];
       params.industries = this.form.industries_ids;
+      params.is_enabled = this.form.is_enabled;
       return params;
-    },
+    }
   },
   methods: {
     async addRule() {

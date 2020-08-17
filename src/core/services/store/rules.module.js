@@ -9,24 +9,7 @@ export const GET_INDUSTRIES = "getIndustries";
 export const SET_INDUSTRIES = "setIndustries";
 
 const state = {
-  industries: [
-    "Professional Services",
-    "Health and Medical",
-    "Construction",
-    "Marine and Shipping",
-    "Arts, Entetainment, and Recreation",
-    "Training and Education",
-    "Science and Techno;ogy",
-    "Whalesale and Retail Trade",
-    "Transport, Storage, and logistic",
-    "Tourism",
-    "Manufacturing and Engineering",
-    "Food and Beverage",
-    "Information and Technology",
-    "Marketing and Communication",
-    "Apparels",
-    "Oil and Gas"
-  ],
+  industries: [],
   list: []
 };
 
@@ -34,14 +17,13 @@ const mutations = {
   [SET_RULES](state, rules) {
     state.list = rules;
   },
-  [UPDATE_RULE](state, rule) {
-    const index = state.list.findIndex(r => r.id == rule.id);
-    state.list[index] = rule;
-  },
   [SET_INDUSTRIES](state, industries) {
     state.industries = [];
     Object.keys(industries).forEach(index => {
-      state.industries.push({ key: parseInt(index), display: industries[index] })
+      state.industries.push({
+        key: parseInt(index),
+        display: industries[index]
+      });
     });
   }
 };
@@ -51,7 +33,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       ApiService.get("/data-list?expand=project-industries")
         .then(({ data }) => {
-          context.commit(SET_INDUSTRIES, data.data['project-industries']);
+          context.commit(SET_INDUSTRIES, data.data["project-industries"]);
           resolve(data);
         })
         .catch(({ response }) => {
@@ -77,6 +59,18 @@ const actions = {
       ApiService.get("/crowd-funding/auto-invest")
         .then(({ data }) => {
           context.commit(SET_RULES, data.data.rows);
+          resolve(data);
+        })
+        .catch(({ response }) => {
+          reject(response);
+        });
+    });
+  },
+
+  [UPDATE_RULE](context, { id, params }) {
+    return new Promise((resolve, reject) => {
+      ApiService.put(`/crowd-funding/auto-invest/${id}`, params)
+        .then(({ data }) => {
           resolve(data);
         })
         .catch(({ response }) => {
