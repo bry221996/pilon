@@ -1,5 +1,5 @@
 <template>
-  <div class="my-10 container-fluid">
+  <div class="my-10 container-fluid" v-if="loaded">
     <div class="row">
       <div class="col-12">
         <div class="links">
@@ -35,11 +35,13 @@
 
 <script>
 import { mapState } from "vuex";
+import { GET_COUNTRIES } from "@/core/services/store/auth.module";
 
 export default {
   name: "Profile",
   data() {
     return {
+      loaded: false,
       links: [
         { display: "PERSONAL DETAILS", to: "/profile/personal-details" },
         { display: "COMPANY DETAILS", to: "/profile/company-details" },
@@ -55,6 +57,10 @@ export default {
     headerTitle() {
       return this.$route.name.replace("-", " ");
     }
+  },
+  async mounted() {
+    await this.$store.dispatch(GET_COUNTRIES);
+    this.loaded = true;
   }
 };
 </script>

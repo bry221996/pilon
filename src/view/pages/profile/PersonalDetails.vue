@@ -164,7 +164,7 @@
                       block
                       large
                       @click="updateProfile"
-                      >SAVE</v-btn
+                      >Next</v-btn
                     >
                   </v-col>
                 </v-row>
@@ -184,7 +184,6 @@
 </template>
 
 <script>
-import ApiService from "@/core/services/api.service";
 import { UPDATE_PROFILE } from "@/core/services/store/auth.module";
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
@@ -197,7 +196,6 @@ export default {
     return {
       dismissCountDown: 0,
       isSubmitting: false,
-      countries: [],
       form: {
         first_name: "",
         last_name: "",
@@ -236,11 +234,12 @@ export default {
   },
   computed: {
     ...mapState({
-      authUser: state => state.auth.user
+      authUser: state => state.auth.user,
+      countries: state => state.auth.countries
     }),
     formParams() {
       return {
-        kyc_type: "personalInfo",
+        kyc_type: 4,
         personalInfo: {
           first_name: this.form.first_name,
           last_name: this.form.last_name,
@@ -256,13 +255,6 @@ export default {
     }
   },
   async mounted() {
-    const GET_COUNTRIES_RESPONSE = await ApiService.get(
-      "/data-list?expand=countries"
-    );
-    this.countries = GET_COUNTRIES_RESPONSE.data.data.countries.map(country => {
-      return { text: country.name, value: parseInt(country.id) };
-    });
-
     this.form.first_name = this.authUser.personalInfo.first_name;
     this.form.last_name = this.authUser.personalInfo.last_name;
     this.form.country_id = this.authUser.personalInfo.address.country_id;
@@ -279,6 +271,7 @@ export default {
       await this.$store.dispatch(UPDATE_PROFILE, this.formParams);
       this.dismissCountDown = 5;
       this.isSubmitting = false;
+      this.$router.push("/profile/company-details");
     }
   }
 };

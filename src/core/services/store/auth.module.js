@@ -8,6 +8,7 @@ export const LOGOUT = "logout";
 export const GET_AUTH_USER = "getAuthUser";
 export const GET_AUTH_CREDIT_CARDS = "getAuthUserCreditCards";
 export const UPDATE_PROFILE = "updateProfile";
+export const GET_COUNTRIES = "getCountries";
 
 // mutation types
 export const PURGE_AUTH = "logOut";
@@ -15,12 +16,14 @@ export const SET_JWT = "setJwt";
 export const SET_AUTH = "setUser";
 export const SET_ERROR = "setError";
 export const SET_CREDIT_CARDS = "setAuthUserCreditCards";
+export const SET_COUNTRIES = "setCountries";
 
 const state = {
   errors: {},
   user: JwtService.getUser(),
   isAuthenticated: !!JwtService.getToken(),
-  creditCards: []
+  creditCards: [],
+  countries: []
 };
 
 const getters = {
@@ -78,11 +81,24 @@ const actions = {
   [UPDATE_PROFILE](context, params) {
     return new Promise((resolve, reject) => {
       ApiService.post(
-        "user/me/kyc?expand=fundSummary,personalInfo,residentialAddress",
+        "user/me/kyc?expand=fundSummary,personalInfo,residentialAddress,businessInfo,financialInfo",
         params
       )
         .then(({ data }) => {
           context.commit(SET_AUTH, data.data);
+          resolve(data);
+        })
+        .catch(({ response }) => {
+          reject(response);
+        });
+    });
+  },
+
+  [GET_COUNTRIES](context) {
+    return new Promise((resolve, reject) => {
+      ApiService.get("/data-list?expand=countries")
+        .then(({ data }) => {
+          context.commit(SET_COUNTRIES, data.data.countries);
           resolve(data);
         })
         .catch(({ response }) => {
@@ -116,6 +132,11 @@ const mutations = {
   },
   [SET_CREDIT_CARDS](state, creditCards) {
     state.creditCards = creditCards;
+  },
+  [SET_COUNTRIES](state, countries) {
+    state.countries = countries.map(country => {
+      return { text: country.name, value: parseInt(country.id) };
+    });
   }
 };
 
