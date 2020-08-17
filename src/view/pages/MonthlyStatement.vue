@@ -17,19 +17,29 @@
       <div class="col-6">Action</div>
     </div>
     <hr />
-    <div class="row pb-3" v-for="(month, index) in months" :key="index">
-      <div class="col-6">{{ month }}</div>
+    <div class="row pb-3" v-for="(statement, index) in statements" :key="index">
+      <div class="col-6">{{ statement.label }}</div>
       <div class="col-6 d-flex">
         <div
           class="d-flex align-items-center pr-3"
           style="border-right: 1px solid rgba(0, 0, 0, 0.1)"
         >
-          <i class="mr-2 text-primary flaticon2-download-2"></i>
-          <a href="/statement.pdf" download>PDF</a>
+          <a
+            style="cursor: pointer"
+            @click.prevent="download(statement.date, 'pdf')"
+          >
+            <i class="mr-2 text-primary flaticon2-download-2"></i>
+            PDF
+          </a>
         </div>
         <div class="d-flex align-items-center pl-3">
-          <i class="mr-2 text-primary flaticon2-download-2"></i>
-          <a :href="getUrl(month)" target="_blank">HTML</a>
+          <a
+            style="cursor: pointer"
+            @click.prevent="download(statement.date, 'html')"
+          >
+            <i class="mr-2 text-primary flaticon2-download-2"></i>
+            HTML
+          </a>
         </div>
       </div>
     </div>
@@ -37,17 +47,42 @@
 </template>
 
 <script>
+import ApiService from "@/core/services/api.service";
+
 export default {
   name: "MonthlyStatement",
   data() {
     return {
-      months: ["March 2020", "April 2020", "May 2020", "June 2020"]
+      months: ["March 2020", "April 2020", "May 2020", "June 2020"],
+      statements: []
     };
   },
+  async mounted() {
+    const STATEMENTS_RESPONSE = await ApiService.get(
+      "/reports/monthly-statement"
+    );
+    this.statements = STATEMENTS_RESPONSE.data.data.rows;
+    // this.downloadPdf("032020");
+  },
   methods: {
-    getUrl(name) {
-      const url = name.replace(" ", "-");
-      return `/#/statements/${url}`;
+    download(date, type) {
+      const query = type == "html" ? "html" : "pdf-base64";
+      ApiService.get(`/reports/monthly-statement/${date}?type=${query}`).then(
+        response => {
+          const downloadLink = document.createElement("a");
+          downloadLink.href = this.downloadLinkHref(response, type);
+          downloadLink.download = `${date}.${type}`;
+          downloadLink.click();
+        }
+      );
+    },
+
+    downloadLinkHref(response, type) {
+      if (type == "html") {
+        var blob = new Blob([response.data], { type: "text/html" });
+        return window.URL.createObjectURL(blob);
+      }
+      return `data:application/pdf;base64,${response.data.data}`;
     }
   }
 };
