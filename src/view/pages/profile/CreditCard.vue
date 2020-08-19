@@ -260,6 +260,7 @@ export default {
         await ApiService.post("/kyc/credit-card", this.form);
       }
       this.isSubmitting = false;
+      this.$router.push("/profile/bank-account");
     },
     selectCard(card) {
       this.selectedCard = card;
