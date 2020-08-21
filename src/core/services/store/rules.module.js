@@ -16,6 +16,10 @@ const state = {
 const mutations = {
   [SET_RULES](state, rules) {
     state.list = rules;
+    state.list.pagination.currentPage =
+      (rules.pagination.totalCount - rules.pagination.firstRowNo) /
+        rules.pagination.defaultPageSize +
+      1;
   },
   [SET_INDUSTRIES](state, industries) {
     state.industries = [];
@@ -54,11 +58,18 @@ const actions = {
     });
   },
 
-  [GET_RULES](context) {
+  [GET_RULES](context, query = {}) {
     return new Promise((resolve, reject) => {
-      ApiService.get("/crowd-funding/auto-invest")
+      let endpoint = "/crowd-funding/auto-invest?";
+
+      Object.keys(query).forEach(key => {
+        endpoint = `${endpoint}&${key}=${query[key]}`;
+      });
+
+      ApiService.get(endpoint)
         .then(({ data }) => {
-          context.commit(SET_RULES, data.data.rows);
+          console.log(data.data);
+          context.commit(SET_RULES, data.data);
           resolve(data);
         })
         .catch(({ response }) => {

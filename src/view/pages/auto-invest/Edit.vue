@@ -118,6 +118,8 @@
 <script>
 import { mapState } from "vuex";
 import { UPDATE_RULE } from "@/core/services/store/rules.module";
+import ApiService from "@/core/services/api.service";
+
 export default {
   name: "AutoInvestEdit",
   data() {
@@ -159,10 +161,11 @@ export default {
       return params;
     }
   },
-  mounted() {
-    const seletectRule = this.list.find(
-      rule => rule.id == this.$route.params.id
+  async mounted() {
+    const RULE_RESPONSE = await ApiService.get(
+      `/crowd-funding/auto-invest/${this.$route.params.id}`
     );
+    const seletectRule = RULE_RESPONSE.data.data;
     this.form.name = seletectRule.name;
     this.form.interest_range = [
       seletectRule.min_interest,

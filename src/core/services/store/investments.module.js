@@ -12,13 +12,18 @@ const state = {
 };
 
 const actions = {
-  [GET_CURRENT_INVESTMENTS](context) {
+  [GET_CURRENT_INVESTMENTS](context, query = {}) {
     return new Promise((resolve, reject) => {
-      ApiService.get(
-        "/crowd-funding/investment?expand=loan,project,companyInfo"
-      )
+      let endpoint =
+        "/crowd-funding/investment?expand=loan,project,companyInfo";
+
+      Object.keys(query).forEach(key => {
+        endpoint = `${endpoint}&${key}=${query[key]}`;
+      });
+
+      ApiService.get(endpoint)
         .then(({ data }) => {
-          context.commit(SET_CURRENT_INVESTMENTS, data.data.rows);
+          context.commit(SET_CURRENT_INVESTMENTS, data.data);
           resolve(data);
         })
         .catch(({ response }) => {
@@ -26,13 +31,18 @@ const actions = {
         });
     });
   },
-  [GET_INVESTMENTS_HISTORY](context) {
+  [GET_INVESTMENTS_HISTORY](context, query = {}) {
     return new Promise((resolve, reject) => {
-      ApiService.get(
-        "/crowd-funding/investment?expand=loan,project,companyInfo&filter=completed"
-      )
+      let endpoint =
+        "/crowd-funding/investment?expand=loan,project,companyInfo&filter=completed";
+
+      Object.keys(query).forEach(key => {
+        endpoint = `${endpoint}&${key}=${query[key]}`;
+      });
+
+      ApiService.get(endpoint)
         .then(({ data }) => {
-          context.commit(SET_INVESTMENTS_HISTORY, data.data.rows);
+          context.commit(SET_INVESTMENTS_HISTORY, data.data);
           resolve(data);
         })
         .catch(({ response }) => {
@@ -45,9 +55,17 @@ const actions = {
 const mutations = {
   [SET_CURRENT_INVESTMENTS](state, investments) {
     state.current = investments;
+    state.current.pagination.currentPage =
+      (investments.pagination.totalCount - investments.pagination.firstRowNo) /
+        investments.pagination.defaultPageSize +
+      1;
   },
   [SET_INVESTMENTS_HISTORY](state, investments) {
     state.history = investments;
+    state.history.pagination.currentPage =
+      (investments.pagination.totalCount - investments.pagination.firstRowNo) /
+        investments.pagination.defaultPageSize +
+      1;
   }
 };
 

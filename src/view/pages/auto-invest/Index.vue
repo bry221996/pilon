@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { GET_INDUSTRIES, GET_RULES } from "@/core/services/store/rules.module";
+import { GET_INDUSTRIES } from "@/core/services/store/rules.module";
 
 export default {
   name: "AutoInvestIndex",
@@ -19,7 +19,6 @@ export default {
   async mounted() {
     try {
       await this.$store.dispatch(GET_INDUSTRIES);
-      await this.$store.dispatch(GET_RULES);
       this.loaded = true;
     } catch (error) {
       console.log(error);
