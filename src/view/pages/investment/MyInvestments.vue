@@ -92,7 +92,7 @@ export default {
     },
     async loadItems() {
       await this.$store.dispatch(GET_CURRENT_INVESTMENTS, {
-        per_page: 5,
+        'per-page': 5,
         page: this.page
       });
     }

@@ -104,7 +104,7 @@ export default {
       return this.pagination.currentPage < this.pages;
     },
     query() {
-      let query = { page: this.page, per_page: 5 };
+      let query = { page: this.page, 'per-page': 5 };
       if (this.tenureRange) {
         query.tenure_range = this.tenureRange;
       }

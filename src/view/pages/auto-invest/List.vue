@@ -117,7 +117,7 @@ export default {
       this.loadItems();
     },
     async loadItems() {
-      await this.$store.dispatch(GET_RULES, { per_page: 10, page: this.page });
+      await this.$store.dispatch(GET_RULES, { 'per-page': 10, page: this.page });
     }
   }
 };

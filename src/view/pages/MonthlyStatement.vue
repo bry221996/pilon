@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid mt-5">
+  <div class="container-fluid mt-5" v-if="loaded">
     <div class="row">
       <div class="col-12">
         <div
@@ -17,7 +17,8 @@
       <div class="col-6">Action</div>
     </div>
     <hr />
-    <div class="row pb-3" v-for="(statement, index) in statements" :key="index">
+    <template v-if="statements.length">
+      <div class="row pb-3" v-for="(statement, index) in statements" :key="index">
       <div class="col-6">{{ statement.label }}</div>
       <div class="col-6 d-flex">
         <div
@@ -43,6 +44,28 @@
         </div>
       </div>
     </div>
+    </template>
+    <div class="row justify-content-center mt-10">
+      <nav>
+        <ul class="pagination justify-content-center">
+          <li class="page-item" :class="hasPrevPage ? '' : 'disabled'">
+            <a class="page-link" @click.prevent="prevPage">Previous</a>
+          </li>
+          <template v-for="page in pages">
+            <li
+              class="page-item"
+              :key="page"
+              :class="page == pagination.currentPage ? 'active' : ''"
+            >
+              <a class="page-link" @click.prevent="setPage(page)">{{ page }}</a>
+            </li>
+          </template>
+          <li class="page-item" :class="hasNextPage ? '' : 'disabled'">
+            <a class="page-link" @click.prevent="nextPage">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </template>
 
@@ -53,16 +76,28 @@ export default {
   name: "MonthlyStatement",
   data() {
     return {
-      months: ["March 2020", "April 2020", "May 2020", "June 2020"],
-      statements: []
+      loaded: false,
+      page: 1,
+      statements: [],
+      pagination: {}
     };
   },
+  computed: {
+    pages() {
+      return Math.ceil(
+        this.pagination.totalCount / this.pagination.defaultPageSize
+      );
+    },
+    hasPrevPage() {
+      return this.pagination.currentPage > 1;
+    },
+    hasNextPage() {
+      return this.pagination.currentPage < this.pages;
+    }
+  },
   async mounted() {
-    const STATEMENTS_RESPONSE = await ApiService.get(
-      "/reports/monthly-statement"
-    );
-    this.statements = STATEMENTS_RESPONSE.data.data.rows;
-    // this.downloadPdf("032020");
+    this.loadItems();
+    this.loaded = true;
   },
   methods: {
     download(date, type) {
@@ -83,6 +118,26 @@ export default {
         return window.URL.createObjectURL(blob);
       }
       return `data:application/pdf;base64,${response.data.data}`;
+    },
+        setPage(page) {
+      this.page = page;
+      this.loadItems();
+    },
+    nextPage() {
+      this.page = this.page + 1;
+      this.loadItems();
+    },
+    prevPage() {
+      this.page = this.page - 1;
+      this.loadItems();
+    },
+    async loadItems() {
+const STATEMENTS_RESPONSE = await ApiService.get(`/reports/monthly-statement?'per-page'=2&page=${this.page}`);
+    this.pagination = STATEMENTS_RESPONSE.data.data.pagination;
+    this.pagination.currentPage = (STATEMENTS_RESPONSE.data.data.pagination.totalCount - STATEMENTS_RESPONSE.data.data.pagination.firstRowNo) /
+        STATEMENTS_RESPONSE.data.data.pagination.defaultPageSize +
+      1;
+    this.statements = STATEMENTS_RESPONSE.data.data.rows;
     }
   }
 };

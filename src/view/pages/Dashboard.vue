@@ -84,13 +84,13 @@ export default {
   },
   computed: {
     ...mapState({
-      projects: state => state.projects.available
+      projects: state => state.projects.available.rows
     })
   },
   async mounted() {
     try {
       await this.$store.dispatch(GET_AUTH_USER);
-      await this.$store.dispatch(GET_AVAILABLE_PROJECTS, "per_page=3");
+      await this.$store.dispatch(GET_AVAILABLE_PROJECTS, { 'per-page': 3 });
       this.isLoaded = true;
     } catch (error) {
       console.log(error);
@@ -98,9 +98,10 @@ export default {
   },
   methods: {
     async updateQuery() {
-      const query = this.tenureRange
-        ? `tenure_range=${this.tenureRange}&per_page=3`
-        : "per_page=3";
+      const query = { 'per-page': 3 };
+      if (this.tenureRange) {
+        query.tenure_range = this.tenureRange;
+      }
       await this.$store.dispatch(GET_AVAILABLE_PROJECTS, query);
     }
   }
