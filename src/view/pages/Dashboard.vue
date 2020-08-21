@@ -90,7 +90,7 @@ export default {
   async mounted() {
     try {
       await this.$store.dispatch(GET_AUTH_USER);
-      await this.$store.dispatch(GET_AVAILABLE_PROJECTS, { 'per-page': 3 });
+      await this.$store.dispatch(GET_AVAILABLE_PROJECTS, { "per-page": 3 });
       this.isLoaded = true;
     } catch (error) {
       console.log(error);
@@ -98,7 +98,7 @@ export default {
   },
   methods: {
     async updateQuery() {
-      const query = { 'per-page': 3 };
+      const query = { "per-page": 3 };
       if (this.tenureRange) {
         query.tenure_range = this.tenureRange;
       }

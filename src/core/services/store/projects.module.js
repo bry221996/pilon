@@ -5,7 +5,9 @@ export const GET_AVAILABLE_PROJECTS = "getAvailableProjects";
 export const SET_AVAILABLE_PROJECTS = "setAvailableProjects";
 
 const state = {
-  available: [],
+  available: {
+    rows: []
+  },
   pagination: {}
 };
 

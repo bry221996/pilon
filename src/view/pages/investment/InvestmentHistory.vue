@@ -33,6 +33,9 @@
         </ul>
       </nav>
     </div>
+    <div class="col-12 mt-10" v-else>
+      <p>* * * No available fundings * * *</p>
+    </div>
   </div>
 </template>
 
@@ -88,7 +91,7 @@ export default {
     },
     async loadItems() {
       await this.$store.dispatch(GET_INVESTMENTS_HISTORY, {
-        'per-page': 5,
+        "per-page": 5,
         page: this.page
       });
     }

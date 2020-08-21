@@ -326,7 +326,7 @@
           <i
             class="flaticon2-cross"
             style="position: absolute; right: 1rem; top: 1rem;"
-            @click="showConfirmationDialog = false"
+            @click="onCloseConfirmation"
           ></i>
           <div class="card-body">
             <div class="row justify-content-center">
@@ -362,6 +362,10 @@
                 <div class="mb-10 d-flex justify-content-between">
                   <p>Tenure</p>
                   <p>{{ project.loan.tenure_label }}</p>
+                </div>
+
+                <div class="d-flex" v-if="message">
+                  <p class="text-danger">{{ message }}</p>
                 </div>
 
                 <div
@@ -441,7 +445,8 @@ export default {
       showSuccessfulDialog: false,
       isLoaded: false,
       isSubmitting: false,
-      project: {}
+      project: {},
+      message: null
     };
   },
   computed: {
@@ -469,15 +474,26 @@ export default {
     this.isLoaded = true;
   },
   methods: {
-    async fundInvoice() {
+    onCloseConfirmation() {
+      this.message = null;
+      this.showConfirmationDialog = false;
+    },
+    fundInvoice() {
       this.isSubmitting = true;
-      await ApiService.post("/crowd-funding/investment", {
+      ApiService.post("/crowd-funding/investment", {
         project_id: this.project.id,
         amount: this.project.invoice.total_amount
-      });
-      this.showConfirmationDialog = false;
-      this.showSuccessfulDialog = true;
-      this.isSubmitting = false;
+      })
+        .then(() => {
+          this.showConfirmationDialog = false;
+          this.showSuccessfulDialog = true;
+        })
+        .catch(err => {
+          this.message = err.response.data.data.message;
+        })
+        .finally(() => {
+          this.isSubmitting = false;
+        });
     }
   }
 };

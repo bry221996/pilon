@@ -104,7 +104,7 @@ export default {
       return this.pagination.currentPage < this.pages;
     },
     query() {
-      let query = { page: this.page, 'per-page': 5 };
+      let query = { page: this.page, "per-page": 5 };
       if (this.tenureRange) {
         query.tenure_range = this.tenureRange;
       }
@@ -132,8 +132,13 @@ export default {
       this.page = 1;
       this.loadItems();
     },
-    async loadItems() {
-      await this.$store.dispatch(GET_AVAILABLE_PROJECTS, this.query);
+    loadItems() {
+      return new Promise((resolve, reject) => {
+        this.$store
+          .dispatch(GET_AVAILABLE_PROJECTS, this.query)
+          .then(() => resolve())
+          .catch(() => reject());
+      });
     }
   }
 };

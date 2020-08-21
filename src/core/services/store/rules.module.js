@@ -10,7 +10,9 @@ export const SET_INDUSTRIES = "setIndustries";
 
 const state = {
   industries: [],
-  list: []
+  list: {
+    rows: []
+  }
 };
 
 const mutations = {

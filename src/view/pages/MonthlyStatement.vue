@@ -17,33 +17,37 @@
       <div class="col-6">Action</div>
     </div>
     <hr />
-    <template v-if="statements.length">
-      <div class="row pb-3" v-for="(statement, index) in statements" :key="index">
-      <div class="col-6">{{ statement.label }}</div>
-      <div class="col-6 d-flex">
-        <div
-          class="d-flex align-items-center pr-3"
-          style="border-right: 1px solid rgba(0, 0, 0, 0.1)"
-        >
-          <a
-            style="cursor: pointer"
-            @click.prevent="download(statement.date, 'pdf')"
+    <template>
+      <div
+        class="row pb-3"
+        v-for="(statement, index) in statements"
+        :key="index"
+      >
+        <div class="col-6">{{ statement.label }}</div>
+        <div class="col-6 d-flex">
+          <div
+            class="d-flex align-items-center pr-3"
+            style="border-right: 1px solid rgba(0, 0, 0, 0.1)"
           >
-            <i class="mr-2 text-primary flaticon2-download-2"></i>
-            PDF
-          </a>
-        </div>
-        <div class="d-flex align-items-center pl-3">
-          <a
-            style="cursor: pointer"
-            @click.prevent="download(statement.date, 'html')"
-          >
-            <i class="mr-2 text-primary flaticon2-download-2"></i>
-            HTML
-          </a>
+            <a
+              style="cursor: pointer"
+              @click.prevent="download(statement.date, 'pdf')"
+            >
+              <i class="mr-2 text-primary flaticon2-download-2"></i>
+              PDF
+            </a>
+          </div>
+          <div class="d-flex align-items-center pl-3">
+            <a
+              style="cursor: pointer"
+              @click.prevent="download(statement.date, 'html')"
+            >
+              <i class="mr-2 text-primary flaticon2-download-2"></i>
+              HTML
+            </a>
+          </div>
         </div>
       </div>
-    </div>
     </template>
     <div class="row justify-content-center mt-10">
       <nav>
@@ -84,15 +88,22 @@ export default {
   },
   computed: {
     pages() {
-      return Math.ceil(
-        this.pagination.totalCount / this.pagination.defaultPageSize
-      );
+      if ("totalCount" in this.pagination) {
+        return Math.ceil(
+          this.pagination.totalCount / this.pagination.defaultPageSize
+        );
+      }
+      return 0;
     },
     hasPrevPage() {
-      return this.pagination.currentPage > 1;
+      return "currentPage" in this.pagination
+        ? this.pagination.currentPage > 1
+        : false;
     },
     hasNextPage() {
-      return this.pagination.currentPage < this.pages;
+      return "currentPage" in this.pagination
+        ? this.pagination.currentPage < this.pages
+        : false;
     }
   },
   async mounted() {
@@ -119,7 +130,7 @@ export default {
       }
       return `data:application/pdf;base64,${response.data.data}`;
     },
-        setPage(page) {
+    setPage(page) {
       this.page = page;
       this.loadItems();
     },
@@ -132,12 +143,17 @@ export default {
       this.loadItems();
     },
     async loadItems() {
-const STATEMENTS_RESPONSE = await ApiService.get(`/reports/monthly-statement?'per-page'=2&page=${this.page}`);
-    this.pagination = STATEMENTS_RESPONSE.data.data.pagination;
-    this.pagination.currentPage = (STATEMENTS_RESPONSE.data.data.pagination.totalCount - STATEMENTS_RESPONSE.data.data.pagination.firstRowNo) /
-        STATEMENTS_RESPONSE.data.data.pagination.defaultPageSize +
-      1;
-    this.statements = STATEMENTS_RESPONSE.data.data.rows;
+      const STATEMENTS_RESPONSE = await ApiService.get(
+        `/reports/monthly-statement?'per-page'=2&page=${this.page}`
+      );
+      this.statements = STATEMENTS_RESPONSE.data.data.rows;
+
+      this.pagination = STATEMENTS_RESPONSE.data.data.pagination;
+      this.pagination.currentPage =
+        (STATEMENTS_RESPONSE.data.data.pagination.totalCount -
+          STATEMENTS_RESPONSE.data.data.pagination.firstRowNo) /
+          STATEMENTS_RESPONSE.data.data.pagination.defaultPageSize +
+        1;
     }
   }
 };

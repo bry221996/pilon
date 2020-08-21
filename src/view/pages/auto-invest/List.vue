@@ -41,7 +41,7 @@
       <div class="col-2" v-html="getStatusDisplay(rule.is_enabled)"></div>
     </div>
 
-    <div class="row justify-content-center mt-10">
+    <div class="row justify-content-center mt-10" v-if="rules.length">
       <nav>
         <ul class="pagination justify-content-center">
           <li class="page-item" :class="hasPrevPage ? '' : 'disabled'">
@@ -61,6 +61,11 @@
           </li>
         </ul>
       </nav>
+    </div>
+    <div class="row">
+      <div class="col-12 mt-3 text-center" v-if="!rules.length">
+        <p>* * * No auto invest rules * * *</p>
+      </div>
     </div>
   </div>
 </template>
@@ -117,7 +122,10 @@ export default {
       this.loadItems();
     },
     async loadItems() {
-      await this.$store.dispatch(GET_RULES, { 'per-page': 10, page: this.page });
+      await this.$store.dispatch(GET_RULES, {
+        "per-page": 10,
+        page: this.page
+      });
     }
   }
 };

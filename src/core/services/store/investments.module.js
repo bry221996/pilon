@@ -7,8 +7,12 @@ export const SET_CURRENT_INVESTMENTS = "setCurrentInvestments";
 export const SET_INVESTMENTS_HISTORY = "setInvestmentsHistory";
 
 const state = {
-  current: [],
-  history: []
+  current: {
+    rows: []
+  },
+  history: {
+    rows: []
+  }
 };
 
 const actions = {
