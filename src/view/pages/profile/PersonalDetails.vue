@@ -27,7 +27,7 @@
                 <v-row>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder="Jason"
+                      placeholder=""
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.first_name.$model"
@@ -43,7 +43,7 @@
                   </v-col>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder="Chua"
+                      placeholder=""
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.last_name.$model"
@@ -61,7 +61,7 @@
                 <v-row>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder="jason@bsweep.com"
+                      placeholder=""
                       class="pt-0"
                       color="#707070"
                       disabled
@@ -74,7 +74,7 @@
                   </v-col>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder="+6512345678"
+                      placeholder=""
                       class="pt-0"
                       disabled
                       color="#707070"
@@ -89,7 +89,7 @@
                 <v-row>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder="Address Line 1"
+                      placeholder=""
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.line1.$model"
@@ -105,7 +105,7 @@
                   </v-col>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder="Address Line 2"
+                      placeholder=""
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.line2.$model"
@@ -123,7 +123,7 @@
                 <v-row>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder="123456"
+                      placeholder=""
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.postal.$model"
@@ -140,7 +140,7 @@
                   <v-col cols="6">
                     <v-select
                       :items="countries"
-                      placeholder="Country"
+                      placeholder=""
                       class="my-0 py-1"
                       v-model="$v.form.country_id.$model"
                       :error="$v.form.country_id.$error"

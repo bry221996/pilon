@@ -38,7 +38,7 @@
                 <v-range-slider
                   v-model="form.interest_range"
                   thumb-label
-                  min="1"
+                  min="0"
                   max="20"
                   ticks
                 ></v-range-slider>
@@ -169,7 +169,7 @@ export default {
     this.form.name = seletectRule.name;
     this.form.interest_range = [
       seletectRule.min_interest,
-      seletectRule.max_interes
+      seletectRule.max_interest
     ];
     this.form.tenure = [seletectRule.min_tenure, seletectRule.max_tenure];
     this.form.allocation_limit = seletectRule.max_allocation;

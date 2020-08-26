@@ -38,7 +38,7 @@
                 <v-range-slider
                   v-model="form.interest_range"
                   thumb-label
-                  min="1"
+                  min="0"
                   max="20"
                   ticks
                 ></v-range-slider>
@@ -125,7 +125,7 @@ export default {
       isSubmitting: false,
       form: {
         name: "",
-        interest_range: [1, 20],
+        interest_range: [0, 20],
         tenure: [1, 12],
         allocation_limit: null,
         industries_ids: [],

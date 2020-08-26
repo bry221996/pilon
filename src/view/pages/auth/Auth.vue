@@ -2,7 +2,7 @@
   <v-app>
     <div class="d-flex flex-column flex-root">
       <div
-        class="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-row-fluid bg-white"
+        class="login login-1 login-signin-on d-flex flex-column flex-md-row flex-row-fluid bg-white"
         id="kt_login"
       >
         <!--begin::Content-->
@@ -17,7 +17,7 @@
 
         <!--begin::Aside-->
         <div
-          class="login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-15"
+          class="login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-15 hide-on-md"
           style="background-position: right"
           :style="{ backgroundImage: `url(${backgroundImage})` }"
         >
@@ -57,3 +57,11 @@ export default {
   }
 };
 </script>
+
+<style>
+@media (max-width: 991.98px) {
+  .v-application .d-flex .hide-on-md {
+    display: none !important;
+  }
+}
+</style>
