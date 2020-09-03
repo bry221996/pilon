@@ -49,13 +49,20 @@
                   >
                 </div>
                 <template v-if="form.payment_type == 6">
-                  <div class="col-4 px-5">
+                  <div
+                    class="col-4 px-5"
+                    style="max-height: 220px; overflow-y: scroll;"
+                  >
                     <p class="text-muted">SELECT CARD</p>
                     <inline-svg
                       v-for="(creditCard, index) in creditCards"
                       :key="`cc-${index}`"
                       class="w-100"
+                      :class="
+                        creditCard.id == seletectCard.id ? 'selected-card' : ''
+                      "
                       src="media/pilons/pilon_credit_card.svg"
+                      @click="selectCard(index)"
                     ></inline-svg>
                   </div>
                   <div class="col-6">
@@ -288,7 +295,8 @@ export default {
         fee: 0,
         transfer_no: null,
         attachment: null
-      }
+      },
+      seletectCard: {}
     };
   },
   computed: {
@@ -305,9 +313,6 @@ export default {
         );
       }
       return this.form.amount;
-    },
-    seletectCard() {
-      return this.creditCards[0];
     },
     years() {
       return Array.from(new Array(20), (x, i) => i + 2020);
@@ -326,10 +331,15 @@ export default {
           cc.month = parseInt(cc.expiration_date.split("-")[1]);
           return cc;
         });
+
+        this.seletectCard = this.creditCards[0];
       })
       .finally(() => (this.isLoaded = true));
   },
   methods: {
+    selectCard(index) {
+      this.seletectCard = this.creditCards[index];
+    },
     async submitTopUpRequest() {
       this.isSubmitting = true;
       let params = Object.assign({}, this.form);
@@ -387,5 +397,9 @@ export default {
       margin: 0;
     }
   }
+}
+.selected-card {
+  border: 1px solid #5084f1;
+  border-radius: 1rem;
 }
 </style>
