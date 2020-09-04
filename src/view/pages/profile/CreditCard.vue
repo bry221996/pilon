@@ -13,7 +13,9 @@
             <v-form>
               <v-container class="py-0">
                 <v-row>
-                  <div class="d-flex overflow-auto mb-5">
+                  <div
+                    class="d-flex align-items-end overflow-auto mb-5 flex-nowrap"
+                  >
                     <div
                       v-for="(card, i) in cards"
                       :key="i"
@@ -22,12 +24,15 @@
                       @click="selectCard(card)"
                     >
                       <inline-svg
-                        style="width: 150px"
+                        :style="getStyle(card.id)"
                         height="100%"
                         src="media/pilons/pilon_credit_card.svg"
                       ></inline-svg>
                     </div>
-                    <div class="p-1 rounded" style="width: 150px">
+                    <div
+                      class="p-1 rounded"
+                      style="min-width: 150px; height: 7.25rem;"
+                    >
                       <div
                         class="h-100 w-100 d-flex"
                         style="cursor: pointer"
@@ -150,7 +155,6 @@
                       class="pt-0 mt-0"
                       :true-value="1"
                       :false-value="0"
-                      :disabled="'id' in selectedCard"
                       label="Set as primary"
                       v-model.number="form.is_primary"
                     ></v-checkbox>
@@ -251,6 +255,9 @@ export default {
     }
   },
   methods: {
+    getStyle(id) {
+      return id == this.selectedCard.id ? "width: 220px" : "width: 150px";
+    },
     async update() {
       this.$v.form.$touch();
       if (this.$v.form.$anyError) return;
@@ -258,6 +265,11 @@ export default {
       this.isSubmitting = true;
       if (Object.keys(this.selectedCard).length < 1) {
         await ApiService.post("/kyc/credit-card", this.form);
+      } else {
+        await ApiService.put(
+          `/kyc/credit-card/${this.selectedCard.id}`,
+          this.form
+        );
       }
       this.isSubmitting = false;
       this.$router.push("/profile/bank-account");
