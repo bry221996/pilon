@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-9">
-      <div class="container-fluid">
+      <div class="container-fluid" v-if="loaded">
         <div class="row">
           <div class="col-12">
             <b-alert
@@ -72,17 +72,31 @@
                       </template>
                     </v-text-field>
                   </v-col>
-                  <v-col cols="6">
+                  <v-col cols="6" class="d-flex">
+                    <v-select
+                      style="width: 4rem"
+                      :items="countryCodes"
+                      placeholder=""
+                      item-value="code"
+                      item-text="code"
+                      class="my-0 py-1"
+                      v-model="form.mobile_cc"
+                      :error="$v.form.mobile_no.$error"
+                    >
+                      <template slot="label">
+                        <p class="font-weight-boldest text-dark">MOBILE</p>
+                      </template>
+                    </v-select>
                     <v-text-field
                       placeholder=""
                       class="pt-0"
-                      disabled
                       color="#707070"
-                      :value="authUser.mobile_no"
+                      v-model="$v.form.mobile_no.$model"
+                      :error="$v.form.mobile_no.$error"
+                      :messages="
+                        $v.form.mobile_no.$error ? 'This field is requred' : ''
+                      "
                     >
-                      <template slot="label">
-                        <p class="font-weight-boldest text-dark">CONTACT</p>
-                      </template>
                     </v-text-field>
                   </v-col>
                 </v-row>
@@ -159,7 +173,6 @@
                     <v-btn
                       rounded
                       :loading="isSubmitting"
-                      :disabled="$v.form.$anyError"
                       color="primary"
                       block
                       large
@@ -184,22 +197,27 @@
 </template>
 
 <script>
+import ApiService from "@/core/services/api.service";
 import { UPDATE_PROFILE } from "@/core/services/store/auth.module";
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
 import { mapState } from "vuex";
+import axios from "axios";
 
 export default {
   name: "PersonalDetails",
   mixins: [validationMixin],
   data() {
     return {
+      loaded: false,
       dismissCountDown: 0,
       isSubmitting: false,
       form: {
         first_name: "",
         last_name: "",
         country_id: 0,
+        mobile_no: null,
+        mobile_cc: null,
         postal: "",
         line1: "",
         line2: ""
@@ -207,7 +225,8 @@ export default {
       changePassword: false,
       currentPassword: "",
       newPassword: "",
-      confirmPassword: ""
+      confirmPassword: "",
+      countryCodes: []
     };
   },
   validations: {
@@ -229,6 +248,12 @@ export default {
       },
       line2: {
         required
+      },
+      mobile_cc: {
+        required
+      },
+      mobile_no: {
+        required
       }
     }
   },
@@ -243,6 +268,8 @@ export default {
         personalInfo: {
           first_name: this.form.first_name,
           last_name: this.form.last_name,
+          mobile_no: this.form.mobile_no,
+          mobile_cc: this.form.mobile_cc,
           address: {
             type: "",
             country_id: this.form.country_id,
@@ -255,18 +282,37 @@ export default {
     }
   },
   async mounted() {
+    const COUNTRY_CODES_RESPONSE = await ApiService.get(
+      "/data-list?expand=country-codes"
+    );
+    this.countryCodes = COUNTRY_CODES_RESPONSE.data.data["country-codes"];
     this.form.first_name = this.authUser.personalInfo.first_name;
     this.form.last_name = this.authUser.personalInfo.last_name;
     this.form.country_id = this.authUser.personalInfo.address.country_id;
     this.form.postal = this.authUser.personalInfo.address.postal;
     this.form.line1 = this.authUser.personalInfo.address.line1;
     this.form.line2 = this.authUser.personalInfo.address.line2;
+    this.form.mobile_cc = this.authUser.personalInfo.mobile_cc;
+    this.form.mobile_no = this.authUser.personalInfo.mobile_no;
+    if (!this.form.mobile_no && !this.mobile_cc) {
+      axios.get("https://ipapi.co/json/").then(({ data }) => {
+        const location = this.countryCodes.find(
+          c => c.name == data.country_name
+        );
+        if (location) {
+          this.form.mobile_cc = location.code;
+        }
+      });
+    }
+    this.loaded = true;
   },
   methods: {
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
     },
     async updateProfile() {
+      this.$v.form.$touch();
+      if (this.$v.form.$anyError) return;
       this.isSubmitting = true;
       await this.$store.dispatch(UPDATE_PROFILE, this.formParams);
       this.dismissCountDown = 5;
