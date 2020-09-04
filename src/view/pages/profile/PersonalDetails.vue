@@ -31,6 +31,7 @@
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.first_name.$model"
+                      :disabled="fieldsIsDisabled"
                       :error="$v.form.first_name.$error"
                       :messages="
                         $v.form.first_name.$error ? 'This field is requred' : ''
@@ -47,6 +48,7 @@
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.last_name.$model"
+                      :disabled="fieldsIsDisabled"
                       :error="$v.form.last_name.$error"
                       :messages="
                         $v.form.last_name.$error ? 'This field is requred' : ''
@@ -81,6 +83,7 @@
                       item-text="code"
                       class="my-0 py-1"
                       v-model="form.mobile_cc"
+                      :disabled="fieldsIsDisabled"
                       :error="$v.form.mobile_no.$error"
                     >
                       <template slot="label">
@@ -92,6 +95,7 @@
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.mobile_no.$model"
+                      :disabled="fieldsIsDisabled"
                       :error="$v.form.mobile_no.$error"
                       :messages="
                         $v.form.mobile_no.$error ? 'This field is requred' : ''
@@ -107,6 +111,7 @@
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.line1.$model"
+                      :disabled="fieldsIsDisabled"
                       :error="$v.form.line1.$error"
                       :messages="
                         $v.form.line1.$error ? 'This field is requred' : ''
@@ -123,6 +128,7 @@
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.line2.$model"
+                      :disabled="fieldsIsDisabled"
                       :error="$v.form.line2.$error"
                       :messages="
                         $v.form.line2.$error ? 'This field is requred' : ''
@@ -141,6 +147,7 @@
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.postal.$model"
+                      :disabled="fieldsIsDisabled"
                       :error="$v.form.postal.$error"
                       :messages="
                         $v.form.postal.$error ? 'This field is requred' : ''
@@ -157,6 +164,7 @@
                       placeholder=""
                       class="my-0 py-1"
                       v-model="$v.form.country_id.$model"
+                      :disabled="fieldsIsDisabled"
                       :error="$v.form.country_id.$error"
                       :messages="
                         $v.form.country_id.$error ? 'This field is requred' : ''
@@ -260,7 +268,8 @@ export default {
   computed: {
     ...mapState({
       authUser: state => state.auth.user,
-      countries: state => state.auth.countries
+      countries: state => state.auth.countries,
+      fieldsIsDisabled: state => !state.auth.user.personalInfo.is_editable
     }),
     formParams() {
       return {

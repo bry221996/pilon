@@ -19,6 +19,7 @@
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.account_name.$model"
+                      :disabled="fieldsIsDisabled"
                       :error="$v.form.account_name.$error"
                       :messages="
                         $v.form.account_name.$error
@@ -39,6 +40,7 @@
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.account_number.$model"
+                      :disabled="fieldsIsDisabled"
                       :error="$v.form.account_number.$error"
                       :messages="
                         $v.form.account_number.$error
@@ -56,7 +58,11 @@
                 </v-row>
                 <v-row class="mb-5">
                   <v-col cols="12" class="py-0">
-                    <v-radio-group :column="false" v-model="form.account_type">
+                    <v-radio-group
+                      :column="false"
+                      v-model="form.account_type"
+                      :disabled="fieldsIsDisabled"
+                    >
                       <v-radio value="1" class="mr-5">
                         <template slot="label" class="mb-0">
                           <p
@@ -89,6 +95,7 @@
                       class="my-0 py-1"
                       v-model="$v.form.bank_name.$model"
                       :error="$v.form.bank_name.$error"
+                      :disabled="fieldsIsDisabled"
                       :messages="
                         $v.form.bank_name.$error ? 'This field is requred' : ''
                       "
@@ -104,6 +111,7 @@
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.branch_code.$model"
+                      :disabled="fieldsIsDisabled"
                       :error="$v.form.branch_code.$error"
                       :messages="
                         $v.form.branch_code.$error
@@ -189,7 +197,8 @@ export default {
   },
   computed: {
     ...mapState({
-      bank: state => state.auth.user.businessInfo.bank
+      bank: state => state.auth.user.businessInfo.bank,
+      fieldsIsDisabled: state => !state.auth.user.personalInfo.is_editable
     })
   },
   mounted() {
@@ -214,6 +223,7 @@ export default {
       this.isSubmitting = true;
       await this.$store.dispatch(UPDATE_PROFILE, {
         kyc_type: 4,
+        is_confirm: 1,
         businessInfo: {
           bank: this.form
         }
