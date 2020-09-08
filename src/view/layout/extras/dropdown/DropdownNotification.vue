@@ -47,7 +47,12 @@
           v-if="activities.length"
         >
           <template v-for="(item, i) in activities">
-            <a href="#" class="navi-item" v-bind:key="i">
+            <a
+              href="#"
+              class="navi-item"
+              v-bind:key="i"
+              @click.prevent="onClick(item.id)"
+            >
               <div class="navi-link">
                 <div class="navi-text">
                   <div class="font-weight-bold">
@@ -231,6 +236,13 @@ export default {
     };
   },
   methods: {
+    onClick(id) {
+      this.$emit("item-selected");
+
+      if (!this.$route.fullPath.includes(id)) {
+        this.$router.push(`/notifications/${id}`);
+      }
+    },
     fromNow(date) {
       return moment(date).fromNow();
     },

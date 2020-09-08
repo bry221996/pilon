@@ -21,6 +21,10 @@ export default new Router({
           component: () => import("@/view/pages/Settings.vue")
         },
         {
+          path: "/notifications/:id",
+          component: () => import("@/view/pages/Notification.vue")
+        },
+        {
           path: "/investments",
           component: () => import("@/view/pages/investment/Index.vue"),
           children: [
