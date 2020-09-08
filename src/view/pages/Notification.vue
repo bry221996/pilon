@@ -36,13 +36,21 @@ export default {
       notification: {}
     };
   },
+  watch: {
+    "$route.params.id": "fetchDetails"
+  },
   mounted() {
-    ApiService.get(`/notification/message/${this.$route.params.id}`).then(
-      ({ data }) => {
-        this.notification = data.data;
-        this.loaded = true;
-      }
-    );
+    this.fetchDetails();
+  },
+  methods: {
+    fetchDetails() {
+      ApiService.get(`/notification/message/${this.$route.params.id}`).then(
+        ({ data }) => {
+          this.notification = data.data;
+          this.loaded = true;
+        }
+      );
+    }
   }
 };
 </script>
