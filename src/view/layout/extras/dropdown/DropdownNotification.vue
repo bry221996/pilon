@@ -81,7 +81,7 @@
           v-if="notifications.length"
         >
           <template v-for="(item, i) in notifications">
-            <a href="#" class="navi-item" v-bind:key="i">
+            <a href="#" class="navi-item" v-bind:key="i" @click.prevent="onClick(item.id)">
               <div class="navi-link">
                 <div class="navi-text">
                   <div class="font-weight-bold">
