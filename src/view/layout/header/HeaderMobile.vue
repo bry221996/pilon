@@ -6,7 +6,7 @@
   >
     <!--begin::Logo-->
     <a href="/">
-      <img alt="Logo" :src="headerLogo" />
+      <img alt="Logo" src="/media/pilons/pilon_logo_white.svg" />
     </a>
     <!--end::Logo-->
     <!--begin::Toolbar-->

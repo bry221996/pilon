@@ -23,7 +23,7 @@
           <b-card
             :bg-variant="analytics.variant"
             text-variant="white"
-            class="p-0"
+            class="p-0 mb-2"
             @click="redirect(analytics.label)"
           >
             <div style="position: absolute; right: 0.5rem; top: 0.5rem;">
@@ -94,17 +94,17 @@ export default {
       return [
         {
           label: "TOTAL INTEREST EARNED TILL DATE",
-          class: "pl-6",
+          class: "pl-6 interest-label",
           value: `$ ${Number(this.funds.dividends.toFixed(1)).toLocaleString()}`
         },
         {
           label: "AVERAGE % RETURNS",
-          class: "pl-9",
+          class: "returns-label",
           value: this.funds.annualized_return
         },
         {
           label: "EXPECTED RETURNS THIS MONTH",
-          class: "pl-12",
+          class: "expected-label",
           value: `$ ${Number(
             this.funds.expected_next_return.toFixed(1)
           ).toLocaleString()}`
@@ -126,5 +126,20 @@ export default {
 .sub-analytics {
   border-radius: 0.42rem;
   background-color: #e5f6ff;
+}
+
+.returns-label {
+  padding-left: 2.25rem !important;
+}
+
+.expected-label {
+  padding-left: 3rem !important;
+}
+
+@media (max-width: 991.98px) {
+  .returns-label,
+  .expected-label {
+    padding-left: 1.5rem !important;
+  }
 }
 </style>
