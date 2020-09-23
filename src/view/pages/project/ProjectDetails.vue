@@ -422,7 +422,7 @@
               style="text-transform: none"
               color="primary"
               squared
-              @click="showSuccessfulDialog = false"
+              @click="continueBrowsing"
               >Continue Browsing</v-btn
             >
           </div>
@@ -474,6 +474,10 @@ export default {
     this.isLoaded = true;
   },
   methods: {
+    continueBrowsing() {
+      this.showSuccessfulDialog = false;
+      this.$router.push("/investments/available");
+    },
     onCloseConfirmation() {
       this.message = null;
       this.showConfirmationDialog = false;
