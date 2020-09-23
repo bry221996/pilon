@@ -27,7 +27,7 @@
                 <v-row>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder=""
+                      placeholder
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.first_name.$model"
@@ -44,7 +44,7 @@
                   </v-col>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder=""
+                      placeholder
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.last_name.$model"
@@ -63,7 +63,7 @@
                 <v-row>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder=""
+                      placeholder
                       class="pt-0"
                       color="#707070"
                       disabled
@@ -78,7 +78,7 @@
                     <v-select
                       style="width: 4rem"
                       :items="countryCodes"
-                      placeholder=""
+                      placeholder
                       item-value="code"
                       item-text="code"
                       class="my-0 py-1"
@@ -91,7 +91,7 @@
                       </template>
                     </v-select>
                     <v-text-field
-                      placeholder=""
+                      placeholder
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.mobile_no.$model"
@@ -100,14 +100,13 @@
                       :messages="
                         $v.form.mobile_no.$error ? 'This field is requred' : ''
                       "
-                    >
-                    </v-text-field>
+                    ></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder=""
+                      placeholder
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.line1.$model"
@@ -124,7 +123,7 @@
                   </v-col>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder=""
+                      placeholder
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.line2.$model"
@@ -143,7 +142,7 @@
                 <v-row>
                   <v-col cols="6">
                     <v-text-field
-                      placeholder=""
+                      placeholder
                       class="pt-0"
                       color="#707070"
                       v-model="$v.form.postal.$model"
@@ -161,7 +160,7 @@
                   <v-col cols="6">
                     <v-select
                       :items="countries"
-                      placeholder=""
+                      placeholder
                       class="my-0 py-1"
                       v-model="$v.form.country_id.$model"
                       :disabled="fieldsIsDisabled"
@@ -320,12 +319,14 @@ export default {
       this.dismissCountDown = dismissCountDown;
     },
     async updateProfile() {
-      this.$v.form.$touch();
-      if (this.$v.form.$anyError) return;
-      this.isSubmitting = true;
-      await this.$store.dispatch(UPDATE_PROFILE, this.formParams);
-      this.dismissCountDown = 5;
-      this.isSubmitting = false;
+      if (!this.fieldsIsDisabled) {
+        this.$v.form.$touch();
+        if (this.$v.form.$anyError) return;
+        this.isSubmitting = true;
+        await this.$store.dispatch(UPDATE_PROFILE, this.formParams);
+        this.dismissCountDown = 5;
+        this.isSubmitting = false;
+      }
       this.$router.push("/profile/company-details");
     }
   }

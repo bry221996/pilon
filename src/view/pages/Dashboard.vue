@@ -20,7 +20,7 @@
             v-model="tenureRange"
             @change="updateQuery"
           >
-            <option value="">Filter</option>
+            <option value>Filter</option>
             <option
               v-for="(filter, index) in filters"
               :key="index"
@@ -53,7 +53,7 @@
 <script>
 import FundsSummary from "@/view/content/dashboard/FundsSummary.vue";
 import Project from "@/view/content/projects/Project.vue";
-import { GET_AUTH_USER } from "@/core/services/store/auth.module";
+import { GET_AUTH_USER, LOGOUT } from "@/core/services/store/auth.module";
 import { GET_AVAILABLE_PROJECTS } from "@/core/services/store/projects.module";
 import { mapState } from "vuex";
 
@@ -87,14 +87,20 @@ export default {
       projects: state => state.projects.available.rows
     })
   },
-  async mounted() {
-    try {
-      await this.$store.dispatch(GET_AUTH_USER);
-      await this.$store.dispatch(GET_AVAILABLE_PROJECTS, { "per-page": 3 });
-      this.isLoaded = true;
-    } catch (error) {
-      console.log(error);
-    }
+  mounted() {
+    this.$store
+      .dispatch(GET_AUTH_USER)
+      .then(() => {
+        this.$store
+          .dispatch(GET_AVAILABLE_PROJECTS, { "per-page": 3 })
+          .then(() => {
+            this.isLoaded = true;
+          });
+      })
+      .catch(() => {
+        this.$store.dispatch(LOGOUT);
+        this.$router.push({ name: "login" });
+      });
   },
   methods: {
     async updateQuery() {

@@ -278,11 +278,13 @@ export default {
   },
   methods: {
     async update() {
-      this.$v.form.$touch();
-      if (this.$v.form.$anyError) return;
-      this.isSubmitting = true;
-      await this.$store.dispatch(UPDATE_PROFILE, this.formParams);
-      this.isSubmitting = false;
+      if (!this.fieldsIsDisabled) {
+        this.$v.form.$touch();
+        if (this.$v.form.$anyError) return;
+        this.isSubmitting = true;
+        await this.$store.dispatch(UPDATE_PROFILE, this.formParams);
+        this.isSubmitting = false;
+      }
       this.$router.push("/profile/credit-card");
     }
   }

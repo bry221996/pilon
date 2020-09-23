@@ -218,17 +218,19 @@ export default {
   },
   methods: {
     async update() {
-      this.$v.form.$touch();
-      if (this.$v.form.$anyError) return;
-      this.isSubmitting = true;
-      await this.$store.dispatch(UPDATE_PROFILE, {
-        kyc_type: 4,
-        is_confirm: 1,
-        businessInfo: {
-          bank: this.form
-        }
-      });
-      this.isSubmitting = false;
+      if (!this.fieldsIsDisabled) {
+        this.$v.form.$touch();
+        if (this.$v.form.$anyError) return;
+        this.isSubmitting = true;
+        await this.$store.dispatch(UPDATE_PROFILE, {
+          kyc_type: 4,
+          is_confirm: 1,
+          businessInfo: {
+            bank: this.form
+          }
+        });
+        this.isSubmitting = false;
+      }
       this.$router.push("/profile/personal-details");
     }
   }

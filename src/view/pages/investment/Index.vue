@@ -33,7 +33,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { GET_AUTH_USER } from "@/core/services/store/auth.module";
+import { GET_AUTH_USER, LOGOUT } from "@/core/services/store/auth.module";
 
 export default {
   name: "Investments",
@@ -52,7 +52,10 @@ export default {
     })
   },
   mounted() {
-    this.$store.dispatch(GET_AUTH_USER);
+    this.$store.dispatch(GET_AUTH_USER).catch(() => {
+      this.$store.dispatch(LOGOUT);
+      this.$router.push({ name: "login" });
+    });
   }
 };
 </script>
