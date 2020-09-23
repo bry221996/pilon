@@ -107,7 +107,7 @@ export default {
           class: "expected-label",
           value: `$ ${Number(
             this.funds.expected_next_return.toFixed(1)
-          ).toLocaleString()}`
+          ).toLocaleString()} (${this.funds.expected_next_return_pct}%)`
         }
       ];
     }
