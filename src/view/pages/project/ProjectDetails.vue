@@ -95,7 +95,7 @@
             <v-progress-linear
               :value="project.progress"
               color="green"
-              height="8"
+              height="12"
             >
               <span style="font-size: 8px">{{ project.progress }}%</span>
             </v-progress-linear>
@@ -374,6 +374,7 @@
                       label
                       style="font-size: 13px"
                       v-model.number="amount"
+                      @input="calculateReturns"
                       placeholder
                       prefix="$"
                     ></v-text-field>
@@ -420,7 +421,7 @@
                     Expected Returns
                   </p>
                   <p class="ml-4 py-3 my-0 font-weight-boldest text-primary">
-                    USD {{ project.loan.interest | money_format }}
+                    USD {{ returnValue }}
                   </p>
                 </div>
 
@@ -491,6 +492,7 @@ export default {
   name: "ProjectDetails",
   data() {
     return {
+      returnValue: 0,
       suplierDetailsPanel: 0,
       projectDetailsPanel: 0,
       showConfirmationDialog: false,
@@ -546,6 +548,17 @@ export default {
     },
     setMax() {
       this.amount = this.project.available_funding_left;
+    },
+    calculateReturns() {
+      this.returnValue = 0;
+      if (this.amount) {
+        ApiService.post("/loan/calculator", {
+          principal: this.amount,
+          interest_rate: this.project.returns
+        }).then(res => {
+          this.returnValue = res.data.data.total_returns;
+        });
+      }
     },
     fundInvoice() {
       this.isSubmitting = true;
