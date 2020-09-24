@@ -38,20 +38,31 @@
       </div>
       <!-- end:main-analytics -->
 
-      <div class="row mt-5 sub-analytics mx-0 py-5">
-        <div
-          class="col-12 col-lg-4 mb-2 mb-sm-0"
-          v-for="analytics in subAnalytics"
-          :key="analytics.label"
-        >
-          <div :class="analytics.class">
+      <div class="row mt-5 mx-0 py-5">
+        <div class="col-6 sub-analytics  pt-5">
+          <div
+            class="pl-6 mb-3"
+            v-for="analytics in subAnalytics"
+            :key="analytics.label"
+          >
             <p class="mb-1 text-primary">
-              <strong>{{ analytics.label }}</strong>
+              <strong style="font-weight: 800; letter-spacing: 2px">{{
+                analytics.label
+              }}</strong>
             </p>
             <p class="mb-0">
               <strong>{{ analytics.value }}</strong>
             </p>
           </div>
+        </div>
+        <div class="col-6">
+          <apexchart
+            class="card-rounded"
+            :options="chartOptions"
+            height="200"
+            :series="series"
+            type="pie"
+          ></apexchart>
         </div>
       </div>
     </template>
@@ -61,11 +72,24 @@
 <script>
 import KTCard from "@/view/content/Card.vue";
 import { mapState } from "vuex";
+import ApiService from "@/core/services/api.service";
 
 export default {
   name: "FundsSummary",
   components: {
     KTCard: KTCard
+  },
+  data() {
+    return {
+      chartOptions: {
+        title: {
+          text: "Portfolio Industry Breakdown",
+          align: "middle"
+        },
+        labels: []
+      },
+      series: []
+    };
   },
   computed: {
     ...mapState({
@@ -99,18 +123,26 @@ export default {
         },
         {
           label: "AVERAGE % RETURNS",
-          class: "returns-label",
+          class: "pl-6",
           value: this.funds.annualized_return
         },
         {
           label: "EXPECTED RETURNS THIS MONTH",
-          class: "expected-label",
+          class: "pl-6",
           value: `$ ${Number(
             this.funds.expected_next_return.toFixed(1)
           ).toLocaleString()} (${this.funds.expected_next_return_pct}%)`
         }
       ];
     }
+  },
+  mounted() {
+    ApiService.get("/fund/funds-distribution-industry").then(res => {
+      res.data.data.forEach(data => {
+        this.chartOptions.labels.push(data.industry);
+        this.series.push(data.amount);
+      });
+    });
   },
   methods: {
     redirect(label) {

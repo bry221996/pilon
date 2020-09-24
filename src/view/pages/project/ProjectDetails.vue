@@ -52,11 +52,11 @@
       <div class="row">
         <div
           class="col-12 px-0 py-0 d-flex flex-row justify-content-between"
-          style="background-color: #1D8CC61C; border: 1px dashed #1D8CC6;"
+          style="background-color: #1d8cc61c; border: 1px dashed #1d8cc6"
         >
           <div
             class="flex-grow-1 py-6 px-6"
-            style="background-color: #1D31C6; color: white"
+            style="background-color: #1d31c6; color: white"
           >
             <h4 class="card-title mb-4">
               <strong>USD {{ funds.available | money_format }}</strong>
@@ -81,8 +81,26 @@
             </h4>
             <p class="card-text">Estimated Payment Date</p>
           </div>
-          <div class="px-10 d-flex align-items-center justify-content-center">
+          <div class="flex-grow-1 py-6 px-6">
+            <h4 class="card-title mb-4">
+              <strong
+                >USD {{ project.available_funding_left | money_format }}</strong
+              >
+            </h4>
+            <p class="card-text">Available Funding Left</p>
+          </div>
+          <div
+            class="px-10 flex-column d-flex align-items-center justify-content-center"
+          >
+            <v-progress-linear
+              :value="project.progress"
+              color="green"
+              height="8"
+            >
+              <span style="font-size: 8px">{{ project.progress }}%</span>
+            </v-progress-linear>
             <b-button
+              class="mt-2"
               size="large"
               squared
               variant="success"
@@ -182,7 +200,7 @@
                     <div>
                       <p
                         class="font-weight-boldest pb-5"
-                        style="border-bottom: 1px solid #F2F3FF"
+                        style="border-bottom: 1px solid #f2f3ff"
                       >
                         DESCRIPTION
                       </p>
@@ -198,7 +216,7 @@
                     <div>
                       <p
                         class="font-weight-boldest pb-5"
-                        style="border-bottom: 1px solid #F2F3FF"
+                        style="border-bottom: 1px solid #f2f3ff"
                       >
                         INVOICE NO.
                       </p>
@@ -209,7 +227,7 @@
                     <div>
                       <p
                         class="font-weight-boldest pb-5"
-                        style="border-bottom: 1px solid #F2F3FF"
+                        style="border-bottom: 1px solid #f2f3ff"
                       >
                         INVOICE DATE
                       </p>
@@ -221,7 +239,7 @@
                     <div>
                       <p
                         class="font-weight-boldest pb-5"
-                        style="border-bottom: 1px solid #F2F3FF"
+                        style="border-bottom: 1px solid #f2f3ff"
                       >
                         INVOICE AMOUNT
                       </p>
@@ -232,7 +250,7 @@
                     <div>
                       <p
                         class="font-weight-boldest pb-5"
-                        style="border-bottom: 1px solid #F2F3FF"
+                        style="border-bottom: 1px solid #f2f3ff"
                       >
                         EARLY REPAYMENT
                       </p>
@@ -243,7 +261,10 @@
                     <div>
                       <p
                         class="font-weight-boldest pb-5"
-                        style="border-bottom: 1px solid #F2F3FF; margin-bottom: 8px"
+                        style="
+													border-bottom: 1px solid #f2f3ff;
+													margin-bottom: 8px;
+												"
                       >
                         ACTIONS
                       </p>
@@ -261,7 +282,7 @@
 
               <div
                 class="row px-5 py-8 mb-5 d-flex flex-column"
-                style="background-color: #FAFAFA"
+                style="background-color: #fafafa"
               >
                 <div class="d-flex align-items-center mb-5">
                   <p class="text-primary font-weight-boldest ls-2 mb-0 mr-5">
@@ -325,14 +346,14 @@
         <v-card class="py-1">
           <i
             class="flaticon2-cross"
-            style="position: absolute; right: 1rem; top: 1rem;"
+            style="position: absolute; right: 1rem; top: 1rem"
             @click="onCloseConfirmation"
           ></i>
           <div class="card-body">
             <div class="row justify-content-center">
               <div class="col-10">
                 <p
-                  style="font-size: 1.25rem; color: #1D8CC6"
+                  style="font-size: 1.25rem; color: #1d8cc6"
                   class="mt-5 modal-text font-weight-boldest text-primary text-center"
                 >
                   Confirmation
@@ -387,7 +408,10 @@
 
                 <div
                   class="d-flex justify-content-between"
-                  style="border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(0, 0, 0, 0.1); "
+                  style="
+										border-top: 1px solid rgba(0, 0, 0, 0.1);
+										border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+									"
                 >
                   <p
                     class="py-3 my-0 flex-grow-1 font-weight-boldest text-primary"
@@ -424,25 +448,35 @@
             class="d-flex justify-content-center flex-column align-items-center"
           >
             <p
-              style="font-size: 1.25rem; color: #1D8CC6"
+              style="font-size: 1.25rem; color: #1d8cc6"
               class="mt-5 modal-text font-weight-boldest"
             >
               Funding Successful
             </p>
-            <p class="modal-text" style="color: #1D8CC6">
+            <p class="modal-text" style="color: #1d8cc6">
               You have successfully funded the invoice.
             </p>
             <inline-svg
               width="40%"
               src="media/pilons/pilon_funding_successful.svg"
             ></inline-svg>
-            <v-btn
-              style="text-transform: none"
-              color="primary"
-              squared
-              @click="continueBrowsing"
-              >Continue Browsing</v-btn
-            >
+            <div class="d-flex justify-content-end px-4 w-100">
+              <v-btn
+                style="text-transform: none"
+                color="primary"
+                class="mr-2"
+                squared
+                @click="continueBrowsing"
+                >Continue Browsing</v-btn
+              >
+              <v-btn
+                style="text-transform: none"
+                color="primary"
+                squared
+                @click="viewPortfolio"
+                >View Current Portfolio</v-btn
+              >
+            </div>
           </div>
         </v-card>
       </v-dialog>
@@ -502,12 +536,16 @@ export default {
       this.showSuccessfulDialog = false;
       this.$router.push("/investments/available");
     },
+    viewPortfolio() {
+      this.showSuccessfulDialog = false;
+      this.$router.push("/investments/user");
+    },
     onCloseConfirmation() {
       this.message = null;
       this.showConfirmationDialog = false;
     },
     setMax() {
-      this.amount = this.project.invoice.total_amount;
+      this.amount = this.project.available_funding_left;
     },
     fundInvoice() {
       this.isSubmitting = true;

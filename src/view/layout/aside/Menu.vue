@@ -228,7 +228,7 @@
                 isExactActive && 'menu-item-active'
               ]"
             >
-              <a :href="href" class="menu-link" @click.prevent="redirectTo">
+              <a :href="href" class="menu-link">
                 <i class="menu-bullet menu-bullet-line">
                   <span></span>
                 </i>
