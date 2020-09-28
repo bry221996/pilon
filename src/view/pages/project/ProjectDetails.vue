@@ -461,7 +461,7 @@
               width="40%"
               src="media/pilons/pilon_funding_successful.svg"
             ></inline-svg>
-            <div class="d-flex justify-content-end px-4 w-100">
+            <div class="d-flex justify-content-center px-4 w-100">
               <v-btn
                 style="text-transform: none"
                 color="primary"

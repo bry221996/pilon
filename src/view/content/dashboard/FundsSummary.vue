@@ -26,7 +26,7 @@
             class="p-0 mb-2"
             @click="redirect(analytics.label)"
           >
-            <div style="position: absolute; right: 0.5rem; top: 0.5rem;">
+            <div style="position: absolute; right: 0.5rem; top: 0.5rem">
               <i class="fa fa-question-circle" style="color: white"></i>
             </div>
             <b-card-title class="mb-4">
@@ -39,7 +39,7 @@
       <!-- end:main-analytics -->
 
       <div class="row mt-5 mx-0 py-5">
-        <div class="col-6 sub-analytics  pt-5">
+        <div class="col-6 sub-analytics pt-5">
           <div
             class="pl-6 mb-3"
             v-for="analytics in subAnalytics"
@@ -84,7 +84,20 @@ export default {
       chartOptions: {
         title: {
           text: "Portfolio Industry Breakdown",
-          align: "middle"
+          align: "middle",
+          style: {
+            fontSize: "14px",
+            fontWeight: 800
+          }
+        },
+        tooltip: {
+          custom: function({ series, seriesIndex, w }) {
+            return (
+              w.globals.labels[seriesIndex] +
+              ": " +
+              Number(series[0].toFixed(2)).toLocaleString()
+            );
+          }
         },
         labels: []
       },
