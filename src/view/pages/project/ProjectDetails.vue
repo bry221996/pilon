@@ -548,6 +548,7 @@ export default {
     },
     setMax() {
       this.amount = this.project.available_funding_left;
+      this.calculateReturns();
     },
     calculateReturns() {
       this.returnValue = 0;
