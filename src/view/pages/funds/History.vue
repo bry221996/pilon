@@ -43,7 +43,7 @@
             </div>
           </div>
           <div class="card-body p-0">
-            <div class="table-responsive">
+            <div class="table-responsive" v-if="hasData">
               <table class="table table-borderless">
                 <tbody>
                   <template v-for="(history, index) in histories">
@@ -70,7 +70,7 @@
                 </tbody>
               </table>
             </div>
-            <nav class="mt-10" v-if="false">
+            <nav class="mt-10" v-if="hasData">
               <ul class="pagination justify-content-center">
                 <li class="page-item" :class="hasPrevPage ? '' : 'disabled'">
                   <a class="page-link" @click.prevent="prevPage">Previous</a>
@@ -91,6 +91,9 @@
                 </li>
               </ul>
             </nav>
+            <div class="col-12 mt-3 text-center" v-if="!hasData">
+              <p>* * * No data * * *</p>
+            </div>
           </div>
         </div>
       </div>
@@ -141,6 +144,9 @@ export default {
           rows: this.history.rows[date]
         };
       });
+    },
+    hasData() {
+      return !!Object.keys(this.history.rows).length;
     }
   },
   async mounted() {
