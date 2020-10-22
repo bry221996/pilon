@@ -36,7 +36,7 @@
                 <p class="mb-2 font-weight-boldest">TENURE</p>
                 <p>{{ project.loan.tenure_label }}</p>
               </div>
-              <div class="d-flex flex-column mr-5">
+              <div class="d-flex flex-column mr-15">
                 <p class="mb-2 font-weight-boldest">FUNDED</p>
                 <v-progress-linear
                   :value="project.progress"
