@@ -1,59 +1,63 @@
 <template>
-  <div class="row mt-5" v-if="isLoaded">
-    <div class="col-12">
-      <div class="p-5" style="background-color: #F2F3FF;height: 50px; ">
-        <p class="text-primary mb-0 font-weight-boldest ls-2 float-left">
-          LATEST AVAILABLE FUNDING
-        </p>
+  <v-app>
+    <div class="row mt-5" v-if="isLoaded">
+      <div class="col-12">
+        <div class="p-5" style="background-color: #F2F3FF;height: 50px; ">
+          <p class="text-primary mb-0 font-weight-boldest ls-2 float-left">
+            LATEST AVAILABLE FUNDING
+          </p>
 
-        <select
-          class="form-control float-right"
-          style="width: 150px; font-size: 14px; margin-top: -11px;"
-          v-model="tenureRange"
-          @change="updateFilter"
-        >
-          <option value="">Filter</option>
-          <option
-            v-for="(filter, index) in filters"
-            :key="index"
-            :value="filter.value"
-            >{{ filter.display }}</option
+          <select
+            class="form-control float-right"
+            style="width: 150px; font-size: 14px; margin-top: -11px;"
+            v-model="tenureRange"
+            @change="updateFilter"
           >
-        </select>
+            <option value="">Filter</option>
+            <option
+              v-for="(filter, index) in filters"
+              :key="index"
+              :value="filter.value"
+              >{{ filter.display }}</option
+            >
+          </select>
+        </div>
+      </div>
+      <div class="col-12 mt-3" v-if="projects.length">
+        <project
+          v-for="(project, index) in projects"
+          :key="index"
+          :project="project"
+        />
+
+        <nav>
+          <ul class="pagination justify-content-center">
+            <li class="page-item" :class="hasPrevPage ? '' : 'disabled'">
+              <a class="page-link" @click.prevent="prevPage">Previous</a>
+            </li>
+            <template v-for="page in pages">
+              <li
+                class="page-item"
+                :key="page"
+                :class="page == pagination.currentPage ? 'active' : ''"
+              >
+                <a class="page-link" @click.prevent="setPage(page)">{{
+                  page
+                }}</a>
+              </li>
+            </template>
+            <li class="page-item" :class="hasNextPage ? '' : 'disabled'">
+              <a class="page-link" @click.prevent="nextPage">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="col-12 mt-3 text-center" v-if="!projects.length">
+        <p>* * * No available fundings * * *</p>
       </div>
     </div>
-    <div class="col-12 mt-3" v-if="projects.length">
-      <project
-        v-for="(project, index) in projects"
-        :key="index"
-        :project="project"
-      />
-
-      <nav>
-        <ul class="pagination justify-content-center">
-          <li class="page-item" :class="hasPrevPage ? '' : 'disabled'">
-            <a class="page-link" @click.prevent="prevPage">Previous</a>
-          </li>
-          <template v-for="page in pages">
-            <li
-              class="page-item"
-              :key="page"
-              :class="page == pagination.currentPage ? 'active' : ''"
-            >
-              <a class="page-link" @click.prevent="setPage(page)">{{ page }}</a>
-            </li>
-          </template>
-          <li class="page-item" :class="hasNextPage ? '' : 'disabled'">
-            <a class="page-link" @click.prevent="nextPage">Next</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="col-12 mt-3 text-center" v-if="!projects.length">
-      <p>* * * No available fundings * * *</p>
-    </div>
-  </div>
+  </v-app>
 </template>
 
 <script>

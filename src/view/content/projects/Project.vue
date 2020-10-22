@@ -36,7 +36,18 @@
                 <p class="mb-2 font-weight-boldest">TENURE</p>
                 <p>{{ project.loan.tenure_label }}</p>
               </div>
+              <div class="d-flex flex-column">
+                <p class="mb-2 font-weight-boldest">FUNDED</p>
+                <v-progress-linear
+                  :value="project.progress"
+                  color="green"
+                  height="12"
+                >
+                  <span style="font-size: 8px">{{ project.progress }}%</span>
+                </v-progress-linear>
+              </div>
             </td>
+
             <td style="border-top: none" width="16%" class="align-middle">
               <b-button
                 size="sm"
