@@ -9,8 +9,8 @@ import JwtService from "@/core/services/jwt.service";
 const ApiService = {
   init() {
     Vue.use(VueAxios, axios);
-    // Vue.axios.defaults.baseURL = "http://gkw-mfi-api.pilon.sg/v1/";
-    Vue.axios.defaults.baseURL = "http://localhost:8086/v1/";
+    Vue.axios.defaults.baseURL = "http://gkw-mfi-api.pilon.sg/v1/";
+    // Vue.axios.defaults.baseURL = "http://localhost:8086/v1/";
     Vue.axios.defaults.headers.common["Content-Type"] = `application/json`;
   },
 
