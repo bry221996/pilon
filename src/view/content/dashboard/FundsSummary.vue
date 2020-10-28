@@ -168,6 +168,7 @@ export default {
 </script>
 
 <style scoped>
+
 .sub-analytics {
   border-radius: 0.42rem;
   background-color: #e5f6ff;
@@ -187,4 +188,5 @@ export default {
     padding-left: 1.5rem !important;
   }
 }
+
 </style>
