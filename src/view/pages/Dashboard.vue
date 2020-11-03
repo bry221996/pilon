@@ -1,53 +1,56 @@
 <template>
-  <div class="my-10 container-fluid" v-if="isLoaded">
-    <div class="row">
-      <div class="col-12">
-        <funds-summary />
+  <v-app>
+    <div class="my-10 container-fluid" v-if="isLoaded">
+      <div class="row">
+        <div class="col-12">
+          <funds-summary />
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div
-          class="px-5 py-3 d-flex justify-content-between align-items-center"
-          style="background-color: #F2F3FF"
-        >
-          <p class="text-primary mb-0 font-weight-boldest ls-2">
-            LATEST AVAILABLE FUNDING
-          </p>
-          <select
-            class="form-control"
-            style="width: 150px; font-size: 14px;"
-            v-model="tenureRange"
-            @change="updateQuery"
+      <div class="row">
+        <div class="col-12">
+          <div
+            class="px-5 py-3 d-flex justify-content-between align-items-center"
+            style="background-color: #f2f3ff"
           >
-            <option value>Filter</option>
-            <option
-              v-for="(filter, index) in filters"
-              :key="index"
-              :value="filter.value"
-              >{{ filter.display }}</option
+            <p class="text-primary mb-0 font-weight-boldest ls-2">
+              LATEST AVAILABLE FUNDING
+            </p>
+            <select
+              class="form-control"
+              style="width: 150px; font-size: 14px"
+              v-model="tenureRange"
+              @change="updateQuery"
             >
-          </select>
+              <option value>Filter</option>
+              <option
+                v-for="(filter, index) in filters"
+                :key="index"
+                :value="filter.value"
+              >
+                {{ filter.display }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-12 mt-3">
+          <project
+            v-for="(project, index) in projects"
+            :key="index"
+            :project="project"
+          />
         </div>
       </div>
-      <div class="col-12 mt-3">
-        <project
-          v-for="(project, index) in projects"
-          :key="index"
-          :project="project"
-        />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="p-5 text-center" style="background-color: #E2F5FE">
-          <router-link class="font-weight-boldest" to="/investments/available"
-            >VIEW ALL</router-link
-          >
+      <div class="row">
+        <div class="col-12">
+          <div class="p-5 text-center" style="background-color: #e2f5fe">
+            <router-link class="font-weight-boldest" to="/investments/available"
+              >VIEW ALL</router-link
+            >
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </v-app>
 </template>
 
 <script>
