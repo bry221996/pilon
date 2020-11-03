@@ -21,6 +21,8 @@
               >{{ filter.display }}</option
             >
           </select>
+
+
         </div>
       </div>
       <div class="col-12 mt-3" v-if="projects.length">

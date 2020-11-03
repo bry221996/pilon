@@ -554,8 +554,8 @@ export default {
       this.returnValue = 0;
       if (this.amount) {
         ApiService.post("/loan/calculator", {
+          project_id: this.project.id,
           principal: this.amount,
-          interest_rate: this.project.returns
         }).then(res => {
           this.returnValue = res.data.data.total_returns;
         });

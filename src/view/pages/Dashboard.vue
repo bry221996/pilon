@@ -116,3 +116,14 @@ export default {
   }
 };
 </script>
+<style scope>
+.v-progress-linear__background.green{
+    background-color: #4caf50!important;
+    border-color: #4caf50!important;
+}
+
+.v-progress-linear__determinate.green{
+    background-color: #4caf50!important;
+    border-color: #4caf50!important;
+}
+</style>
